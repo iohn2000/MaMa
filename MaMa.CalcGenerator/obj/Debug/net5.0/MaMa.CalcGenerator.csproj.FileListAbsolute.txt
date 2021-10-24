@@ -12,4 +12,3 @@ C:\dev\MaMa\MaMa.CalcGenerator\obj\Debug\net5.0\ref\MaMa.CalcGenerator.dll
 C:\dev\MaMa\MaMa.CalcGenerator\obj\Debug\net5.0\MaMa.CalcGenerator.pdb
 C:\dev\MaMa\MaMa.CalcGenerator\bin\Debug\net5.0\MaMa.Settings.dll
 C:\dev\MaMa\MaMa.CalcGenerator\bin\Debug\net5.0\MaMa.Settings.pdb
-C:\dev\MaMa\MaMa.CalcGenerator\obj\Debug\net5.0\MaMa.CalcGenerator.csproj.CopyComplete

@@ -1,7 +1,8 @@
 using NUnit.Framework;
 using FakeItEasy;
+using MaMa.Settings;
 
-namespace MaMa.Settings.Tests
+namespace MaMaTests.Settings
 {
     public class JsonSettingsTests
     {
