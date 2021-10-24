@@ -2,9 +2,22 @@
   "version": 3,
   "targets": {
     "net5.0": {
+      "MaMa.DataModels/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/MaMa.DataModels.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MaMa.DataModels.dll": {}
+        }
+      },
       "MaMa.Settings/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "MaMa.DataModels": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/MaMa.Settings.dll": {}
         },
@@ -15,6 +28,11 @@
     }
   },
   "libraries": {
+    "MaMa.DataModels/1.0.0": {
+      "type": "project",
+      "path": "../Mama.DataModels/MaMa.DataModels.csproj",
+      "msbuildProject": "../Mama.DataModels/MaMa.DataModels.csproj"
+    },
     "MaMa.Settings/1.0.0": {
       "type": "project",
       "path": "../MaMa.Settings/MaMa.Settings.csproj",

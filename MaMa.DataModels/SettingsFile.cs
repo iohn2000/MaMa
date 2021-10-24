@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace MaMa.Settings
+namespace MaMa.DataModels
 {
     public class SettingsFile
     {

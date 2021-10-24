@@ -1,4 +1,5 @@
 using System.IO;
+using MaMa.DataModels;
 
 namespace MaMa.Settings
 {

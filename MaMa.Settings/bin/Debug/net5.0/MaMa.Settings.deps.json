@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v5.0": {
       "MaMa.Settings/1.0.0": {
+        "dependencies": {
+          "MaMa.DataModels": "1.0.0"
+        },
         "runtime": {
           "MaMa.Settings.dll": {}
+        }
+      },
+      "MaMa.DataModels/1.0.0": {
+        "runtime": {
+          "MaMa.DataModels.dll": {}
         }
       }
     }
   },
   "libraries": {
     "MaMa.Settings/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MaMa.DataModels/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

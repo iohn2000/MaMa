@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using FakeItEasy;
+using MaMa.DataModels;
 using MaMa.Settings;
 
 namespace MaMaTests.Settings

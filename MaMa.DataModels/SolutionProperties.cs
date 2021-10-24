@@ -1,4 +1,4 @@
-namespace MaMa.Settings
+namespace MaMa.DataModels
 {
     public class SolutionProperties
     {

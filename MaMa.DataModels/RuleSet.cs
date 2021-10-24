@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace MaMa.Settings
+namespace MaMa.DataModels
 {
     ///<summary>
     /// keeps a set of settings together and is used to serialize

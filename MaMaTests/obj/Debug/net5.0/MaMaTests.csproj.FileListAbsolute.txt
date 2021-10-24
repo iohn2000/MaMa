@@ -104,3 +104,5 @@ C:\dev\MaMa\MaMaTests\bin\Debug\net5.0\FakeItEasy.dll
 C:\dev\MaMa\MaMaTests\bin\Debug\net5.0\CoverletSourceRootsMapping
 C:\dev\MaMa\MaMaTests\bin\Debug\net5.0\MaMa.Settings.dll
 C:\dev\MaMa\MaMaTests\bin\Debug\net5.0\MaMa.Settings.pdb
+C:\dev\MaMa\MaMaTests\bin\Debug\net5.0\MaMa.DataModels.dll
+C:\dev\MaMa\MaMaTests\bin\Debug\net5.0\MaMa.DataModels.pdb

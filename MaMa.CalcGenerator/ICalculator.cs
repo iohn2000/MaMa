@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using MaMa.Settings;
+using MaMa.DataModels;
 
 namespace MaMa.CalcGenerator
 {

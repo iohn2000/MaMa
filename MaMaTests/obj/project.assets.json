@@ -1313,9 +1313,22 @@
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
       },
+      "MaMa.DataModels/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/MaMa.DataModels.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MaMa.DataModels.dll": {}
+        }
+      },
       "MaMa.Settings/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "MaMa.DataModels": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/MaMa.Settings.dll": {}
         },
@@ -5125,6 +5138,11 @@
         "system.xml.xpath.xmldocument.4.3.0.nupkg.sha512",
         "system.xml.xpath.xmldocument.nuspec"
       ]
+    },
+    "MaMa.DataModels/1.0.0": {
+      "type": "project",
+      "path": "../Mama.DataModels/MaMa.DataModels.csproj",
+      "msbuildProject": "../Mama.DataModels/MaMa.DataModels.csproj"
     },
     "MaMa.Settings/1.0.0": {
       "type": "project",

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using MaMa.Settings;
+using MaMa.DataModels;
 
 namespace MaMa.CalcGenerator
 {
-   public class Calculator : ICalculator
+    public class Calculator : ICalculator
     {
         private List<CalculationItem> calcList = new List<CalculationItem>();
 

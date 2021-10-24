@@ -14,7 +14,15 @@
           "MaMa.CalcGenerator.dll": {}
         }
       },
+      "MaMa.DataModels/1.0.0": {
+        "runtime": {
+          "MaMa.DataModels.dll": {}
+        }
+      },
       "MaMa.Settings/1.0.0": {
+        "dependencies": {
+          "MaMa.DataModels": "1.0.0"
+        },
         "runtime": {
           "MaMa.Settings.dll": {}
         }
@@ -23,6 +31,11 @@
   },
   "libraries": {
     "MaMa.CalcGenerator/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MaMa.DataModels/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

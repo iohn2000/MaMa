@@ -1,3 +1,4 @@
+using MaMa.DataModels;
 using MaMa.Settings;
 
 namespace MaMa.CalcGenerator

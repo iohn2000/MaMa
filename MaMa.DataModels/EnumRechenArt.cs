@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace MaMa.Settings
+namespace MaMa.DataModels
 {
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum EnumRechenArt

@@ -1,4 +1,5 @@
 using System.Text.Json;
+using MaMa.DataModels;
 
 namespace MaMa.Settings
 {

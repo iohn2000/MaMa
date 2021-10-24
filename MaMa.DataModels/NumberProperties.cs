@@ -1,6 +1,6 @@
 using System;
 
-namespace MaMa.Settings
+namespace MaMa.DataModels
 {
     ///<summary>
     /// define properties for a randomly generated number

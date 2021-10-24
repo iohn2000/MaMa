@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net5.0": {}
+    "net5.0": {
+      "MaMa.DataModels/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/MaMa.DataModels.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MaMa.DataModels.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "MaMa.DataModels/1.0.0": {
+      "type": "project",
+      "path": "../Mama.DataModels/MaMa.DataModels.csproj",
+      "msbuildProject": "../Mama.DataModels/MaMa.DataModels.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net5.0": []
+    "net5.0": [
+      "MaMa.DataModels >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\fleckj\\.nuget\\packages\\": {}
@@ -33,7 +52,11 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\dev\\MaMa\\Mama.DataModels\\MaMa.DataModels.csproj": {
+              "projectPath": "C:\\dev\\MaMa\\Mama.DataModels\\MaMa.DataModels.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

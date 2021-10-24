@@ -5,10 +5,12 @@
 2) create a project
    C:\dev\MaMa>dotnet new classlib -o MaMa.Settings
    C:\dev\MaMa>dotnet new classlib -o MaMa.CalcGenerator    
+   C:\dev\MaMa>dotnet new classlib -o Mama.Interfaces
 
 3) add project to sln
    C:\dev\MaMa>dotnet sln add MaMa.Settings\MaMa.Settings.csproj 
    C:\dev\MaMa>dotnet sln add MaMa.CalcGenerator\MaMa.CalcGenerator.csproj
+   C:\dev\MaMa>dotnet sln add Mama.Interfaces\Mama.Interfaces.csproj
 
 4) add nunit test project "nunit"
    c:\dev\MaMa\dotnet new nunit -o MaMaTests
@@ -26,6 +28,10 @@
 
 7) add nuget package : FakeItEasy for testing
    C:\dev\MaMa>dotnet add MaMaTests\MaMaTests.csproj package FakeItEasy --version 7.2.0
+
+8) remove prj references
+   C:\dev\MaMa>dotnet remove MaMa.Settings\MaMa.Settings.csproj reference Mama.Interfaces\Mama.Interfaces.csproj 
+
 
 ---------
 keyboad shortcuts studio code :
