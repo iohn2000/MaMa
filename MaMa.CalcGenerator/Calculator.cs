@@ -7,24 +7,26 @@ namespace MaMa.CalcGenerator
     public class Calculator : ICalculator
     {
         private List<CalculationItem> calcList = new List<CalculationItem>();
+        private readonly IRandomNumber rndGenerator;
 
-        public Calculator()
+        public Calculator(IRandomNumber rndGenerator)
         {
             this.calcList = new List<CalculationItem>();
+            this.rndGenerator = rndGenerator;
         }
 
         public void GenerateNumbers(NumberProperties firstNumberConfig, NumberProperties secondNumberConfig, SolutionProperties solutionConfig, int amountCalculations)
         {
-            Random randomGenerator = new Random(DateTime.Now.Millisecond);
             do
             {
                 bool slnCriteriaMet = false;
-                decimal firstNumber, secondNumber;
+                decimal firstNumber, secondNumber, solution = decimal.Zero;
+                bool errorFlag = false;
                 do
                 {
-                    firstNumber = GetRandomNr(firstNumberConfig, randomGenerator);
-                    secondNumber = GetRandomNr(secondNumberConfig, randomGenerator);
-                    decimal solution = decimal.Zero;
+                    firstNumber = rndGenerator.GetRandomNr(firstNumberConfig);
+                    secondNumber = rndGenerator.GetRandomNr(secondNumberConfig);
+                    
                     // check if solution meets criteria
                     switch (solutionConfig.ShowAsRechenArt)
                     {
@@ -36,7 +38,14 @@ namespace MaMa.CalcGenerator
 
                         case EnumRechenArt.Division:
                             {
-                                solution = (firstNumber * secondNumber) / secondNumber;
+                                if (secondNumber != decimal.Zero)
+                                {
+                                    solution = firstNumber / secondNumber;
+                                }
+                                else
+                                {
+                                    errorFlag = true;
+                                }
                                 break;
                             }
 
@@ -46,20 +55,26 @@ namespace MaMa.CalcGenerator
                                 break;
                             }
                     }
-
-                    slnCriteriaMet = this.solutionCriteriaMet(firstNumber, secondNumber, solution, solutionConfig);
+                    if (!errorFlag)
+                    {
+                        slnCriteriaMet = this.SolutionCriteriaMet(firstNumber, secondNumber, solution, solutionConfig);
+                    }
+                    else
+                    {
+                        slnCriteriaMet = false;
+                    }
                 }
                 while (slnCriteriaMet != true);
                 // generate numbers
 
 
-                calcList.Add(new CalculationItem(firstNumber, secondNumber, solutionConfig.ShowAsRechenArt));
+                calcList.Add(new CalculationItem(firstNumber, secondNumber, solution, solutionConfig.ShowAsRechenArt));
                 amountCalculations = amountCalculations - 1;
             }
             while (amountCalculations > 0);
         }
 
-        private bool solutionCriteriaMet(decimal firstNr, decimal secondNr, decimal slnValue, SolutionProperties slnCfg)
+        public bool SolutionCriteriaMet(decimal firstNr, decimal secondNr, decimal slnValue, SolutionProperties slnCfg)
         {
             if (!slnCfg.AllowNegative & slnValue < 0)
                 return false;
@@ -75,38 +90,5 @@ namespace MaMa.CalcGenerator
         {
             return this.calcList;
         }
-
-        private decimal GetRandomNr(NumberProperties nrCfg, Random rnd)
-        {
-            decimal genNr;
-            var kommaDivisor = Convert.ToInt32(Math.Pow(10, rnd.Next(0, nrCfg.MoveKomma + 1)));
-
-            if (nrCfg.MaxValue != null & nrCfg.MinValue != null)
-            {
-                // use min/max
-                var rndNumber = rnd.Next(nrCfg.MinValue.Value, nrCfg.MaxValue.Value + 1);
-                genNr = rndNumber / kommaDivisor;
-            }
-            else if (nrCfg.MaxDigits != null)
-            {
-                // use max digits
-                var stellenFaktor = (int)(Math.Pow(10, nrCfg.MaxDigits.Value - 1));
-                var rndNumber = rnd.Next(stellenFaktor, stellenFaktor * 10 - 1);
-                genNr = rndNumber / kommaDivisor;
-            }
-            else
-                throw new ArgumentException("please set min/max value or maxdigits");
-
-            // randomize negativ or not, if allowed
-            if (nrCfg.AllowNegative)
-            {
-                var makeNegative = rnd.Next(0, 2) == 1;
-                if (makeNegative)
-                    genNr *= (-1);
-            }
-
-            return genNr;
-        }
-
     }
 }

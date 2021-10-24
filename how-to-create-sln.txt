@@ -32,6 +32,8 @@
 8) remove prj references
    C:\dev\MaMa>dotnet remove MaMa.Settings\MaMa.Settings.csproj reference Mama.Interfaces\Mama.Interfaces.csproj 
 
+9) output test results as TRX
+   dotnet test --logger trx
 
 ---------
 keyboad shortcuts studio code :

@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MaMa.Settings\MaMa.Settings.csproj" />
+    <ProjectReference Include="..\MaMa.CalcGenerator\MaMa.CalcGenerator.csproj" />
   </ItemGroup>
 
 </Project>

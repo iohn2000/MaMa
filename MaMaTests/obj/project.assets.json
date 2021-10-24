@@ -1313,6 +1313,19 @@
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
       },
+      "MaMa.CalcGenerator/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "MaMa.Settings": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/MaMa.CalcGenerator.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MaMa.CalcGenerator.dll": {}
+        }
+      },
       "MaMa.DataModels/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
@@ -5139,6 +5152,11 @@
         "system.xml.xpath.xmldocument.nuspec"
       ]
     },
+    "MaMa.CalcGenerator/1.0.0": {
+      "type": "project",
+      "path": "../MaMa.CalcGenerator/MaMa.CalcGenerator.csproj",
+      "msbuildProject": "../MaMa.CalcGenerator/MaMa.CalcGenerator.csproj"
+    },
     "MaMa.DataModels/1.0.0": {
       "type": "project",
       "path": "../Mama.DataModels/MaMa.DataModels.csproj",
@@ -5153,6 +5171,7 @@
   "projectFileDependencyGroups": {
     "net5.0": [
       "FakeItEasy >= 7.2.0",
+      "MaMa.CalcGenerator >= 1.0.0",
       "MaMa.Settings >= 1.0.0",
       "Microsoft.NET.Test.Sdk >= 16.9.4",
       "NUnit >= 3.13.1",
@@ -5187,6 +5206,9 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
+            "C:\\dev\\MaMa\\MaMa.CalcGenerator\\MaMa.CalcGenerator.csproj": {
+              "projectPath": "C:\\dev\\MaMa\\MaMa.CalcGenerator\\MaMa.CalcGenerator.csproj"
+            },
             "C:\\dev\\MaMa\\MaMa.Settings\\MaMa.Settings.csproj": {
               "projectPath": "C:\\dev\\MaMa\\MaMa.Settings\\MaMa.Settings.csproj"
             }

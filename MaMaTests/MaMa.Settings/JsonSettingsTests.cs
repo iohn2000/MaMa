@@ -119,7 +119,7 @@ namespace MaMaTests.Settings
             RuleSet rs1 = sf.RuleSets[0];
             NumberProperties nr1 = rs1.FirstNumber;
             Assert.IsTrue(nr1.MaxDigits == null);
-            Assert.AreEqual(2,nr1.MoveKomma);
+            Assert.AreEqual(2,nr1.MaxMoveKomma);
             Assert.IsFalse(nr1.AllowNegative);
             // sln criteria
             Assert.IsFalse(rs1.SolutionCriteria.AllowNegative);
