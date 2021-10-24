@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "MaMa.CalcGenerator/1.0.0": {
+        "dependencies": {
+          "MaMa.Settings": "1.0.0"
+        },
+        "runtime": {
+          "MaMa.CalcGenerator.dll": {}
+        }
+      },
+      "MaMa.Settings/1.0.0": {
+        "runtime": {
+          "MaMa.Settings.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MaMa.CalcGenerator/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MaMa.Settings/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

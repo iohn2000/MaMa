@@ -1,0 +1,33 @@
+1) create a solution
+   create a folder, cd into
+   C:\dev\MaMa>dotnet new sln
+
+2) create a project
+   C:\dev\MaMa>dotnet new classlib -o MaMa.Settings
+   C:\dev\MaMa>dotnet new classlib -o MaMa.CalcGenerator    
+
+3) add project to sln
+   C:\dev\MaMa>dotnet sln add MaMa.Settings\MaMa.Settings.csproj 
+   C:\dev\MaMa>dotnet sln add MaMa.CalcGenerator\MaMa.CalcGenerator.csproj
+
+4) add nunit test project "nunit"
+   c:\dev\MaMa\dotnet new nunit -o MaMaTests
+   C:\dev\MaMa\MaMaTests>dotnet sln add MaMaTests\MaMaTests.csproj
+
+5) add nunit test item
+   C:\dev\MaMa\MaMaTests\MaMa.Settings>dotnet new nunit-test -n JsonSettingsManagerTests.cs
+
+6a) run unit tests in solution
+   C:\dev\MaMa>dotnet test -v n
+
+6b) add reference to a prj 
+    C:\dev\MaMa>dotnet add MaMaTests\MaMaTests.csproj reference MaMa.Settings\MaMa.Settings.csproj
+    C:\dev\MaMa>dotnet add MaMa.CalcGenerator\MaMa.CalcGenerator.csproj reference MaMa.Settings\MaMa.Settings.csproj
+
+7) add nuget package : FakeItEasy for testing
+   C:\dev\MaMa>dotnet add MaMaTests\MaMaTests.csproj package FakeItEasy --version 7.2.0
+
+---------
+keyboad shortcuts studio code :
+*) focus on terminal : strg-ö
+*) focus on Exploer : alt-e
