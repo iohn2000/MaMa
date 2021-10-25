@@ -11,23 +11,24 @@ namespace MaMa.CalcGenerator
             this.randomiser = new Random(DateTime.Now.Millisecond);
         }
         private Random randomiser;
-        public decimal GetRandomNr(NumberProperties nrCfg)
+        public decimal GetRandomNr(NumberProperties nrCfg, out int rawNumber)
         {
             decimal genNr;
+            int rndNr;
             var kommaDivisor = Convert.ToInt32(Math.Pow(10, randomiser.Next(0, nrCfg.MaxMoveKomma + 1)));
 
             if (nrCfg.MaxValue != null & nrCfg.MinValue != null)
             {
                 // use min/max
-                var rndNumber = randomiser.Next(nrCfg.MinValue.Value, nrCfg.MaxValue.Value + 1);
-                genNr = (decimal)rndNumber / (decimal)kommaDivisor;
+                rndNr = randomiser.Next(nrCfg.MinValue.Value, nrCfg.MaxValue.Value + 1);
+                genNr = (decimal)rndNr / (decimal)kommaDivisor;
             }
             else if (nrCfg.MaxDigits != null)
             {
                 // use max digits
                 var stellenFaktor = (int)(Math.Pow(10, nrCfg.MaxDigits.Value - 1));
-                var rndNumber = randomiser.Next(stellenFaktor, stellenFaktor * 10 - 1);
-                genNr = rndNumber / kommaDivisor;
+                rndNr = randomiser.Next(stellenFaktor, stellenFaktor * 10 - 1);
+                genNr = rndNr / kommaDivisor;
             }
             else
                 throw new ArgumentException("please set min/max value or maxdigits");
@@ -39,7 +40,7 @@ namespace MaMa.CalcGenerator
                 if (makeNegative)
                     genNr *= (-1);
             }
-
+            rawNumber = rndNr;
             return genNr;
         }
     }

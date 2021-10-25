@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using MaMa.DataModels;
 
 namespace MaMa.CalcGenerator
@@ -19,13 +18,14 @@ namespace MaMa.CalcGenerator
         {
             do
             {
+                int rawNr = 0;
                 bool slnCriteriaMet = false;
                 decimal firstNumber, secondNumber, solution = decimal.Zero;
                 bool errorFlag = false;
                 do
                 {
-                    firstNumber = rndGenerator.GetRandomNr(firstNumberConfig);
-                    secondNumber = rndGenerator.GetRandomNr(secondNumberConfig);
+                    firstNumber = rndGenerator.GetRandomNr(firstNumberConfig, out rawNr);
+                    secondNumber = rndGenerator.GetRandomNr(secondNumberConfig, out rawNr);
                     
                     // check if solution meets criteria
                     switch (solutionConfig.ShowAsRechenArt)

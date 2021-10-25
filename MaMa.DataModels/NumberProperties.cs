@@ -24,15 +24,18 @@ namespace MaMa.DataModels
         public byte MaxMoveKomma { get; set; }
 
         ///<summary>
-        /// if maxvalue is null use this instead of MaxDigits
+        /// max value for number BEFORE the komme is inserted
         /// this way divisor can be kept below a certain value, e.g. i want 2 digits but less than 50 and the comma 3 to the left --> 0,033
+        /// size of number is only relevant before komma move, divide by 44 or 4,4 or 0,44 is the same difficulty level
+        /// if maxvalue is null use this instead of MaxDigits
         ///</summary>
         ///<returns></returns>
         [JsonPropertyName("MaxValue")]
         public Nullable<int> MaxValue { get; set; } = default(int?);
 
         ///<summary>
-        /// if != null then minimum value for number
+        /// if != null then minimum value for number BEFORE the komme is inserted
+        /// size of number is only relevant before komma move, divide by 44 or 4,4 or 0,44 is the same difficulty level
         ///</summary>
         ///<returns></returns>
         [JsonPropertyName("MinValue")]

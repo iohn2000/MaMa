@@ -4,6 +4,6 @@ namespace MaMa.CalcGenerator
 {
     public interface IRandomNumber
     {
-        decimal GetRandomNr(NumberProperties nrCfg);
+        decimal GetRandomNr(NumberProperties nrCfg, out int rawNumber);
     }
 }

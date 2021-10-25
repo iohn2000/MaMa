@@ -1,7 +1,5 @@
-using MaMa.DataModels;
-using MaMa.Settings;
-
-namespace MaMa.CalcGenerator
+using System;
+namespace MaMa.DataModels
 {
     public class CalculationItem
     {
@@ -15,19 +13,16 @@ namespace MaMa.CalcGenerator
         /// </summary>
         /// <returns></returns>
         public decimal SecondNumber { get; set; }
-
         /// <summary>
         /// solution of rechenart
         /// </summary>
         /// <value></value>
         public decimal Solution { get; set; }
-
         /// <summary>
         /// type of calculation
         /// </summary>
         /// <returns></returns>
         public EnumRechenArt RechenArt { get; set; }
-
         public CalculationItem(decimal nr1, decimal nr2, decimal sln, EnumRechenArt rechnArt)
         {
             this.FirstNumber = nr1;
