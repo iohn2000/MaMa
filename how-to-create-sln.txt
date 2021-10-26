@@ -28,7 +28,7 @@
 
 7) add nuget package : FakeItEasy for testing
    C:\dev\MaMa>dotnet add MaMaTests\MaMaTests.csproj package FakeItEasy --version 7.2.0
-
+   for console app to have dependency injection : dotnet add package Microsoft.Extensions.DependencyInjection --version 5.0.2
 8) remove prj references
    C:\dev\MaMa>dotnet remove MaMa.Settings\MaMa.Settings.csproj reference Mama.Interfaces\Mama.Interfaces.csproj 
 
