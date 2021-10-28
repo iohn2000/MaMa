@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaMa.Settings", "MaMa.Settings\MaMa.Settings.csproj", "{4EA36C6B-FBE4-40B7-A6B8-A70FF23D8606}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaMa.Settings", "MaMa.Settings\MaMa.Settings.csproj", "{4EA36C6B-FBE4-40B7-A6B8-A70FF23D8606}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaMaTests", "MaMaTests\MaMaTests.csproj", "{D0F0A0EF-F5D1-4579-88EE-79D081725BEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaMaTests", "MaMaTests\MaMaTests.csproj", "{D0F0A0EF-F5D1-4579-88EE-79D081725BEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaMa.CalcGenerator", "MaMa.CalcGenerator\MaMa.CalcGenerator.csproj", "{F82B2A16-1AD1-45C1-AF81-D6532A2F75CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaMa.CalcGenerator", "MaMa.CalcGenerator\MaMa.CalcGenerator.csproj", "{F82B2A16-1AD1-45C1-AF81-D6532A2F75CA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleMath", "ConsoleMath\ConsoleMath.csproj", "{F5999A8C-96DF-43F7-81C7-8070F728FD1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,9 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4EA36C6B-FBE4-40B7-A6B8-A70FF23D8606}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -58,5 +57,23 @@ Global
 		{F82B2A16-1AD1-45C1-AF81-D6532A2F75CA}.Release|x64.Build.0 = Release|Any CPU
 		{F82B2A16-1AD1-45C1-AF81-D6532A2F75CA}.Release|x86.ActiveCfg = Release|Any CPU
 		{F82B2A16-1AD1-45C1-AF81-D6532A2F75CA}.Release|x86.Build.0 = Release|Any CPU
+		{F5999A8C-96DF-43F7-81C7-8070F728FD1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5999A8C-96DF-43F7-81C7-8070F728FD1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5999A8C-96DF-43F7-81C7-8070F728FD1C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F5999A8C-96DF-43F7-81C7-8070F728FD1C}.Debug|x64.Build.0 = Debug|Any CPU
+		{F5999A8C-96DF-43F7-81C7-8070F728FD1C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F5999A8C-96DF-43F7-81C7-8070F728FD1C}.Debug|x86.Build.0 = Debug|Any CPU
+		{F5999A8C-96DF-43F7-81C7-8070F728FD1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5999A8C-96DF-43F7-81C7-8070F728FD1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5999A8C-96DF-43F7-81C7-8070F728FD1C}.Release|x64.ActiveCfg = Release|Any CPU
+		{F5999A8C-96DF-43F7-81C7-8070F728FD1C}.Release|x64.Build.0 = Release|Any CPU
+		{F5999A8C-96DF-43F7-81C7-8070F728FD1C}.Release|x86.ActiveCfg = Release|Any CPU
+		{F5999A8C-96DF-43F7-81C7-8070F728FD1C}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EB4C287F-B84F-44D9-A6B5-99158007684E}
 	EndGlobalSection
 EndGlobal
