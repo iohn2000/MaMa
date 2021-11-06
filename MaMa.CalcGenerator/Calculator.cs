@@ -14,8 +14,9 @@ namespace MaMa.CalcGenerator
             this.rndGenerator = rndGenerator;
         }
 
-        public void GenerateNumbers(NumberProperties firstNumberConfig, NumberProperties secondNumberConfig, SolutionProperties solutionConfig, int amountCalculations)
+        public void GenerateNumbers(RuleSet ruleSet)
         {
+            int amountCalculations = ruleSet.AmountOfCalculations;
             do
             {
                 int rawNr = 0;
@@ -24,11 +25,11 @@ namespace MaMa.CalcGenerator
                 bool errorFlag = false;
                 do
                 {
-                    firstNumber = rndGenerator.GetRandomNr(firstNumberConfig, out rawNr);
-                    secondNumber = rndGenerator.GetRandomNr(secondNumberConfig, out rawNr);
+                    firstNumber = rndGenerator.GetRandomNr(ruleSet.FirstNumber, out rawNr);
+                    secondNumber = rndGenerator.GetRandomNr(ruleSet.SecondNumber, out rawNr);
                     
                     // check if solution meets criteria
-                    switch (solutionConfig.ShowAsRechenArt)
+                    switch (ruleSet.SolutionCriteria.ShowAsRechenArt)
                     {
                         case EnumRechenArt.Multiplikation:
                             {
@@ -57,7 +58,7 @@ namespace MaMa.CalcGenerator
                     }
                     if (!errorFlag)
                     {
-                        slnCriteriaMet = this.SolutionCriteriaMet(firstNumber, secondNumber, solution, solutionConfig);
+                        slnCriteriaMet = this.SolutionCriteriaMet(firstNumber, secondNumber, solution, ruleSet.SolutionCriteria);
                     }
                     else
                     {
@@ -68,7 +69,7 @@ namespace MaMa.CalcGenerator
                 // generate numbers
 
 
-                calcList.Add(new CalculationItem(firstNumber, secondNumber, solution, solutionConfig.ShowAsRechenArt));
+                calcList.Add(new CalculationItem(firstNumber, secondNumber, solution, ruleSet.SolutionCriteria.ShowAsRechenArt));
                 amountCalculations = amountCalculations - 1;
             }
             while (amountCalculations > 0);

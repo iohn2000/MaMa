@@ -6,11 +6,13 @@ namespace MaMa.CalcGenerator
 
     public class RandomNumberGenerator : IRandomNumber
     {
+        private Random randomiser;
+
         public RandomNumberGenerator()
         {
             this.randomiser = new Random(DateTime.Now.Millisecond);
         }
-        private Random randomiser;
+        
         public decimal GetRandomNr(NumberProperties nrCfg, out int rawNumber)
         {
             decimal genNr;

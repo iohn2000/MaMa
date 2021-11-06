@@ -1,4 +1,5 @@
 ﻿using MaMa.DataModels;
+using MaMa.Settings;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -57,7 +58,7 @@ namespace ConsoleMath
                 }
 
 
-                string formattedLine = string.Format(lineTemplate, 
+                string formattedLine = string.Format(lineTemplate,
                     calcItem.FirstNumber, calcItem.SecondNumber, calcItem.FirstNumber * calcItem.SecondNumber);
                 Console.WriteLine(formattedLine);
                 //if ((this.fileName != null))
@@ -65,9 +66,14 @@ namespace ConsoleMath
             }
         }
 
-        public void ShowSettings()
+        public void ShowSettings(RuleSet ruleSet)
         {
-
+            JsonSerializeSettings jSettings = new JsonSerializeSettings();
+            string settingJson = jSettings.SerializeSettings(new SettingsFile
+            {
+                RuleSets = new List<RuleSet> { ruleSet }
+            });
+            Console.WriteLine(settingJson);
         }
 
         private int GetMaxDigitCount(List<CalculationItem> calcList, Func<CalculationItem, decimal> member)

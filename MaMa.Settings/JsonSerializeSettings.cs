@@ -15,7 +15,7 @@ public class JsonSerializeSettings : ISerializeSettings
     /// </summary>
     /// <param name="settings"></param>
     /// <returns></returns>
-    string ISerializeSettings.SerializeSettings(SettingsFile settings)
+    public string SerializeSettings(SettingsFile settings)
     {
         JsonSerializerOptions options = new JsonSerializerOptions() { WriteIndented = true };
         var str = JsonSerializer.Serialize(settings, options);

@@ -16,9 +16,12 @@ namespace ConsoleMath
                 .AddSingleton<NumberProperties>()
                 .AddSingleton<SolutionProperties>()
                 .AddSingleton<IRandomNumber,MaMa.CalcGenerator.RandomNumberGenerator>()
+                .AddSingleton<ConsoleFormatter>()
                 .BuildServiceProvider();
             
             ICalculator cc = serviceProvider.GetService<ICalculator>();
+            ConsoleFormatter cf = serviceProvider.GetRequiredService<ConsoleFormatter>();
+
             NumberProperties p1 = new NumberProperties()
             {
                 MaxDigits = null,
@@ -41,10 +44,20 @@ namespace ConsoleMath
                 AllowNegative = false,
                 ShowAsRechenArt = EnumRechenArt.Division
             };
-            cc.GenerateNumbers(p1,p2,sln,10);
+            RuleSet ruleSet = new RuleSet
+            {
+                FirstNumber = p1,
+                SecondNumber = p2,
+                SolutionCriteria = sln,
+                AmountOfCalculations = 10
+            };
+            
+            cc.GenerateNumbers(ruleSet);
+            
             List<CalculationItem> result  = cc.GetGeneratedNumbers();
 
-            ConsoleFormatter cf = new ConsoleFormatter();
+            
+            cf.ShowSettings(ruleSet);
             cf.ShowRechnungen(result);
         }
     }

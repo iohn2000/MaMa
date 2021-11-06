@@ -23,14 +23,21 @@ namespace MaMaTests.CalcGenerator
                 AllowRational = true,
                 ShowAsRechenArt = rechenArt
             };
+            RuleSet ruleSet = new RuleSet
+            {
+                FirstNumber = nr1Prop,
+                SecondNumber = nr2Prop,
+                SolutionCriteria = slnProp,
+                AmountOfCalculations = 1
+            };
             // use pre set numbers and test if div, mul,.. is done correctly
             // need fake rnd gen so that numbers are always the same
             var fakeRnd = A.Fake<IRandomNumber>();
-            A.CallTo(() => fakeRnd.GetRandomNr(nr1Prop, out rawNr)).Returns<decimal>((decimal)nr1);
-            A.CallTo(() => fakeRnd.GetRandomNr(nr2Prop, out rawNr)).Returns<decimal>((decimal)nr2);
+            A.CallTo(() => fakeRnd.GetRandomNr(ruleSet.FirstNumber, out rawNr)).Returns<decimal>((decimal)nr1);
+            A.CallTo(() => fakeRnd.GetRandomNr(ruleSet.SecondNumber, out rawNr)).Returns<decimal>((decimal)nr2);
 
             Calculator sut = new Calculator(fakeRnd);
-            sut.GenerateNumbers(nr1Prop, nr2Prop, slnProp, 1);
+            sut.GenerateNumbers(ruleSet);
 
             var result = sut.GetGeneratedNumbers();
 
@@ -62,9 +69,15 @@ namespace MaMaTests.CalcGenerator
                 AllowRational = false,
                 ShowAsRechenArt = EnumRechenArt.Division
             };
-
+            RuleSet ruleSet = new RuleSet
+            {
+                FirstNumber = nr1Prop,
+                SecondNumber = nr2Prop,
+                SolutionCriteria = slnProp,
+                AmountOfCalculations = 55
+            };
             Calculator sut = new Calculator(new RandomNumberGenerator());
-            sut.GenerateNumbers(nr1Prop, nr2Prop, slnProp, 55);
+            sut.GenerateNumbers(ruleSet);
 
             var results = sut.GetGeneratedNumbers();
             foreach (var r in results)
