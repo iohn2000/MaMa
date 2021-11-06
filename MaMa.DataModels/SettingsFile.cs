@@ -6,8 +6,8 @@ namespace MaMa.DataModels
     public class SettingsFile
     {
         [JsonPropertyName("RuleSets")]
-        public List<RuleSet> RuleSets { get; set; }
+        public Dictionary<string,RuleSet> RuleSets { get; set; }
 
-        public SettingsFile() => this.RuleSets = new List<RuleSet>();
+        public SettingsFile() => this.RuleSets = new Dictionary<string,RuleSet>();
     }
 }

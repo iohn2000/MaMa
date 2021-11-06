@@ -24,9 +24,10 @@ namespace ConsoleMath
         {
             int firstMax = GetMaxDigitCount(calcList, c => c.FirstNumber);
             int secondMax = GetMaxDigitCount(calcList, c => c.SecondNumber);
+            int ruleNameMax = GetMaxDigitCount(calcList,c=>c.RuleSetName);
 
             string lineTemplate = "";
-
+            string ruleSetNameTemplate = "{3," + ruleNameMax.ToString() + "}";
             foreach (CalculationItem calcItem in calcList)
             {
                 switch (calcItem.RechenArt)
@@ -58,25 +59,25 @@ namespace ConsoleMath
                 }
 
 
-                string formattedLine = string.Format(lineTemplate,
-                    calcItem.FirstNumber, calcItem.SecondNumber, calcItem.FirstNumber * calcItem.SecondNumber);
+                string formattedLine = string.Format(lineTemplate + ruleSetNameTemplate,
+                    calcItem.FirstNumber, calcItem.SecondNumber, calcItem.FirstNumber * calcItem.SecondNumber, calcItem.RuleSetName);
                 Console.WriteLine(formattedLine);
                 //if ((this.fileName != null))
                 //    File.AppendAllText(this.fileName, formattedLine + Environment.NewLine);
             }
         }
 
-        public void ShowSettings(RuleSet ruleSet)
+        public void ShowSettings(Dictionary<string,RuleSet> ruleSets)
         {
             JsonSerializeSettings jSettings = new JsonSerializeSettings();
             string settingJson = jSettings.SerializeSettings(new SettingsFile
             {
-                RuleSets = new List<RuleSet> { ruleSet }
+                RuleSets =  ruleSets
             });
             Console.WriteLine(settingJson);
         }
 
-        private int GetMaxDigitCount(List<CalculationItem> calcList, Func<CalculationItem, decimal> member)
+        private int GetMaxDigitCount(List<CalculationItem> calcList, Func<CalculationItem, object> member)
         {
             var biggestItem = calcList.OrderByDescending(p => member(p).ToString().Length).FirstOrDefault();
             var m = member(biggestItem).ToString().Length;

@@ -14,7 +14,7 @@ namespace MaMa.CalcGenerator
             this.rndGenerator = rndGenerator;
         }
 
-        public void GenerateNumbers(RuleSet ruleSet)
+        public void GenerateNumbers(RuleSet ruleSet, string ruleSetName)
         {
             int amountCalculations = ruleSet.AmountOfCalculations;
             do
@@ -27,7 +27,7 @@ namespace MaMa.CalcGenerator
                 {
                     firstNumber = rndGenerator.GetRandomNr(ruleSet.FirstNumber, out rawNr);
                     secondNumber = rndGenerator.GetRandomNr(ruleSet.SecondNumber, out rawNr);
-                    
+
                     // check if solution meets criteria
                     switch (ruleSet.SolutionCriteria.ShowAsRechenArt)
                     {
@@ -69,7 +69,7 @@ namespace MaMa.CalcGenerator
                 // generate numbers
 
 
-                calcList.Add(new CalculationItem(firstNumber, secondNumber, solution, ruleSet.SolutionCriteria.ShowAsRechenArt));
+                calcList.Add(new CalculationItem(firstNumber, secondNumber, solution, ruleSet.SolutionCriteria.ShowAsRechenArt, ruleSetName));
                 amountCalculations = amountCalculations - 1;
             }
             while (amountCalculations > 0);

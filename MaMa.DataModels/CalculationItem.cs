@@ -23,12 +23,15 @@ namespace MaMa.DataModels
         /// </summary>
         /// <returns></returns>
         public EnumRechenArt RechenArt { get; set; }
-        public CalculationItem(decimal nr1, decimal nr2, decimal sln, EnumRechenArt rechnArt)
+
+        public string RuleSetName { get; set; }
+        public CalculationItem(decimal nr1, decimal nr2, decimal sln, EnumRechenArt rechnArt, string ruleSetName)
         {
             this.FirstNumber = nr1;
             this.SecondNumber = nr2;
             this.Solution = sln;
             this.RechenArt = rechnArt;
+            this.RuleSetName = ruleSetName;
         }
     }
 }

@@ -2,6 +2,7 @@ using NUnit.Framework;
 using FakeItEasy;
 using MaMa.DataModels;
 using MaMa.Settings;
+using System.Linq;
 
 namespace MaMaTests.Settings
 {
@@ -108,6 +109,69 @@ namespace MaMaTests.Settings
         {
 
         }
+        [Test]
+        public void TestDictionaryJson()
+        {
+string fakeDictJson = @"
+{
+  ""RuleSets"": 
+    [
+    ""ruleSetName1"" : 
+            {
+              ""firstNumber"": {
+                ""MaxDigits"": null,
+                ""MoveKomma"": 2,
+                ""MaxValue"": 5000,
+                ""MinValue"": 1000,
+                ""AllowNegative"": false
+              },
+              ""secondNumber"": {
+                ""MaxDigits"": null,
+                ""MoveKomma"": 2,
+                ""MaxValue"": 30,
+                ""MinValue"": 10,
+                ""AllowNegative"": false
+              },
+              ""solutionCriteria"": {
+                ""AllowRational"": true,
+                ""AllowNegative"": false,
+                ""ShowAsRechenArt"": ""Division""
+              },
+              ""amount"": 1
+            }
+        },
+        ""ruleSetName2"" :
+        {
+            {
+              ""firstNumber"": {
+                ""MaxDigits"": null,
+                ""MoveKomma"": 2,
+                ""MaxValue"": 5000,
+                ""MinValue"": 1000,
+                ""AllowNegative"": false
+              },
+              ""secondNumber"": {
+                ""MaxDigits"": null,
+                ""MoveKomma"": 2,
+                ""MaxValue"": 30,
+                ""MinValue"": 10,
+                ""AllowNegative"": false
+              },
+              ""solutionCriteria"": {
+                ""AllowRational"": true,
+                ""AllowNegative"": false,
+                ""ShowAsRechenArt"": ""Division""
+              },
+              ""amount"": 1
+            }
+        }
+    ]
+}
+";
+
+            ISerializeSettings ss = new JsonSerializeSettings();
+            SettingsFile sf = ss.DeserializeSettings(fakeDictJson);
+        }
 
         [Test]
         public void JsonDeserialiseTest()
@@ -116,7 +180,7 @@ namespace MaMaTests.Settings
             SettingsFile sf = ss.DeserializeSettings(fakeJsonSetting);
 
             // do some test if fiels are correctly deseralised
-            RuleSet rs1 = sf.RuleSets[0];
+            RuleSet rs1 = sf.RuleSets.Values.ElementAt(0);
             NumberProperties nr1 = rs1.FirstNumber;
             Assert.IsTrue(nr1.MaxDigits == null);
             Assert.AreEqual(2,nr1.MaxMoveKomma);

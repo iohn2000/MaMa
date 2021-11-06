@@ -15,4 +15,10 @@
     <ProjectReference Include="..\MaMa.Settings\MaMa.Settings.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="RuleSets.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

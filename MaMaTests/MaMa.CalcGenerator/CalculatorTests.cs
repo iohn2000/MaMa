@@ -37,7 +37,7 @@ namespace MaMaTests.CalcGenerator
             A.CallTo(() => fakeRnd.GetRandomNr(ruleSet.SecondNumber, out rawNr)).Returns<decimal>((decimal)nr2);
 
             Calculator sut = new Calculator(fakeRnd);
-            sut.GenerateNumbers(ruleSet);
+            sut.GenerateNumbers(ruleSet,"test");
 
             var result = sut.GetGeneratedNumbers();
 
@@ -77,7 +77,7 @@ namespace MaMaTests.CalcGenerator
                 AmountOfCalculations = 55
             };
             Calculator sut = new Calculator(new RandomNumberGenerator());
-            sut.GenerateNumbers(ruleSet);
+            sut.GenerateNumbers(ruleSet,"test");
 
             var results = sut.GetGeneratedNumbers();
             foreach (var r in results)
