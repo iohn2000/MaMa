@@ -43,10 +43,9 @@ namespace ConsoleMath
             };
             cc.GenerateNumbers(p1,p2,sln,10);
             List<CalculationItem> result  = cc.GetGeneratedNumbers();
-            foreach (CalculationItem item in result)
-            {
-                Console.WriteLine(item.FirstNumber);
-            }
+
+            ConsoleFormatter cf = new ConsoleFormatter();
+            cf.ShowRechnungen(result);
         }
     }
 }
