@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ConsoleMath": {
+      "commandName": "Project",
+      "commandLineArgs": "Kiera.json"
+    }
+  }
+}

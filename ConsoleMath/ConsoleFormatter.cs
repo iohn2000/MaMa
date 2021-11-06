@@ -2,10 +2,7 @@
 using MaMa.Settings;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleMath
 {
@@ -27,7 +24,7 @@ namespace ConsoleMath
             int ruleNameMax = GetMaxDigitCount(calcList,c=>c.RuleSetName);
 
             string lineTemplate = "";
-            string ruleSetNameTemplate = "{3," + ruleNameMax.ToString() + "}";
+            string ruleSetNameTemplate = "  -  {3," + ruleNameMax.ToString() + "}";
             foreach (CalculationItem calcItem in calcList)
             {
                 switch (calcItem.RechenArt)

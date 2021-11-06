@@ -16,6 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Kiera.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="RuleSets.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
