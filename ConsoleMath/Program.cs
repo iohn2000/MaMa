@@ -1,9 +1,10 @@
-﻿using System;
-using Microsoft.Extensions.DependencyInjection;
-using MaMa.CalcGenerator;
+﻿using MaMa.CalcGenerator;
 using MaMa.DataModels;
-using System.Collections.Generic;
 using MaMa.Settings;
+using Microsoft.Extensions.DependencyInjection;
+using Serilog;
+using System;
+using System.Collections.Generic;
 
 namespace ConsoleMath
 {
@@ -19,7 +20,7 @@ namespace ConsoleMath
             ISettingsManager sMgr = serviceProvider.GetRequiredService<ISettingsManager>();
             ConsoleFormatter cf = serviceProvider.GetRequiredService<ConsoleFormatter>();
 
-            SettingsFile settingsFile = sMgr.GetSettings(args.Length==1 ? args[0] : "RuleSets.json");
+            SettingsFile settingsFile = sMgr.GetSettings(args.Length == 1 ? args[0] : "RuleSets.json");
 
             foreach (var ruleSet in settingsFile.RuleSets)
             {
@@ -28,7 +29,7 @@ namespace ConsoleMath
 
             List<CalculationItem> result = cc.GetGeneratedNumbers();
 
-            cf.ShowSettings(settingsFile.RuleSets);
+            //cf.ShowSettings(settingsFile.RuleSets);
             cf.ShowRechnungen(result);
         }
 
@@ -43,6 +44,17 @@ namespace ConsoleMath
                 .AddSingleton<ISerializeSettings, JsonSerializeSettings>()
                 .AddSingleton<ISettingsReader, SettingsFileReader>()
                 .AddSingleton<ISettingsManager, JsonSettingsManager>()
+                .AddLogging(builder =>
+                {
+                    var logger = new LoggerConfiguration()
+                                              .MinimumLevel.Error()
+                                              .WriteTo.Console()
+                                              .WriteTo.File("log-.txt", rollingInterval: RollingInterval.Day)
+                                              .CreateLogger();
+
+                    builder.AddSerilog(logger);
+                })
+
                 .BuildServiceProvider();
         }
     }

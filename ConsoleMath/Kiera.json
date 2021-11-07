@@ -16,7 +16,7 @@
         "AllowNegative": false
       },
       "solutionCriteria": {
-        "AllowRational": true,
+        "AllowRational": false,
         "AllowNegative": false,
         "ShowAsRechenArt": "Division"
       },
@@ -43,7 +43,7 @@
         "AllowNegative": false,
         "ShowAsRechenArt": "Multiplikation"
       },
-      "amount": 5
+      "amount": 0
     }
   }
 }

@@ -1,22 +1,26 @@
 ﻿using System.Collections.Generic;
 using MaMa.DataModels;
+using Microsoft.Extensions.Logging;
 
 namespace MaMa.CalcGenerator
 {
     public class Calculator : ICalculator
     {
         private List<CalculationItem> calcList = new List<CalculationItem>();
+        private readonly ILogger<Calculator> logger;
         private readonly IRandomNumber rndGenerator;
 
-        public Calculator(IRandomNumber rndGenerator)
+        public Calculator(ILogger<Calculator> logger, IRandomNumber rndGenerator)
         {
             this.calcList = new List<CalculationItem>();
+            this.logger = logger;
             this.rndGenerator = rndGenerator;
         }
 
         public void GenerateNumbers(RuleSet ruleSet, string ruleSetName)
         {
             int amountCalculations = ruleSet.AmountOfCalculations;
+            if (amountCalculations == 0) return;
             do
             {
                 int rawNr = 0;
@@ -46,6 +50,7 @@ namespace MaMa.CalcGenerator
                                 else
                                 {
                                     errorFlag = true;
+                                    this.logger.LogDebug($"errorflag = true");
                                 }
                                 break;
                             }
@@ -64,11 +69,15 @@ namespace MaMa.CalcGenerator
                     {
                         slnCriteriaMet = false;
                     }
+                    if (!slnCriteriaMet)
+                    {
+                        this.logger.LogDebug($"not valid, needs retry: {firstNumber} / {secondNumber} = { solution}");
+                    }
                 }
                 while (slnCriteriaMet != true);
                 // generate numbers
 
-
+                this.logger.LogDebug($"WORKED: {firstNumber} / {secondNumber} = { solution}");
                 calcList.Add(new CalculationItem(firstNumber, secondNumber, solution, ruleSet.SolutionCriteria.ShowAsRechenArt, ruleSetName));
                 amountCalculations = amountCalculations - 1;
             }

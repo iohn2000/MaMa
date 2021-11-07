@@ -21,6 +21,7 @@ namespace ConsoleMath
         {
             int firstMax = GetMaxDigitCount(calcList, c => c.FirstNumber);
             int secondMax = GetMaxDigitCount(calcList, c => c.SecondNumber);
+            int solutionMax = GetMaxDigitCount(calcList, c => c.Solution);
             int ruleNameMax = GetMaxDigitCount(calcList,c=>c.RuleSetName);
 
             string lineTemplate = "";
@@ -31,36 +32,27 @@ namespace ConsoleMath
                 {
                     case EnumRechenArt.Multiplikation:
                         {
-                            int productMax = GetMaxDigitCount(calcList, c =>
-                            {
-                                return c.FirstNumber * c.SecondNumber;
-                            }
-    );
-                            lineTemplate = "{0,-" + firstMax.ToString() + "} x {1,-" + secondMax.ToString() + "} = {2,-" + productMax.ToString() + "}";
+                            lineTemplate = "{0,-" + firstMax.ToString() + "} x {1,-" + secondMax.ToString() + "} = {2,-" + solutionMax.ToString() + "}";
                             break;
                         }
 
                     case EnumRechenArt.Division:
                         {
-                            int productMax = GetMaxDigitCount(calcList, c => c.FirstNumber * c.SecondNumber);
-                            lineTemplate = "{2,-" + productMax.ToString() + "} / {1,-" + secondMax.ToString() + "} = {0,-" + firstMax.ToString() + "}";
+                            lineTemplate = "{0,-" + firstMax.ToString() + "} / {1,-" + secondMax.ToString() + "} = {2,-" + solutionMax.ToString() + "}";
                             break;
                         }
 
                     case EnumRechenArt.Addition:
                         {
-                            int summeMax = GetMaxDigitCount(calcList, c => c.FirstNumber + c.SecondNumber);
-                            lineTemplate = "{0,-" + firstMax.ToString() + "} + {1,-" + secondMax.ToString() + "} = {0,-" + summeMax.ToString() + "}";
+                            lineTemplate = "{0,-" + firstMax.ToString() + "} + {1,-" + secondMax.ToString() + "} = {0,-" + solutionMax.ToString() + "}";
                             break;
                         }
                 }
 
 
                 string formattedLine = string.Format(lineTemplate + ruleSetNameTemplate,
-                    calcItem.FirstNumber, calcItem.SecondNumber, calcItem.FirstNumber * calcItem.SecondNumber, calcItem.RuleSetName);
+                    calcItem.FirstNumber, calcItem.SecondNumber, calcItem.Solution, calcItem.RuleSetName);
                 Console.WriteLine(formattedLine);
-                //if ((this.fileName != null))
-                //    File.AppendAllText(this.fileName, formattedLine + Environment.NewLine);
             }
         }
 

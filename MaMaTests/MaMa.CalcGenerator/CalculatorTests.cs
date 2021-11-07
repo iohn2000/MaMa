@@ -36,7 +36,7 @@ namespace MaMaTests.CalcGenerator
             A.CallTo(() => fakeRnd.GetRandomNr(ruleSet.FirstNumber, out rawNr)).Returns<decimal>((decimal)nr1);
             A.CallTo(() => fakeRnd.GetRandomNr(ruleSet.SecondNumber, out rawNr)).Returns<decimal>((decimal)nr2);
 
-            Calculator sut = new Calculator(fakeRnd);
+            Calculator sut = new Calculator(null, fakeRnd);
             sut.GenerateNumbers(ruleSet,"test");
 
             var result = sut.GetGeneratedNumbers();
@@ -44,6 +44,24 @@ namespace MaMaTests.CalcGenerator
             Assert.AreEqual((decimal)nr1, result[0].FirstNumber);
             Assert.AreEqual((decimal)nr2, result[0].SecondNumber);
             Assert.AreEqual((decimal)sln, result[0].Solution);
+        }
+
+        [Test]
+        [TestCase(89.22,0.1,false)]
+        [TestCase(53.116, 0.07, false)]
+        public void AllowIrrationalWorking(double nr1, double nr2, bool allowIrrational)
+        {
+            SolutionProperties slnProp = new SolutionProperties()
+            {
+                AllowNegative = false,
+                AllowRational = allowIrrational,
+                ShowAsRechenArt = EnumRechenArt.Division
+            };
+            
+            var fakeRnd = A.Fake<IRandomNumber>();
+            Calculator sut = new Calculator(null,fakeRnd);
+            bool isMeet = sut.SolutionCriteriaMet((decimal)nr1, (decimal)nr2,(decimal)(nr1/nr2),slnProp);
+            Assert.IsFalse(isMeet);
         }
 
         [Test]
@@ -76,7 +94,7 @@ namespace MaMaTests.CalcGenerator
                 SolutionCriteria = slnProp,
                 AmountOfCalculations = 55
             };
-            Calculator sut = new Calculator(new RandomNumberGenerator());
+            Calculator sut = new Calculator(null, new RandomNumberGenerator());
             sut.GenerateNumbers(ruleSet,"test");
 
             var results = sut.GetGeneratedNumbers();

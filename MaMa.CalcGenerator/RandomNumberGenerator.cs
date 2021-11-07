@@ -10,7 +10,7 @@ namespace MaMa.CalcGenerator
 
         public RandomNumberGenerator()
         {
-            this.randomiser = new Random(DateTime.Now.Millisecond);
+            this.randomiser = new Random((int)DateTime.Now.Ticks & 0x0000FFFF);
         }
         
         public decimal GetRandomNr(NumberProperties nrCfg, out int rawNumber)
