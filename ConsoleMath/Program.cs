@@ -10,7 +10,12 @@ namespace ConsoleMath
 {
     class Program
     {
-        static void Main(string[] args)
+        /// <summary>
+        /// Generate Random math problems
+        /// </summary>
+        /// <param name="showRules">show the content of rule sets json</param>
+        /// <param name="r">full path to a json config file containing the rule sets</param>
+        static void Main(bool showRules, string r = "RuleSets.json")
         {
             Console.WriteLine("MaMa - Mathe Maker");
 
@@ -20,7 +25,8 @@ namespace ConsoleMath
             ISettingsManager sMgr = serviceProvider.GetRequiredService<ISettingsManager>();
             ConsoleFormatter cf = serviceProvider.GetRequiredService<ConsoleFormatter>();
 
-            SettingsFile settingsFile = sMgr.GetSettings(args.Length == 1 ? args[0] : "RuleSets.json");
+            Console.WriteLine($"Load rulesSets from file: {r}");
+            SettingsFile settingsFile = sMgr.GetSettings(r);
 
             foreach (var ruleSet in settingsFile.RuleSets)
             {
@@ -29,10 +35,17 @@ namespace ConsoleMath
 
             List<CalculationItem> result = cc.GetGeneratedNumbers();
 
-            //cf.ShowSettings(settingsFile.RuleSets);
+            if (showRules)
+            {
+                cf.ShowSettings(settingsFile.RuleSets); 
+            }
             cf.ShowRechnungen(result);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private static ServiceProvider AddServices()
         {
             return new ServiceCollection()
