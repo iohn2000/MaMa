@@ -7,6 +7,7 @@ namespace MaMa.DataModels
     {
         Integer, 
         RationalNonPeriodic,
-        RationalPeriodic
+        RationalPeriodic,
+        Any
     }
 }

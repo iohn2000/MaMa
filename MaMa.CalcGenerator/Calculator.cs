@@ -88,17 +88,63 @@ namespace MaMa.CalcGenerator
 
         public bool SolutionCriteriaMet(decimal firstNr, decimal secondNr, decimal slnValue, SolutionProperties slnCfg)
         {
-            if (!slnCfg.AllowNegative & slnValue < 0)
-                return false;
+            // criteria allow negative
+            bool alloeNegMet = true;
+            if (!slnCfg.AllowNegative & slnValue < 0m)
+                alloeNegMet = false;
 
-            if (slnCfg.NumberClass == EnumNumberClassification.Integer & 
-                !(this.soltionChecker.GetClassOfNumber(slnValue) == EnumNumberClassification.Integer))
-                return false;
+            //
+            // nr classification checks
+            //
+            bool nrClassificationMet = false;
+            // any 
+            if (slnCfg.NumberClass == EnumNumberClassification.Any)
+                nrClassificationMet = true;
+            // integer
+            else if (slnCfg.NumberClass == EnumNumberClassification.Integer)
+            {
+                if (this.soltionChecker.GetClassOfNumber(slnValue) != EnumNumberClassification.Integer)
+                    nrClassificationMet = false;
+                else
+                    nrClassificationMet = true;
+            }
+            // rational periodic
+            else if (slnCfg.NumberClass == EnumNumberClassification.RationalNonPeriodic)
+            {
+                if (this.soltionChecker.GetClassOfNumber(slnValue) == EnumNumberClassification.RationalNonPeriodic
+                    || this.soltionChecker.GetClassOfNumber(slnValue) == EnumNumberClassification.Integer)
+                {
+                    if (slnCfg.AmountOfDigitsAfterComma > -1) // check amount commas
+                    {
+                        // get amount of commas make sure its wihtin limits
+                        if (true) // all ok
+                        {
 
+                        }
+                        else // comma criteria not met
+                        {
 
+                        }
+                    }
+                    else // class is ok, commas dont matter
+                    {
+                        nrClassificationMet = true;
+                    }
+                        
+                }
+                else // wrong class of nr
+                {
+                    nrClassificationMet = false;
+                }
+                    
+            }
+            else // unkown class ?
+            {
+                nrClassificationMet = false;
+            }
 
             // still here
-            return true;
+            return alloeNegMet && nrClassificationMet;
         }
 
         public List<CalculationItem> GetGeneratedNumbers()

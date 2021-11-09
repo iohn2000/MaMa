@@ -2,14 +2,63 @@
 
 void Main()
 {
-	decimal dividend = 11.31m;
-	decimal divisor = 20m;
-	
-	decimal sln = dividend / divisor;
-	
-	sln.Dump();
+	//524899
+		FindFactors(15).Dump();
+		ggT(545,15).Dump();
+		
 }
 
+private long ggT(long a, long b)
+{
+		long c = 1;
+		while (c != 0)
+		{
+			c = a % b;
+			a = b;
+			b = c;
+		}
+		return a;
+}
+
+private List<long> FindFactors(long num)
+{
+	List<long> result = new List<long>();
+
+	// Take out the 2s.
+	while (num % 2 == 0)
+	{
+		result.Add(2);
+		num /= 2;
+	}
+
+	// Take out other primes.
+	long factor = 3;
+	while (factor * factor <= num)
+	{
+		if (num % factor == 0)
+		{
+			// This is a factor.
+			result.Add(factor);
+			num /= factor;
+		}
+		else
+		{
+			// Go to the next odd number.
+			factor += 2;
+		}
+	}
+
+	// If num is not 1, then whatever is left is prime.
+	if (num > 1) result.Add(num);
+
+	return result;
+}
+/*
+11.31 
+/ 20
+*/
+
+#region
 /*
 0,58  / 11   = 0,0527272727272727272727272727  -  DivisionKomma
 228   / 0,6  = 380                             -  DivisionKomma
@@ -49,4 +98,4 @@ void Main()
 27,32 / 16   = 1,7075                          -  DivisionKomma
 6482  / 0,18 = 36011,111111111111111111111111  -  DivisionKomma
 */
-
+#endregion

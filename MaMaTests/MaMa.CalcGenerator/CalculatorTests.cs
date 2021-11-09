@@ -26,6 +26,7 @@ namespace MaMaTests.CalcGenerator
         [Test]
         [TestCase(EnumRechenArt.Multiplikation, 6.0d, 2.0d, 12d)]
         [TestCase(EnumRechenArt.Division, 12.0d, 2.0d, 6d)]
+        [TestCase(EnumRechenArt.Division, 11.0d, 2.0d, 5.5d)]
         [TestCase(EnumRechenArt.Addition, 7.1d, 1.3d, 8.4d)]
         public void CaclulationsDoneCorrectly(EnumRechenArt rechenArt, double nr1, double nr2, double sln)
         {
@@ -35,7 +36,6 @@ namespace MaMaTests.CalcGenerator
             SolutionProperties slnProp = new SolutionProperties()
             {
                 AllowNegative = false,
-                //AllowRational = true,
                 NumberClass = EnumNumberClassification.RationalNonPeriodic,
                 ShowAsRechenArt = rechenArt
             };

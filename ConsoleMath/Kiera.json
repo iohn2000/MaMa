@@ -16,7 +16,8 @@
         "AllowNegative": false
       },
       "solutionCriteria": {
-        "NumberClass": "Integer", 
+        "NumberClass": "Integer",
+        "AmountOfDigitsAfterComma": -1,
         "AllowNegative": false,
         "ShowAsRechenArt": "Division"
       },
@@ -40,6 +41,7 @@
       },
       "solutionCriteria": {
         "NumberClass": "RationalNonPeriodic",
+        "AmountOfDigitsAfterComma": 3,
         "AllowNegative": false,
         "ShowAsRechenArt": "Multiplikation"
       },
