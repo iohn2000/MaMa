@@ -9,12 +9,14 @@ namespace MaMa.CalcGenerator
         private List<CalculationItem> calcList = new List<CalculationItem>();
         private readonly ILogger<Calculator> logger;
         private readonly IRandomNumber rndGenerator;
+        private readonly INumberClassifier soltionChecker;
 
-        public Calculator(ILogger<Calculator> logger, IRandomNumber rndGenerator)
+        public Calculator(ILogger<Calculator> logger, IRandomNumber rndGenerator, INumberClassifier nrClass)
         {
             this.calcList = new List<CalculationItem>();
             this.logger = logger;
             this.rndGenerator = rndGenerator;
+            this.soltionChecker = nrClass;
         }
 
         public void GenerateNumbers(RuleSet ruleSet, string ruleSetName)
@@ -89,8 +91,11 @@ namespace MaMa.CalcGenerator
             if (!slnCfg.AllowNegative & slnValue < 0)
                 return false;
 
-            if (!slnCfg.AllowRational & ((int)slnValue != slnValue))
+            if (slnCfg.NumberClass == EnumNumberClassification.Integer & 
+                !(this.soltionChecker.GetClassOfNumber(slnValue) == EnumNumberClassification.Integer))
                 return false;
+
+
 
             // still here
             return true;

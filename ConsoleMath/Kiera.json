@@ -16,11 +16,11 @@
         "AllowNegative": false
       },
       "solutionCriteria": {
-        "AllowRational": false,
+        "NumberClass": "Integer", 
         "AllowNegative": false,
         "ShowAsRechenArt": "Division"
       },
-      "amount": 5
+      "amount": 56
     },
 
     "Multiplik. Komma": {
@@ -39,11 +39,11 @@
         "AllowNegative": false
       },
       "solutionCriteria": {
-        "AllowRational": true,
+        "NumberClass": "RationalNonPeriodic",
         "AllowNegative": false,
         "ShowAsRechenArt": "Multiplikation"
       },
-      "amount": 0
+      "amount": 22
     }
   }
 }

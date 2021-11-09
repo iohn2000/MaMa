@@ -1,3 +1,5 @@
+using System;
+
 namespace MaMa.DataModels
 {
     public class SolutionProperties
@@ -6,7 +8,13 @@ namespace MaMa.DataModels
         /// if set to false also irrational 
         ///</summary>
         ///<returns></returns>
-        public bool AllowRational { get; set; } = true;
+        //[Obsolete("use EnumNumberClassification instead", true)]
+        //public bool AllowRational { get; set; } = true;
+
+        /// <summary>
+        /// spefifies if solution is an integer, rational or irrational
+        /// </summary>
+        public EnumNumberClassification NumberClass { get; set; } = EnumNumberClassification.Integer;
 
         ///<summary>
         ///allow negative numbers

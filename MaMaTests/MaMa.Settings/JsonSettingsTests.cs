@@ -10,162 +10,108 @@ namespace MaMaTests.Settings
     {
         private string fakeJsonSetting = @"
 {
-  ""RuleSets"": [
-    {
+  ""RuleSets"": {
+    ""DivisionKomma"": {
       ""firstNumber"": {
         ""MaxDigits"": null,
         ""MoveKomma"": 2,
-        ""MaxValue"": 5000,
-        ""MinValue"": 1000,
+        ""MaxValue"": 9999,
+        ""MinValue"": 1,
         ""AllowNegative"": false
       },
       ""secondNumber"": {
         ""MaxDigits"": null,
         ""MoveKomma"": 2,
-        ""MaxValue"": 30,
-        ""MinValue"": 10,
+        ""MaxValue"": 20,
+        ""MinValue"": 1,
         ""AllowNegative"": false
       },
       ""solutionCriteria"": {
-        ""AllowRational"": true,
+        ""NumberClass"" : ""Integer"",
         ""AllowNegative"": false,
         ""ShowAsRechenArt"": ""Division""
       },
-      ""amount"": 1
+      ""amount"": 56
     },
-    {
+
+    ""Multiplik. Komma"": {
       ""firstNumber"": {
         ""MaxDigits"": null,
-        ""MoveKomma"": 2,
-        ""MaxValue"": 5000,
-        ""MinValue"": 1000,
+        ""MoveKomma"": 5,
+        ""MaxValue"": 999,
+        ""MinValue"": 10,
         ""AllowNegative"": false
       },
       ""secondNumber"": {
         ""MaxDigits"": null,
-        ""MoveKomma"": 2,
-        ""MaxValue"": 30,
+        ""MoveKomma"": 5,
+        ""MaxValue"": 999,
         ""MinValue"": 10,
         ""AllowNegative"": false
       },
       ""solutionCriteria"": {
-        ""AllowRational"": true,
         ""AllowNegative"": false,
-        ""ShowAsRechenArt"": ""Division""
-      },
-      ""amount"": 1
-    }
-    ,
-    {
-      ""firstNumber"": {
-        ""MaxDigits"": null,
-        ""MoveKomma"": 3,
-        ""MaxValue"": 5000,
-        ""MinValue"": 1000,
-        ""AllowNegative"": false
-      },
-      ""secondNumber"": {
-        ""MaxDigits"": null,
-        ""MoveKomma"": 3,
-        ""MaxValue"": 30,
-        ""MinValue"": 10,
-        ""AllowNegative"": false
-      },
-      ""solutionCriteria"": {
-        ""AllowRational"": true,
-        ""AllowNegative"": false,
+        ""NumberClass"" : ""Integer"",
         ""ShowAsRechenArt"": ""Multiplikation""
       },
-      ""amount"": 2
+      ""amount"": 0
     }
-    ,
-    {
-      ""firstNumber"": {
-        ""MaxDigits"": null,
-        ""MoveKomma"": 4,
-        ""MaxValue"": 9999,
-        ""MinValue"": 8888,
-        ""AllowNegative"": false
-      },
-      ""secondNumber"": {
-        ""MaxDigits"": null,
-        ""MoveKomma"": 4,
-        ""MaxValue"": 99999,
-        ""MinValue"": 77777,
-        ""AllowNegative"": false
-      },
-      ""solutionCriteria"": {
-        ""AllowRational"": true,
-        ""AllowNegative"": false,
-        ""ShowAsRechenArt"": ""Addition""
-      },
-      ""amount"": 2
-    }
-  ]
+  }
 }
 ";
-        [SetUp]
-        public void Setup()
-        {
 
-        }
         [Test]
         public void TestDictionaryJson()
         {
 string fakeDictJson = @"
 {
-  ""RuleSets"": 
-    [
-    ""ruleSetName1"" : 
-            {
-              ""firstNumber"": {
-                ""MaxDigits"": null,
-                ""MoveKomma"": 2,
-                ""MaxValue"": 5000,
-                ""MinValue"": 1000,
-                ""AllowNegative"": false
-              },
-              ""secondNumber"": {
-                ""MaxDigits"": null,
-                ""MoveKomma"": 2,
-                ""MaxValue"": 30,
-                ""MinValue"": 10,
-                ""AllowNegative"": false
-              },
-              ""solutionCriteria"": {
-                ""AllowRational"": true,
-                ""AllowNegative"": false,
-                ""ShowAsRechenArt"": ""Division""
-              },
-              ""amount"": 1
-            }
-        },
-        ""ruleSetName2"" :
-        {
-            {
-              ""firstNumber"": {
-                ""MaxDigits"": null,
-                ""MoveKomma"": 2,
-                ""MaxValue"": 5000,
-                ""MinValue"": 1000,
-                ""AllowNegative"": false
-              },
-              ""secondNumber"": {
-                ""MaxDigits"": null,
-                ""MoveKomma"": 2,
-                ""MaxValue"": 30,
-                ""MinValue"": 10,
-                ""AllowNegative"": false
-              },
-              ""solutionCriteria"": {
-                ""AllowRational"": true,
-                ""AllowNegative"": false,
-                ""ShowAsRechenArt"": ""Division""
-              },
-              ""amount"": 1
-            }
-        }
-    ]
+  ""RuleSets"": {
+    ""DivisionKomma"": {
+      ""firstNumber"": {
+        ""MaxDigits"": null,
+        ""MoveKomma"": 2,
+        ""MaxValue"": 9999,
+        ""MinValue"": 1,
+        ""AllowNegative"": false
+      },
+      ""secondNumber"": {
+        ""MaxDigits"": null,
+        ""MoveKomma"": 2,
+        ""MaxValue"": 20,
+        ""MinValue"": 1,
+        ""AllowNegative"": false
+      },
+      ""solutionCriteria"": {
+        ""AllowNegative"": false,
+        ""NumberClass"" : ""Integer"",
+        ""ShowAsRechenArt"": ""Division""
+      },
+      ""amount"": 56
+    },
+
+    ""Multiplik. Komma"": {
+      ""firstNumber"": {
+        ""MaxDigits"": null,
+        ""MoveKomma"": 5,
+        ""MaxValue"": 999,
+        ""MinValue"": 10,
+        ""AllowNegative"": false
+      },
+      ""secondNumber"": {
+        ""MaxDigits"": null,
+        ""MoveKomma"": 5,
+        ""MaxValue"": 999,
+        ""MinValue"": 10,
+        ""AllowNegative"": false
+      },
+      ""solutionCriteria"": {
+        ""AllowNegative"": false,
+        ""NumberClass"" : ""Integer"",
+        ""ShowAsRechenArt"": ""Multiplikation""
+      },
+      ""amount"": 0
+    }
+  }
 }
 ";
 
@@ -189,7 +135,7 @@ string fakeDictJson = @"
             Assert.IsFalse(rs1.SolutionCriteria.AllowNegative);
             Assert.AreEqual(EnumRechenArt.Division, rs1.SolutionCriteria.ShowAsRechenArt);  
             // ruleSet
-            Assert.AreEqual(1,rs1.AmountOfCalculations);
+            Assert.AreEqual(56,rs1.AmountOfCalculations);
         }
 
         [Test]
@@ -211,7 +157,7 @@ string fakeDictJson = @"
             // THEN
             //
             // if no error and serialisation produces 4 sets of rules -> good start
-            Assert.AreEqual(4, f.RuleSets.Count);
+            Assert.AreEqual(2, f.RuleSets.Count);
         }
     }
 }

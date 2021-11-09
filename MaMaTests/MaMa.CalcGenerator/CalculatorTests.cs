@@ -3,11 +3,26 @@ using FakeItEasy;
 using MaMa.CalcGenerator;
 using MaMa.DataModels;
 using System;
+using Serilog;
+using Microsoft.Extensions.Logging;
+using Serilog.Extensions.Logging;
 
 namespace MaMaTests.CalcGenerator
 {
     public class CalculatorTests
     {
+        private ILogger<Calculator> logger;
+
+        [OneTimeSetUp]
+        public void Setup()
+        {
+            var xx= new LoggerConfiguration().MinimumLevel.Error()
+                                             .WriteTo.Console()
+                                             //.WriteTo.File("log-.txt", rollingInterval: RollingInterval.Day)
+                                             .CreateLogger();
+         this.logger =  new SerilogLoggerFactory(xx).CreateLogger<Calculator>();
+        }
+
         [Test]
         [TestCase(EnumRechenArt.Multiplikation, 6.0d, 2.0d, 12d)]
         [TestCase(EnumRechenArt.Division, 12.0d, 2.0d, 6d)]
@@ -20,7 +35,8 @@ namespace MaMaTests.CalcGenerator
             SolutionProperties slnProp = new SolutionProperties()
             {
                 AllowNegative = false,
-                AllowRational = true,
+                //AllowRational = true,
+                NumberClass = EnumNumberClassification.RationalNonPeriodic,
                 ShowAsRechenArt = rechenArt
             };
             RuleSet ruleSet = new RuleSet
@@ -36,7 +52,7 @@ namespace MaMaTests.CalcGenerator
             A.CallTo(() => fakeRnd.GetRandomNr(ruleSet.FirstNumber, out rawNr)).Returns<decimal>((decimal)nr1);
             A.CallTo(() => fakeRnd.GetRandomNr(ruleSet.SecondNumber, out rawNr)).Returns<decimal>((decimal)nr2);
 
-            Calculator sut = new Calculator(null, fakeRnd);
+            Calculator sut = new Calculator(this.logger, fakeRnd, new SolutionChecker());
             sut.GenerateNumbers(ruleSet,"test");
 
             var result = sut.GetGeneratedNumbers();
@@ -47,19 +63,19 @@ namespace MaMaTests.CalcGenerator
         }
 
         [Test]
-        [TestCase(89.22,0.1,false)]
-        [TestCase(53.116, 0.07, false)]
-        public void AllowIrrationalWorking(double nr1, double nr2, bool allowIrrational)
+        [TestCase(89.22,0.1)]
+        [TestCase(53.116, 0.07)]
+        public void AllowIrrationalWorking(double nr1, double nr2)
         {
             SolutionProperties slnProp = new SolutionProperties()
             {
                 AllowNegative = false,
-                AllowRational = allowIrrational,
+                NumberClass = EnumNumberClassification.Integer,
                 ShowAsRechenArt = EnumRechenArt.Division
             };
             
             var fakeRnd = A.Fake<IRandomNumber>();
-            Calculator sut = new Calculator(null,fakeRnd);
+            Calculator sut = new Calculator(null,fakeRnd, new SolutionChecker());
             bool isMeet = sut.SolutionCriteriaMet((decimal)nr1, (decimal)nr2,(decimal)(nr1/nr2),slnProp);
             Assert.IsFalse(isMeet);
         }
@@ -84,7 +100,7 @@ namespace MaMaTests.CalcGenerator
             SolutionProperties slnProp = new SolutionProperties()
             {
                 AllowNegative = false,
-                AllowRational = false,
+                NumberClass = EnumNumberClassification.Integer,
                 ShowAsRechenArt = EnumRechenArt.Division
             };
             RuleSet ruleSet = new RuleSet
@@ -94,7 +110,7 @@ namespace MaMaTests.CalcGenerator
                 SolutionCriteria = slnProp,
                 AmountOfCalculations = 55
             };
-            Calculator sut = new Calculator(null, new RandomNumberGenerator());
+            Calculator sut = new Calculator(this.logger, new RandomNumberGenerator(), new SolutionChecker());
             sut.GenerateNumbers(ruleSet,"test");
 
             var results = sut.GetGeneratedNumbers();

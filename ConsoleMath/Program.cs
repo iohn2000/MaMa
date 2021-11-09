@@ -57,6 +57,7 @@ namespace ConsoleMath
                 .AddSingleton<ISerializeSettings, JsonSerializeSettings>()
                 .AddSingleton<ISettingsReader, SettingsFileReader>()
                 .AddSingleton<ISettingsManager, JsonSettingsManager>()
+                .AddSingleton<INumberClassifier,SolutionChecker>()
                 .AddLogging(builder =>
                 {
                     var logger = new LoggerConfiguration()
