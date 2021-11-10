@@ -18,7 +18,7 @@ namespace MaMaTests.CalcGenerator
         {
             var xx = new LoggerConfiguration().MinimumLevel.Error()
                                              .WriteTo.Console()
-                                             //.WriteTo.File("log-.txt", rollingInterval: RollingInterval.Day)
+                                             .WriteTo.File("c:\\temp\\unit-tests-log-.txt", rollingInterval: RollingInterval.Day)
                                              .CreateLogger();
             this.logger = new SerilogLoggerFactory(xx).CreateLogger<Calculator>();
         }
@@ -36,7 +36,7 @@ namespace MaMaTests.CalcGenerator
                 {
                     AllowNegative = false,
                     NumberClass = nrClass,
-                    ShowAsRechenArt = rechenArt
+                    ElementaryArithmetic = rechenArt
                 };
                 RuleSet ruleSet = new RuleSet
                 {
@@ -73,7 +73,7 @@ namespace MaMaTests.CalcGenerator
             {
                 AllowNegative = false,
                 NumberClass = nrClass,
-                ShowAsRechenArt = rechenArt
+                ElementaryArithmetic = rechenArt
             };
             RuleSet ruleSet = new RuleSet
             {
@@ -107,7 +107,7 @@ namespace MaMaTests.CalcGenerator
             {
                 AllowNegative = false,
                 NumberClass = EnumNumberClassification.Integer,
-                ShowAsRechenArt = EnumRechenArt.Division
+                ElementaryArithmetic = EnumRechenArt.Division
             };
 
             var fakeRnd = A.Fake<IRandomNumber>();
@@ -143,7 +143,7 @@ namespace MaMaTests.CalcGenerator
             {
                 AllowNegative = false,
                 NumberClass = EnumNumberClassification.Integer,
-                ShowAsRechenArt = EnumRechenArt.Division
+                ElementaryArithmetic = EnumRechenArt.Division
             };
             RuleSet ruleSet = new RuleSet
             {

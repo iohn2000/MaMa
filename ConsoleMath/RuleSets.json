@@ -1,72 +1,50 @@
 {
   "RuleSets": {
-    "divisionKomma": {
+    "2-5 Komma": {
       "firstNumber": {
-        "MaxDigits": null,
-        "MoveKomma": 2,
-        "MaxValue": 100,
-        "MinValue": 1,
-        "AllowNegative": false
+        "maxDigits": null,
+        "minValue": 2147483641,
+        "maxValue": 2147483641,
+        "moveKomma": 3,
+        "allowNegative": false
       },
       "secondNumber": {
-        "MaxDigits": null,
-        "MoveKomma": 2,
-        "MaxValue": 100,
-        "MinValue": 1,
-        "AllowNegative": false
+        "maxDigits": null,
+        "minValue": 100,
+        "maxValue": 10000,
+        "moveKomma": 3,
+        "allowNegative": false
       },
       "solutionCriteria": {
-        "AllowRational": true,
-        "AllowNegative": false,
-        "ShowAsRechenArt": "Division"
+        "numberClass": "RationalNonPeriodic",
+        "digitsAfterCommaRange": "2-5",
+        "allowNegative": false,
+        "elementaryArithmetic": "Division"
+      },
+      "amount": 150
+    },
+    "BigNumbersMulti": {
+      "firstNumber": {
+        "maxDigits": null,
+        "minValue": 2147483641,
+        "maxValue": 2147483646,
+        "moveKomma": 3,
+        "allowNegative": false
+      },
+      "secondNumber": {
+        "maxDigits": null,
+        "minValue": 2147483641,
+        "maxValue": 2147483646,
+        "moveKomma": 3,
+        "allowNegative": false
+      },
+      "solutionCriteria": {
+        "numberClass": "Integer",
+        "digitsAfterCommaRange": "2-5",
+        "allowNegative": false,
+        "elementaryArithmetic": "Multiplikation"
       },
       "amount": 5
-    },
-    
-      "multiplik.with komma": {
-        "firstNumber": {
-          "MaxDigits": null,
-          "MoveKomma": 5,
-          "MaxValue": 100,
-          "MinValue": 10,
-          "AllowNegative": true
-        },
-        "secondNumber": {
-          "MaxDigits": null,
-          "MoveKomma": 5,
-          "MaxValue": 100,
-          "MinValue": 10,
-          "AllowNegative": true
-        },
-        "solutionCriteria": {
-          "AllowRational": true,
-          "AllowNegative": true,
-          "ShowAsRechenArt": "Multiplikation"
-        },
-        "amount": 5
-      },
-      
-        "integer multipl negative": {
-          "firstNumber": {
-            "MaxDigits": null,
-            "MoveKomma": 0,
-            "MaxValue": 100,
-            "MinValue": 10,
-            "AllowNegative": true
-          },
-          "secondNumber": {
-            "MaxDigits": null,
-            "MoveKomma": 0,
-            "MaxValue": 100,
-            "MinValue": 10,
-            "AllowNegative": true
-          },
-          "solutionCriteria": {
-            "AllowRational": true,
-            "AllowNegative": true,
-            "ShowAsRechenArt": "Multiplikation"
-          },
-          "amount": 5
-        }
-      }
     }
+  }
+}

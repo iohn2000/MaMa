@@ -7,7 +7,7 @@ namespace MaMa.CalcGenerator
 {
     public class Calculator : ICalculator
     {
-        private const int MAXTRIES = 2000;
+        private const int MAXTRIES = 4000;
         private List<CalculationItem> calcList = new List<CalculationItem>();
         private readonly ILogger<Calculator> logger;
         private readonly IRandomNumber rndGenerator;
@@ -39,7 +39,7 @@ namespace MaMa.CalcGenerator
                     secondNumber = rndGenerator.GetRandomNr(ruleSet.SecondNumber, out rawNr);
 
                     // check if solution meets criteria
-                    switch (ruleSet.SolutionCriteria.ShowAsRechenArt)
+                    switch (ruleSet.SolutionCriteria.ElementaryArithmetic)
                     {
                         case EnumRechenArt.Multiplikation:
                             {
@@ -91,7 +91,7 @@ namespace MaMa.CalcGenerator
                 if (attempts < MAXTRIES)
                 {
                     this.logger.LogDebug($"WORKED: {firstNumber} | {secondNumber} = { solution}");
-                    calcList.Add(new CalculationItem(firstNumber, secondNumber, solution, ruleSet.SolutionCriteria.ShowAsRechenArt, ruleSetName));
+                    calcList.Add(new CalculationItem(firstNumber, secondNumber, solution, ruleSet.SolutionCriteria.ElementaryArithmetic, ruleSetName));
                     amountCalculations = amountCalculations - 1;
                 }
                 else
@@ -118,7 +118,7 @@ namespace MaMa.CalcGenerator
             int commaCount = -1;
 
 
-            switch (slnCfg.ShowAsRechenArt)
+            switch (slnCfg.ElementaryArithmetic)
             {
                 case EnumRechenArt.Multiplikation:
                     isNonPeriodic = true;
@@ -158,10 +158,10 @@ namespace MaMa.CalcGenerator
             {
                 if (isNonPeriodic)
                 {
-                    if (slnCfg.AmountOfDigitsAfterComma > -1) // check amount commas
+                    if (!string.IsNullOrWhiteSpace(slnCfg.DigitsAfterCommaRange)) // check amount commas
                     {
                         // get amount of commas make sure its wihtin limits
-                        if (isNonPeriodic && commaCount <= slnCfg.AmountOfDigitsAfterComma) // all ok
+                        if (isNonPeriodic && this.soltionChecker.IsInRange(commaCount, slnCfg.DigitsAfterCommaRange)) // all ok
                         {
                             return true;
                         }

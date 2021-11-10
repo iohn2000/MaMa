@@ -154,5 +154,19 @@ namespace MaMa.CalcGenerator
             }
             return a;
         }
+
+        public bool IsInRange(int theNumber, string theRange)
+        {
+            if (string.IsNullOrWhiteSpace(theRange) && theRange.IndexOf("-") == -1)
+            {
+                throw new Exception($"Specified range in solution properties is not valid. range:'{theRange}'");
+            }
+            string[] range = theRange.Split("-",StringSplitOptions.RemoveEmptyEntries);
+            if (range.Length != 2)
+            {
+                throw new Exception($"Specified range in solution properties is not valid. range:'{theRange}'");
+            }
+            return theNumber >= int.Parse(range[0]) && theNumber <= int.Parse(range[1]);
+        }
     }
 }
