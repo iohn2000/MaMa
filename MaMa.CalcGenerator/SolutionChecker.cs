@@ -79,7 +79,8 @@ namespace MaMa.CalcGenerator
         }
 
         public (int integerNr, int potenzenCount) MakeInteger(decimal divisor)
-        {
+        
+            {
             int potenzen = 0;
             decimal newNr = divisor;
 

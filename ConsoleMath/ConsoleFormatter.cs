@@ -44,7 +44,12 @@ namespace ConsoleMath
 
                     case EnumRechenArt.Addition:
                         {
-                            lineTemplate = "{0,-" + firstMax.ToString() + "} + {1,-" + secondMax.ToString() + "} = {0,-" + solutionMax.ToString() + "}";
+                            lineTemplate = "{0,-" + firstMax.ToString() + "} + {1,-" + secondMax.ToString() + "} = {2,-" + solutionMax.ToString() + "}";
+                            break;
+                        }
+                    case EnumRechenArt.Subtraction:
+                        {
+                            lineTemplate = "{0,-" + firstMax.ToString() + "} - {1,-" + secondMax.ToString() + "} = {2,-" + solutionMax.ToString() + "}";
                             break;
                         }
                 }

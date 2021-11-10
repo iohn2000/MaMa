@@ -7,7 +7,8 @@ namespace MaMa.DataModels
     {
         Multiplikation,
         Division,
-        Addition
+        Addition,
+        Subtraction
     }
 }
 

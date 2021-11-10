@@ -1,0 +1,97 @@
+{
+  "RuleSets": {
+    "Division": {
+      "firstNumber": {
+        "MaxDigits": null,
+        "MoveKomma": 0,
+        "MaxValue": 99,
+        "MinValue": 1,
+        "AllowNegative": false
+      },
+      "secondNumber": {
+        "MaxDigits": null,
+        "MoveKomma": 0,
+        "MaxValue": 10,
+        "MinValue": 1,
+        "AllowNegative": false
+      },
+      "solutionCriteria": {
+        "NumberClass": "Integer",
+        "AmountOfDigitsAfterComma": -1,
+        "AllowNegative": false,
+        "ShowAsRechenArt": "Division"
+      },
+      "amount": 15
+    },
+
+    "Multiplik": {
+      "firstNumber": {
+        "MaxDigits": null,
+        "MoveKomma": 0,
+        "MaxValue": 10,
+        "MinValue": 1,
+        "AllowNegative": false
+      },
+      "secondNumber": {
+        "MaxDigits": null,
+        "MoveKomma": 0,
+        "MaxValue": 10,
+        "MinValue": 1,
+        "AllowNegative": false
+      },
+      "solutionCriteria": {
+        "NumberClass": "Integer",
+        "AmountOfDigitsAfterComma": -1,
+        "AllowNegative": false,
+        "ShowAsRechenArt": "Multiplikation"
+      },
+      "amount": 15
+    },
+    "Addition": {
+      "firstNumber": {
+        "MaxDigits": null,
+        "MoveKomma": 0,
+        "MaxValue": 100,
+        "MinValue": 1,
+        "AllowNegative": false
+      },
+      "secondNumber": {
+        "MaxDigits": null,
+        "MoveKomma": 0,
+        "MaxValue": 100,
+        "MinValue": 1,
+        "AllowNegative": false
+      },
+      "solutionCriteria": {
+        "NumberClass": "Integer",
+        "AmountOfDigitsAfterComma": -1,
+        "AllowNegative": false,
+        "ShowAsRechenArt": "Addition"
+      },
+      "amount": 15
+    },
+    "Subtraction": {
+      "firstNumber": {
+        "MaxDigits": null,
+        "MoveKomma": 0,
+        "MaxValue": 999,
+        "MinValue": 1,
+        "AllowNegative": false
+      },
+      "secondNumber": {
+        "MaxDigits": null,
+        "MoveKomma": 0,
+        "MaxValue": 999,
+        "MinValue": 1,
+        "AllowNegative": false
+      },
+      "solutionCriteria": {
+        "NumberClass": "Integer",
+        "AmountOfDigitsAfterComma": -1,
+        "AllowNegative": false,
+        "ShowAsRechenArt": "Subtraction"
+      },
+      "amount": 15
+    }
+  }
+}

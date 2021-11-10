@@ -66,6 +66,12 @@ namespace MaMa.CalcGenerator
                                 solution = firstNumber + secondNumber;
                                 break;
                             }
+
+                        case EnumRechenArt.Subtraction:
+                            {
+                                solution = firstNumber - secondNumber;
+                                break;
+                            }
                     }
                     if (!errorFlag)
                     {
@@ -81,7 +87,7 @@ namespace MaMa.CalcGenerator
                     }
                 }
                 while (slnCriteriaMet != true && attempts <= MAXTRIES);
-                
+
                 if (attempts < MAXTRIES)
                 {
                     this.logger.LogDebug($"WORKED: {firstNumber} | {secondNumber} = { solution}");
@@ -92,7 +98,7 @@ namespace MaMa.CalcGenerator
                 {
                     throw new Exception($"could not generate a solution that meets criteria.");
                 }
-                
+
             }
             while (amountCalculations > 0);
         }
@@ -115,12 +121,19 @@ namespace MaMa.CalcGenerator
             switch (slnCfg.ShowAsRechenArt)
             {
                 case EnumRechenArt.Multiplikation:
-                    (isNonPeriodic, commaCount) = this.soltionChecker.CalcPeriodicity(firstNr, 1 / secondNr);
+                    isNonPeriodic = true;
+                    (_, int c1) = this.soltionChecker.MakeInteger(firstNr);
+                    (_, int c2) = this.soltionChecker.MakeInteger(secondNr);
+                    commaCount = c1 + c2;
                     break;
                 case EnumRechenArt.Division:
                     (isNonPeriodic, commaCount) = this.soltionChecker.CalcPeriodicity(firstNr, secondNr);
                     break;
                 case EnumRechenArt.Addition:
+                    isNonPeriodic = true;
+                    (_, commaCount) = this.soltionChecker.MakeInteger(slnValue);
+                    break;
+                case EnumRechenArt.Subtraction:
                     isNonPeriodic = true;
                     (_, commaCount) = this.soltionChecker.MakeInteger(slnValue);
                     break;
