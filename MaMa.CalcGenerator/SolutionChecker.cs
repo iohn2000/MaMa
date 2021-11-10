@@ -53,7 +53,7 @@ namespace MaMa.CalcGenerator
                 List<long> primeFactors = GetPrimeFactors(divisorInteger);
                 List<long> otherNumbers = new List<long> { 1, 3, 4, 6, 7, 8, 9 };
 
-                bool containsNumberNot_2_or_5 = primeFactors.Intersect(otherNumbers).Any();
+                bool containsNumberNot_2_or_5 = primeFactors.Intersect(otherNumbers).Any() ||primeFactors.Exists(e=>e>9);
 
                 isNonPeriodic = !containsNumberNot_2_or_5;
                 if (isNonPeriodic)
@@ -70,7 +70,7 @@ namespace MaMa.CalcGenerator
             return (isNonPeriodic, commaCount);
         }
 
-        private (long dividend, long divisor) BruchKürzen(long dividendInteger, long divisorInteger)
+        public (long dividend, long divisor) BruchKürzen(long dividendInteger, long divisorInteger)
         {
             var ggT = this.GetGGT(dividendInteger, divisorInteger);
             dividendInteger = dividendInteger / ggT;

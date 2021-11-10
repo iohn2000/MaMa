@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MaMa.DataModels;
 using Microsoft.Extensions.Logging;
 
@@ -6,6 +7,7 @@ namespace MaMa.CalcGenerator
 {
     public class Calculator : ICalculator
     {
+        private const int MAXTRIES = 2000;
         private List<CalculationItem> calcList = new List<CalculationItem>();
         private readonly ILogger<Calculator> logger;
         private readonly IRandomNumber rndGenerator;
@@ -29,8 +31,10 @@ namespace MaMa.CalcGenerator
                 bool slnCriteriaMet = false;
                 decimal firstNumber, secondNumber, solution = decimal.Zero;
                 bool errorFlag = false;
+                int attempts = 0;
                 do
                 {
+                    attempts++;
                     firstNumber = rndGenerator.GetRandomNr(ruleSet.FirstNumber, out rawNr);
                     secondNumber = rndGenerator.GetRandomNr(ruleSet.SecondNumber, out rawNr);
 
@@ -76,12 +80,19 @@ namespace MaMa.CalcGenerator
                         this.logger.LogDebug($"not valid, needs retry: {firstNumber} / {secondNumber} = { solution}");
                     }
                 }
-                while (slnCriteriaMet != true);
-                // generate numbers
-
-                this.logger.LogDebug($"WORKED: {firstNumber} / {secondNumber} = { solution}");
-                calcList.Add(new CalculationItem(firstNumber, secondNumber, solution, ruleSet.SolutionCriteria.ShowAsRechenArt, ruleSetName));
-                amountCalculations = amountCalculations - 1;
+                while (slnCriteriaMet != true && attempts <= MAXTRIES);
+                
+                if (attempts < MAXTRIES)
+                {
+                    this.logger.LogDebug($"WORKED: {firstNumber} | {secondNumber} = { solution}");
+                    calcList.Add(new CalculationItem(firstNumber, secondNumber, solution, ruleSet.SolutionCriteria.ShowAsRechenArt, ruleSetName));
+                    amountCalculations = amountCalculations - 1;
+                }
+                else
+                {
+                    throw new Exception($"could not generate a solution that meets criteria.");
+                }
+                
             }
             while (amountCalculations > 0);
         }
@@ -97,13 +108,34 @@ namespace MaMa.CalcGenerator
             // nr classification checks
             //
             bool nrClassificationMet = false;
+            bool isNonPeriodic = true;
+            int commaCount = -1;
+
+
+            switch (slnCfg.ShowAsRechenArt)
+            {
+                case EnumRechenArt.Multiplikation:
+                    (isNonPeriodic, commaCount) = this.soltionChecker.CalcPeriodicity(firstNr, 1 / secondNr);
+                    break;
+                case EnumRechenArt.Division:
+                    (isNonPeriodic, commaCount) = this.soltionChecker.CalcPeriodicity(firstNr, secondNr);
+                    break;
+                case EnumRechenArt.Addition:
+                    isNonPeriodic = true;
+                    (_, commaCount) = this.soltionChecker.MakeInteger(slnValue);
+                    break;
+                default:
+                    break;
+            }
+
             // any 
             if (slnCfg.NumberClass == EnumNumberClassification.Any)
                 nrClassificationMet = true;
+
             // integer
             else if (slnCfg.NumberClass == EnumNumberClassification.Integer)
             {
-                if (this.soltionChecker.GetClassOfNumber(slnValue) != EnumNumberClassification.Integer)
+                if (!isNonPeriodic || commaCount > 0)
                     nrClassificationMet = false;
                 else
                     nrClassificationMet = true;
@@ -111,32 +143,31 @@ namespace MaMa.CalcGenerator
             // rational periodic
             else if (slnCfg.NumberClass == EnumNumberClassification.RationalNonPeriodic)
             {
-                if (this.soltionChecker.GetClassOfNumber(slnValue) == EnumNumberClassification.RationalNonPeriodic
-                    || this.soltionChecker.GetClassOfNumber(slnValue) == EnumNumberClassification.Integer)
+                if (isNonPeriodic)
                 {
                     if (slnCfg.AmountOfDigitsAfterComma > -1) // check amount commas
                     {
                         // get amount of commas make sure its wihtin limits
-                        if (true) // all ok
+                        if (isNonPeriodic && commaCount <= slnCfg.AmountOfDigitsAfterComma) // all ok
                         {
-
+                            return true;
                         }
                         else // comma criteria not met
                         {
-
+                            return false;
                         }
                     }
                     else // class is ok, commas dont matter
                     {
                         nrClassificationMet = true;
                     }
-                        
+
                 }
                 else // wrong class of nr
                 {
                     nrClassificationMet = false;
                 }
-                    
+
             }
             else // unkown class ?
             {

@@ -6,5 +6,9 @@
     public interface INumberClassifier
     {
         EnumNumberClassification GetClassOfNumber(decimal theNumber);
+
+        (bool isNonPeriodic, int commaCount) CalcPeriodicity(decimal dividend, decimal divisor);
+
+        (int integerNr, int potenzenCount) MakeInteger(decimal divisor);
     }
 }

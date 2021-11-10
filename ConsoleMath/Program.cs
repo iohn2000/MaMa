@@ -10,6 +10,7 @@ namespace ConsoleMath
 {
     class Program
     {
+        private static Serilog.Core.Logger logger;
         /// <summary>
         /// Generate Random math problems
         /// </summary>
@@ -17,6 +18,12 @@ namespace ConsoleMath
         /// <param name="r">full path to a json config file containing the rule sets</param>
         static void Main(bool showRules, string r = "RuleSets.json")
         {
+            logger = new LoggerConfiguration()
+                                             .MinimumLevel.Error()
+                                             .WriteTo.Console()
+                                             .WriteTo.File("log-.txt", rollingInterval: RollingInterval.Day)
+                                             .CreateLogger();
+
             Console.WriteLine("MaMa - Mathe Maker");
 
             ServiceProvider serviceProvider = AddServices();
@@ -30,7 +37,15 @@ namespace ConsoleMath
 
             foreach (var ruleSet in settingsFile.RuleSets)
             {
-                cc.GenerateNumbers(ruleSet.Value, ruleSet.Key);
+                try
+                {
+                    cc.GenerateNumbers(ruleSet.Value, ruleSet.Key);
+                }
+                catch (Exception ex)
+                {
+                    logger.Error(ex, "cannot generate numbers for this rule set.");
+                    
+                }
             }
 
             List<CalculationItem> result = cc.GetGeneratedNumbers();
@@ -60,12 +75,6 @@ namespace ConsoleMath
                 .AddSingleton<INumberClassifier,SolutionChecker>()
                 .AddLogging(builder =>
                 {
-                    var logger = new LoggerConfiguration()
-                                              .MinimumLevel.Error()
-                                              .WriteTo.Console()
-                                              .WriteTo.File("log-.txt", rollingInterval: RollingInterval.Day)
-                                              .CreateLogger();
-
                     builder.AddSerilog(logger);
                 })
 
