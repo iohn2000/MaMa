@@ -38,9 +38,7 @@ namespace MaMa.CalcGenerator
             var divisorInteger = (long)(divisor * integerFactor);
 
             // 2) bruch kürzen
-            var ggT = this.GetGGT(dividendInteger, divisorInteger);
-            dividendInteger = dividendInteger / ggT;
-            divisorInteger = divisorInteger / ggT;
+            (_, divisorInteger) = this.BruchKürzen(dividendInteger, divisorInteger);
 
             // 3) non periodic?
             bool isNonPeriodic;
@@ -53,14 +51,15 @@ namespace MaMa.CalcGenerator
             else
             {
                 List<long> primeFactors = GetPrimeFactors(divisorInteger);
-                List<long> otherNumbers = new List<long> { 1,3,4,6,7,8,9 };
-                
+                List<long> otherNumbers = new List<long> { 1, 3, 4, 6, 7, 8, 9 };
+
                 bool containsNumberNot_2_or_5 = primeFactors.Intersect(otherNumbers).Any();
 
                 isNonPeriodic = !containsNumberNot_2_or_5;
                 if (isNonPeriodic)
                 {
                     // 4) amount of commas - only when there is commas
+                    commaCount = Math.Max(primeFactors.Count(p => p == 2),primeFactors.Count(p => p == 5));
                 }
                 else
                 {
@@ -69,6 +68,14 @@ namespace MaMa.CalcGenerator
             }
 
             return (isNonPeriodic, commaCount);
+        }
+
+        private (long dividend, long divisor) BruchKürzen(long dividendInteger, long divisorInteger)
+        {
+            var ggT = this.GetGGT(dividendInteger, divisorInteger);
+            dividendInteger = dividendInteger / ggT;
+            divisorInteger = divisorInteger / ggT;
+            return (dividendInteger, divisorInteger);
         }
 
         public (int integerNr, int potenzenCount) MakeInteger(decimal divisor)
