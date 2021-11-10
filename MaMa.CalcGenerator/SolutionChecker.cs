@@ -27,20 +27,48 @@ namespace MaMa.CalcGenerator
         /// <param name="dividend"></param>
         /// <param name="divisor"></param>
         /// <returns></returns>
-        public int GetNonPeriodicCommaCount(decimal dividend, decimal divisor)
+        public (bool isNonPeriodic, int commaCount) CalcPeriodicity(decimal dividend, decimal divisor)
         {
             // prep fraction so calcs can be done on it
             // 1) remove commas  1.23 -> 123 -> 10^2
-            var disisorResult = MakeInteger(divisor);
-            var divedendResult = MakeInteger(dividend);
+            var divisorResult = MakeInteger(divisor);
+            var dividendResult = MakeInteger(dividend);
+            var integerFactor = (int)Math.Pow(10, Math.Max(dividendResult.potenzenCount, divisorResult.potenzenCount));
+            var dividendInteger = (long)(dividend * integerFactor);
+            var divisorInteger = (long)(divisor * integerFactor);
 
-            //    // 2) bruch kürzen
-            //    // 3) non periodic?
-            //    List<long> primeFactors = GetPrimeFactors(divisor);
-            //    bool twoFiveOnly = primeFactors.Exists(c => c != 2 || c != 5);
-            //    // 4) amount of commas
+            // 2) bruch kürzen
+            var ggT = this.GetGGT(dividendInteger, divisorInteger);
+            dividendInteger = dividendInteger / ggT;
+            divisorInteger = divisorInteger / ggT;
 
-            return 1;
+            // 3) non periodic?
+            bool isNonPeriodic;
+            int commaCount = -1;
+            if (divisorInteger == 1) // keine kommastellen
+            {
+                isNonPeriodic = true;
+                commaCount = 0;
+            }
+            else
+            {
+                List<long> primeFactors = GetPrimeFactors(divisorInteger);
+                List<long> otherNumbers = new List<long> { 1,3,4,6,7,8,9 };
+                
+                bool containsNumberNot_2_or_5 = primeFactors.Intersect(otherNumbers).Any();
+
+                isNonPeriodic = !containsNumberNot_2_or_5;
+                if (isNonPeriodic)
+                {
+                    // 4) amount of commas - only when there is commas
+                }
+                else
+                {
+                    commaCount = -1;
+                }
+            }
+
+            return (isNonPeriodic, commaCount);
         }
 
         public (int integerNr, int potenzenCount) MakeInteger(decimal divisor)
@@ -73,7 +101,7 @@ namespace MaMa.CalcGenerator
         //    return (twoFiveOnly, 0);
         //}
 
-        private List<long> GetPrimeFactors(long theNumber)
+        public List<long> GetPrimeFactors(long theNumber)
         {
             List<long> result = new List<long>();
 
@@ -107,7 +135,7 @@ namespace MaMa.CalcGenerator
             return result;
         }
 
-        private long GetGGT(long a, long b)
+        public long GetGGT(long a, long b)
         {
             long c = 1;
             while (c != 0)
