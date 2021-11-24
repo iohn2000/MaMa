@@ -19,6 +19,7 @@ namespace MaMa.CalcGenerator
             this.logger = logger;
             this.rndGenerator = rndGenerator;
             this.soltionChecker = nrClass;
+            this.logger.LogDebug($"ctor Calculator");
         }
 
         public void GenerateNumbers(RuleSet ruleSet, string ruleSetName)
@@ -143,12 +144,13 @@ namespace MaMa.CalcGenerator
 
             // any 
             if (slnCfg.NumberClass == EnumNumberClassification.Any)
+            { 
                 nrClassificationMet = true;
-
+            }
             // integer
             else if (slnCfg.NumberClass == EnumNumberClassification.Integer)
             {
-                if (!isNonPeriodic || commaCount > 0)
+                if (!isNonPeriodic || commaCount > 0) // !isNonPeriodic == komma zahl mit endlichen komma stellen
                     nrClassificationMet = false;
                 else
                     nrClassificationMet = true;
@@ -163,11 +165,11 @@ namespace MaMa.CalcGenerator
                         // get amount of commas make sure its wihtin limits
                         if (isNonPeriodic && this.soltionChecker.IsInRange(commaCount, slnCfg.DigitsAfterCommaRange)) // all ok
                         {
-                            return true;
+                            nrClassificationMet = true;
                         }
                         else // comma criteria not met
                         {
-                            return false;
+                            nrClassificationMet = false;
                         }
                     }
                     else // class is ok, commas dont matter

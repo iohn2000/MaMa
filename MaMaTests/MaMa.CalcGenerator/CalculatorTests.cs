@@ -16,7 +16,7 @@ namespace MaMaTests.CalcGenerator
         [OneTimeSetUp]
         public void Setup()
         {
-            var xx = new LoggerConfiguration().MinimumLevel.Error()
+            var xx = new LoggerConfiguration().MinimumLevel.Debug()
                                              .WriteTo.Console()
                                              .WriteTo.File("c:\\temp\\unit-tests-log-.txt", rollingInterval: RollingInterval.Day)
                                              .CreateLogger();
@@ -29,6 +29,7 @@ namespace MaMaTests.CalcGenerator
         {
             var ex = Assert.Throws<Exception>(() =>
             {
+                
                 int rawNr = 0;
                 NumberProperties nr1Prop = new NumberProperties() { AllowNegative = true };
                 NumberProperties nr2Prop = new NumberProperties() { AllowNegative = false };
@@ -111,7 +112,7 @@ namespace MaMaTests.CalcGenerator
             };
 
             var fakeRnd = A.Fake<IRandomNumber>();
-            Calculator sut = new Calculator(null, fakeRnd, new SolutionChecker());
+            Calculator sut = new Calculator(this.logger, fakeRnd, new SolutionChecker());
             bool isMeet = sut.SolutionCriteriaMet((decimal)nr1, (decimal)nr2, (decimal)(nr1 / nr2), slnProp);
             Assert.IsFalse(isMeet);
         }
