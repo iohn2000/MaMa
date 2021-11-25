@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Syncfusion.Compression.Portable">
+      <HintPath>..\..\..\Program Files (x86)\Syncfusion\Essential Studio\FileFormats\19.3.0.43\precompiledassemblies\.NET Standard 2.0\Syncfusion.Compression.Portable.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Pdf.Portable">
+      <HintPath>..\..\..\Program Files (x86)\Syncfusion\Essential Studio\FileFormats\19.3.0.43\precompiledassemblies\.NET Standard 2.0\Syncfusion.Pdf.Portable.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
