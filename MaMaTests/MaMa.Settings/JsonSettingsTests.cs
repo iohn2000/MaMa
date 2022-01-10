@@ -3,6 +3,8 @@ using FakeItEasy;
 using MaMa.DataModels;
 using MaMa.Settings;
 using System.Linq;
+using MaMa.DataModels.Interfaces;
+using System.Collections.Generic;
 
 namespace MaMaTests.Settings
 {
@@ -126,7 +128,7 @@ string fakeDictJson = @"
             SettingsFile sf = ss.DeserializeSettings(fakeJsonSetting);
 
             // do some test if fiels are correctly deseralised
-            RuleSet rs1 = sf.RuleSets.Values.ElementAt(0);
+            BasicArithmeticalOperation rs1 = sf.BasicArithmeticalOperationSets.Values.ElementAt(0);
             NumberProperties nr1 = rs1.FirstNumber;
             Assert.IsTrue(nr1.MaxDigits == null);
             Assert.AreEqual(2,nr1.MaxMoveKomma);
@@ -136,6 +138,40 @@ string fakeDictJson = @"
             Assert.AreEqual(EnumRechenArt.Division, rs1.SolutionCriteria.ElementaryArithmetic);  
             // ruleSet
             Assert.AreEqual(56,rs1.AmountOfCalculations);
+        }
+
+        [Test]
+        public void JsonSerializeTest()
+        {
+            ISerializeSettings ss = new JsonSerializeSettings();
+            SettingsFile sf = new SettingsFile();
+
+
+            Dictionary<string, BasicArithmeticalOperation> b = new Dictionary<string, BasicArithmeticalOperation>();
+            b.Add("basicAdd", new BasicArithmeticalOperation {
+                FirstNumber = new NumberProperties { MinValue = 12, MaxValue = 142 },
+                SecondNumber = new NumberProperties { MinValue = 13, MaxValue = 312 },
+                AmountOfCalculations = 5,
+                SolutionCriteria = new SolutionProperties { ElementaryArithmetic = EnumRechenArt.Addition }
+            });
+            sf.BasicArithmeticalOperationSets = b;
+
+            Dictionary<string,Fractions> f = new Dictionary<string, Fractions>();
+            f.Add("f1", new Fractions{ 
+                Numerator = new NumberProperties{ MinValue = 1, MaxValue = 12 }, 
+                Denominator = new NumberProperties{ MinValue = 2, MaxValue =12},
+                AmountOfCalculations = 4,
+                SolutionCriteria = new SolutionProperties { ElementaryArithmetic = EnumRechenArt.Multiplikation }
+                });
+            f.Add("f2", new Fractions
+            {
+                Numerator = new NumberProperties { MinValue = 23, MaxValue = 76 },
+                Denominator = new NumberProperties { MinValue = 13, MaxValue = 43 },
+                AmountOfCalculations = 4,
+                SolutionCriteria = new SolutionProperties { ElementaryArithmetic = EnumRechenArt.Multiplikation }
+            });
+            sf.FractionSets = f;
+            string strSettings = ss.SerializeSettings(sf);
         }
 
         [Test]
@@ -157,7 +193,7 @@ string fakeDictJson = @"
             // THEN
             //
             // if no error and serialisation produces 4 sets of rules -> good start
-            Assert.AreEqual(2, f.RuleSets.Count);
+            Assert.AreEqual(2, f.BasicArithmeticalOperationSets.Count);
         }
     }
 }

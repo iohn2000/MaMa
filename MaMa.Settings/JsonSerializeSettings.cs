@@ -1,9 +1,10 @@
 using System.Text.Json;
 using MaMa.DataModels;
+using MaMa.DataModels.Interfaces;
 
 namespace MaMa.Settings
 {
-public class JsonSerializeSettings : ISerializeSettings
+    public class JsonSerializeSettings : ISerializeSettings
 {
     public SettingsFile DeserializeSettings(string settingsStr)
     {

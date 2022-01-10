@@ -61,12 +61,12 @@ namespace ConsoleMath
             }
         }
 
-        public void ShowSettings(Dictionary<string,RuleSet> ruleSets)
+        public void ShowSettings(Dictionary<string,BasicArithmeticalOperation> ruleSets)
         {
             JsonSerializeSettings jSettings = new JsonSerializeSettings();
             string settingJson = jSettings.SerializeSettings(new SettingsFile
             {
-                RuleSets =  ruleSets
+                BasicArithmeticalOperationSets =  ruleSets
             });
             Console.WriteLine(settingJson);
         }

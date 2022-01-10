@@ -5,9 +5,12 @@ namespace MaMa.DataModels
 {
     public class SettingsFile
     {
-        [JsonPropertyName("RuleSets")]
-        public Dictionary<string,RuleSet> RuleSets { get; set; }
+        [JsonPropertyName("BasicArithmeticalOperation")]
+        public Dictionary<string, BasicArithmeticalOperation> BasicArithmeticalOperationSets { get; set; }
 
-        public SettingsFile() => this.RuleSets = new Dictionary<string,RuleSet>();
+        [JsonPropertyName("Fractions")]
+        public Dictionary<string, Fractions> FractionSets { get; set; }
+
+        public SettingsFile() => this.BasicArithmeticalOperationSets = new Dictionary<string,BasicArithmeticalOperation>();
     }
 }

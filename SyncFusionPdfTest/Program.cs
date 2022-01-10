@@ -18,7 +18,7 @@ namespace SyncFusionPdfTest
             //PdfGraphics graphics = page.Graphics;
             //PdfFont font2 = new PdfStandardFont(PdfFontFamily.Helvetica, 14);
 
-            RechenAufgabenPdf p = new RechenAufgabenPdf();
+            RechenAufgabenPdf p = new RechenAufgabenPdf(2);
             p.SavePdf();
         }
 
@@ -27,13 +27,22 @@ namespace SyncFusionPdfTest
 
     public class RechenAufgabenPdf
     {
+        private float minHeightRow = 30f;
+        private float marginAll = 15f;
+        private float amountRows = 20f;
+
         PdfDocument doc = new PdfDocument();
-        
+
+        public RechenAufgabenPdf(int amountOfRowsPerPage)
+        {
+
+        }
 
         public void SavePdf()
         {
             doc = DrawPdf();
-
+            Console.WriteLine($"page h:{doc.PageSettings.Height} w:{doc.PageSettings.Width}");
+            Console.WriteLine($"Row height:{minHeightRow} --> amount rows fitting:{doc.PageSettings.Height/minHeightRow}");
             //Save the document.
             var fileStream = File.Create("out.pdf");
             doc.Save(fileStream);
@@ -44,7 +53,7 @@ namespace SyncFusionPdfTest
             //Create a new PDF document.
             
             PdfMargins marg = new PdfMargins();
-            marg.All = 15f;
+            marg.All = marginAll;
             doc.PageSettings.Size = PdfPageSize.A4;
             doc.PageSettings.Margins = marg;
             PdfPage page = doc.Pages.Add();
@@ -97,9 +106,9 @@ namespace SyncFusionPdfTest
             return pdfLightTable;
         }
 
-        private static void PdfLightTable_BeginRowLayout(object sender, BeginRowLayoutEventArgs args)
+        private void PdfLightTable_BeginRowLayout(object sender, BeginRowLayoutEventArgs args)
         {
-            args.MinimalHeight = 30f;
+            args.MinimalHeight = doc.PageSettings.Height / amountRows; //minHeightRow;
         }
     }
 }

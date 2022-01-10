@@ -1,5 +1,21 @@
 {
-  "RuleSets": {
+  "Fractions": {
+    "multipl. fractions": {
+      "numerator": {
+        "minValue": 1,
+        "maxValue": 23
+      },
+      "denominator": {
+        "minValue": 2,
+        "maxValue": 11
+      },
+      "solutionCriteria": {
+        "elementaryArithmetic": "Multiplikation"
+      },
+      "amount": 34
+    }
+  },
+  "BasicArithmeticalOperation": {
     "2-5 Komma": {
       "firstNumber": {
         "maxDigits": null,
@@ -47,4 +63,6 @@
       "amount": 5
     }
   }
+
+
 }

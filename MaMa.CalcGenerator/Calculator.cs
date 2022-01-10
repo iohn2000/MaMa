@@ -22,7 +22,7 @@ namespace MaMa.CalcGenerator
             this.logger.LogDebug($"ctor Calculator");
         }
 
-        public void GenerateNumbers(RuleSet ruleSet, string ruleSetName)
+        public void GenerateNumbers(BasicArithmeticalOperation ruleSet, string ruleSetName)
         {
             int amountCalculations = ruleSet.AmountOfCalculations;
             if (amountCalculations == 0) return;

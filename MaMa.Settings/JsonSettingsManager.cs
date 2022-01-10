@@ -1,4 +1,6 @@
 using MaMa.DataModels;
+using MaMa.DataModels.Interfaces;
+
 
 namespace MaMa.Settings
 {

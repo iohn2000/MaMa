@@ -5,7 +5,7 @@ namespace MaMa.DataModels
     ///<summary>
     /// keeps a set of settings together and is used to serialize
     ///</summary>
-    public class RuleSet
+    public class BasicArithmeticalOperation
     {
         [JsonPropertyName("firstNumber")]
         public NumberProperties FirstNumber { get; set; }

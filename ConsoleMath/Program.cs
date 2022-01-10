@@ -1,5 +1,6 @@
 ﻿using MaMa.CalcGenerator;
 using MaMa.DataModels;
+using MaMa.DataModels.Interfaces;
 using MaMa.Settings;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
@@ -35,7 +36,7 @@ namespace ConsoleMath
             Console.WriteLine($"Load rulesSets from file: {r}");
             SettingsFile settingsFile = sMgr.GetSettings(r);
 
-            foreach (var ruleSet in settingsFile.RuleSets)
+            foreach (var ruleSet in settingsFile.BasicArithmeticalOperationSets)
             {
                 try
                 {
@@ -52,7 +53,7 @@ namespace ConsoleMath
 
             if (showRules)
             {
-                cf.ShowSettings(settingsFile.RuleSets); 
+                cf.ShowSettings(settingsFile.BasicArithmeticalOperationSets); 
             }
             cf.ShowRechnungen(result);
         }

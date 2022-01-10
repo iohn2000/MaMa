@@ -1,4 +1,4 @@
-namespace MaMa.DataModels
+namespace MaMa.DataModels.Interfaces
 {
     public interface ISerializeSettings
     {

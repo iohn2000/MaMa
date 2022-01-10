@@ -39,7 +39,7 @@ namespace MaMaTests.CalcGenerator
                     NumberClass = nrClass,
                     ElementaryArithmetic = rechenArt
                 };
-                RuleSet ruleSet = new RuleSet
+                BasicArithmeticalOperation ruleSet = new BasicArithmeticalOperation
                 {
                     FirstNumber = nr1Prop,
                     SecondNumber = nr2Prop,
@@ -76,7 +76,7 @@ namespace MaMaTests.CalcGenerator
                 NumberClass = nrClass,
                 ElementaryArithmetic = rechenArt
             };
-            RuleSet ruleSet = new RuleSet
+            BasicArithmeticalOperation ruleSet = new BasicArithmeticalOperation
             {
                 FirstNumber = nr1Prop,
                 SecondNumber = nr2Prop,
@@ -146,7 +146,7 @@ namespace MaMaTests.CalcGenerator
                 NumberClass = EnumNumberClassification.Integer,
                 ElementaryArithmetic = EnumRechenArt.Division
             };
-            RuleSet ruleSet = new RuleSet
+            BasicArithmeticalOperation ruleSet = new BasicArithmeticalOperation
             {
                 FirstNumber = nr1Prop,
                 SecondNumber = nr2Prop,
