@@ -6,10 +6,17 @@ using System.Linq;
 
 namespace ConsoleMath
 {
+    /// <summary>
+    /// format calculations for console
+    /// </summary>
     public class ConsoleFormatter
     {
         //private string fileName;
 
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="filename"></param>
         public ConsoleFormatter(string filename = null)
         {
             //this.fileName = filename;
@@ -17,6 +24,10 @@ namespace ConsoleMath
             //    File.AppendAllText(this.fileName, "--------------" + Environment.NewLine + DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss") + Environment.NewLine);
         }
 
+        /// <summary>
+        /// write out calculations to console
+        /// </summary>
+        /// <param name="calcList"></param>
         public void ShowRechnungen(List<CalculationItem> calcList)
         {
             int firstMax = GetMaxDigitCount(calcList, c => c.FirstNumber);
@@ -61,6 +72,10 @@ namespace ConsoleMath
             }
         }
 
+        /// <summary>
+        /// display rules for generating calculations
+        /// </summary>
+        /// <param name="ruleSets"></param>
         public void ShowSettings(Dictionary<string,BasicArithmeticalOperation> ruleSets)
         {
             JsonSerializeSettings jSettings = new JsonSerializeSettings();

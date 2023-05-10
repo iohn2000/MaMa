@@ -1,97 +1,73 @@
 {
-  "RuleSets": {
-    "Division": {
+  "BasicArithmeticalOperation": {
+    "multi": {
       "firstNumber": {
-        "MaxDigits": null,
-        "MoveKomma": 0,
-        "MaxValue": 99,
-        "MinValue": 1,
-        "AllowNegative": false
+        "maxDigits": 5,
+        "minValue": 100,
+        "maxValue": 999,
+        "moveKomma": 0,
+        "allowNegative": false
       },
       "secondNumber": {
-        "MaxDigits": null,
-        "MoveKomma": 0,
-        "MaxValue": 10,
-        "MinValue": 1,
-        "AllowNegative": false
+        "maxDigits": 5,
+        "minValue": 100,
+        "maxValue": 999,
+        "moveKomma": 0,
+        "allowNegative": false
       },
       "solutionCriteria": {
-        "NumberClass": "Integer",
-        "AmountOfDigitsAfterComma": -1,
-        "AllowNegative": false,
-        "ShowAsRechenArt": "Division"
+        "numberClass": "Integer",
+        "digitsAfterCommaRange": "0",
+        "allowNegative": false,
+        "elementaryArithmetic": "Multiplikation"
       },
       "amount": 15
     },
-
-    "Multiplik": {
+    "2-stellig-Div-KeinRest": {
       "firstNumber": {
-        "MaxDigits": null,
-        "MoveKomma": 0,
-        "MaxValue": 10,
-        "MinValue": 1,
-        "AllowNegative": false
+        "maxDigits": 5,
+        "minValue": 500,
+        "maxValue": 99999,
+        "moveKomma": 0,
+        "allowNegative": false
       },
       "secondNumber": {
-        "MaxDigits": null,
-        "MoveKomma": 0,
-        "MaxValue": 10,
-        "MinValue": 1,
-        "AllowNegative": false
+        "maxDigits": 2,
+        "minValue": 12,
+        "maxValue": 99,
+        "moveKomma": 0,
+        "allowNegative": false
       },
       "solutionCriteria": {
-        "NumberClass": "Integer",
-        "AmountOfDigitsAfterComma": -1,
-        "AllowNegative": false,
-        "ShowAsRechenArt": "Multiplikation"
+        "numberClass": "Integer",
+        "digitsAfterCommaRange": "0",
+        "allowNegative": false,
+        "elementaryArithmetic": "Division"
       },
-      "amount": 15
+      "amount": 1
     },
-    "Addition": {
+    "2-stellig-Div-MitRest": {
       "firstNumber": {
-        "MaxDigits": null,
-        "MoveKomma": 0,
-        "MaxValue": 100,
-        "MinValue": 1,
-        "AllowNegative": false
+        "maxDigits": 5,
+        "minValue": 500,
+        "maxValue": 99999,
+        "moveKomma": 0,
+        "allowNegative": false
       },
       "secondNumber": {
-        "MaxDigits": null,
-        "MoveKomma": 0,
-        "MaxValue": 100,
-        "MinValue": 1,
-        "AllowNegative": false
+        "maxDigits": 2,
+        "minValue": 12,
+        "maxValue": 99,
+        "moveKomma": 0,
+        "allowNegative": false
       },
       "solutionCriteria": {
-        "NumberClass": "Integer",
-        "AmountOfDigitsAfterComma": -1,
-        "AllowNegative": false,
-        "ShowAsRechenArt": "Addition"
+        "numberClass": "Any",
+        "digitsAfterCommaRange": "0",
+        "allowNegative": false,
+        "elementaryArithmetic": "Division"
       },
-      "amount": 15
-    },
-    "Subtraction": {
-      "firstNumber": {
-        "MaxDigits": null,
-        "MoveKomma": 0,
-        "MaxValue": 999,
-        "MinValue": 1,
-        "AllowNegative": false
-      },
-      "secondNumber": {
-        "MaxDigits": null,
-        "MoveKomma": 0,
-        "MaxValue": 999,
-        "MinValue": 1,
-        "AllowNegative": false
-      },
-      "solutionCriteria": {
-        "NumberClass": "Integer",
-        "AmountOfDigitsAfterComma": -1,
-        "AllowNegative": false,
-        "ShowAsRechenArt": "Subtraction"
-      },
-      "amount": 15
+      "amount": 1
     }
   }
 }

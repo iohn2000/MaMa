@@ -12,7 +12,7 @@ namespace MaMaTests.Settings
     {
         private string fakeJsonSetting = @"
 {
-  ""RuleSets"": {
+""BasicArithmeticalOperation"": {
     ""DivisionKomma"": {
       ""firstNumber"": {
         ""maxDigits"": null,

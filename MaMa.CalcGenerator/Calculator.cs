@@ -122,7 +122,6 @@ namespace MaMa.CalcGenerator
             switch (slnCfg.ElementaryArithmetic)
             {
                 case EnumRechenArt.Multiplikation:
-                    isNonPeriodic = true;
                     (_, int c1) = this.soltionChecker.MakeInteger(firstNr);
                     (_, int c2) = this.soltionChecker.MakeInteger(secondNr);
                     commaCount = c1 + c2;
@@ -131,14 +130,10 @@ namespace MaMa.CalcGenerator
                     (isNonPeriodic, commaCount) = this.soltionChecker.CalcPeriodicity(firstNr, secondNr);
                     break;
                 case EnumRechenArt.Addition:
-                    isNonPeriodic = true;
                     (_, commaCount) = this.soltionChecker.MakeInteger(slnValue);
                     break;
                 case EnumRechenArt.Subtraction:
-                    isNonPeriodic = true;
                     (_, commaCount) = this.soltionChecker.MakeInteger(slnValue);
-                    break;
-                default:
                     break;
             }
 
