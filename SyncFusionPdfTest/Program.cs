@@ -1,8 +1,4 @@
-﻿using Syncfusion.Drawing;
-using Syncfusion.Pdf;
-using Syncfusion.Pdf.Graphics;
-using Syncfusion.Pdf.Tables;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
