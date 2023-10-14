@@ -12,7 +12,7 @@
       "solutionCriteria": {
         "elementaryArithmetic": "Multiplikation"
       },
-      "amount": 34
+      "amount": 0
     }
   },
   "BasicArithmeticalOperation": {
@@ -37,7 +37,7 @@
         "allowNegative": false,
         "elementaryArithmetic": "Division"
       },
-      "amount": 150
+      "amount": 0
     },
     "BigNumbersMulti": {
       "firstNumber": {
@@ -60,9 +60,30 @@
         "allowNegative": false,
         "elementaryArithmetic": "Multiplikation"
       },
+      "amount": 0
+    },
+    "StepsTester": {
+      "firstNumber": {
+        "maxDigits": null,
+        "minValue": 111,
+        "maxValue": 333,
+        "moveKomma": 0,
+        "allowNegative": false
+      },
+      "secondNumber": {
+        "maxDigits": null,
+        "minValue": 1000,
+        "maxValue": 6666,
+        "moveKomma": 0,
+        "allowNegative": false
+      },
+      "solutionCriteria": {
+        "numberClass": "Integer",
+        "digitsAfterCommaRange": "2-5",
+        "allowNegative": false,
+        "elementaryArithmetic": "Multiplikation"
+      },
       "amount": 5
     }
   }
-
-
 }
