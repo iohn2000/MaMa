@@ -48,6 +48,12 @@ public class CalculationSteps
                 prevCarryOver = carryOver; // remember for next round
                 order++;
             }
+            // add last (left most) digit if carry over > 0 
+            // digit equas carry over (zehner stelle)
+            if (prevCarryOver > 0)
+            {
+                digits.Add(new Digit{ CarryOver = 0, DigitValue = prevCarryOver, Order = order});
+            }
 
             int rowValue = digitFaktor2 * int.Parse(firstNrSTr);
             int produktWithStellenwert = rowValue * (int)Math.Pow(10, stellenwert);
