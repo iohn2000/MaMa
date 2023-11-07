@@ -6,17 +6,17 @@ using System.Linq;
 
 namespace MaMaTests.Concept.CalcSteps
 {
-    public class MultiplicationStepsTests
+    public class MultiplicationStepsDecimalTests
     {
         [Test]
-        [TestCaseSource(nameof(TestCases))]
-        public void MultiplicationTestGoodCases((decimal factor1, decimal factor2, decimal product, List<Row> stepsSln) testCase) 
-        { 
+        [TestCaseSource(nameof(DecimalTestCases))]
+        public void DecimalMultiplicationTestGoodCases((decimal factor1, decimal factor2, decimal product, List<Row> stepsSln) testCase)
+        {
             CalculationSteps cstep = new CalculationSteps();
-   
+
             CalculationItem item = new(testCase.factor1, testCase.factor2, testCase.product, EnumRechenArt.Multiplikation, "RuleSet");
             MuiltiplicationStepsSolution sln = cstep.CalculateMultiplicationSteps(item);
-           
+
             Assert.That(sln.GetProduct() == testCase.product);
 
             for (int i = 0; i < testCase.stepsSln.Count; i++)
@@ -28,14 +28,16 @@ namespace MaMaTests.Concept.CalcSteps
             }
         }
 
-        private static IEnumerable<(decimal factor1, decimal factor2, decimal product, List<Row> stepsSln)> TestCases()
+
+        private static IEnumerable<(decimal factor1, decimal factor2, decimal product, List<Row> stepsSln)> DecimalTestCases()
         {
             List<(decimal factor1, decimal factor2, decimal product, List<Row> stepsSln)> testCases = new()
             {
-                (factor1: 53, factor2: 2, product: 106, stepsSln: TestCase53_2()),
-                (factor1: 53, factor2: 67, product: 3551, stepsSln: TestCase53_67()),
-                (factor1: 765, factor2: 349, product: 266985, stepsSln: TestCase765_349()),
-                (factor1: 100, factor2: 100, product: 10000, stepsSln: TestCase100_100())
+                (factor1: 5.3m, factor2: 67, product: 355.1m, stepsSln: TestCase53_67()),
+                (factor1: 76.5m, factor2: 3.49m, product: 266.985m, stepsSln: TestCase765_349()),
+                (factor1: 7.65m, factor2: 3.49m, product: 26.6985m, stepsSln: TestCase765_349()),
+                (factor1: 0.765m, factor2: 0.349m, product: 0.266985m, stepsSln: TestCase765_349()),
+                (factor1: 0.01m, factor2: 100, product: 1m, stepsSln: TestCase100_100())
             };
             return testCases;
         }
@@ -50,8 +52,6 @@ namespace MaMaTests.Concept.CalcSteps
                     Digits = new List<Digit>
                     {
                         new Digit{ Order = 0, DigitValue = 0, CarryOver = 0 },
-                        new Digit{ Order = 1, DigitValue = 0, CarryOver = 0 },
-                        new Digit{ Order = 2, DigitValue = 0, CarryOver = 0 },
                     }
                 },
                 new Row
@@ -60,18 +60,14 @@ namespace MaMaTests.Concept.CalcSteps
                     Digits = new List<Digit>
                     {
                         new Digit{ Order = 0, DigitValue = 0, CarryOver = 0 },
-                        new Digit{ Order = 1, DigitValue = 0, CarryOver = 0 },
-                        new Digit{ Order = 2, DigitValue = 0, CarryOver = 0 },
                     }
                 },
                 new Row
                 {
-                    OrderRevers = 2, RowValue = 100, RowValueWithStellenwert = 10000,
+                    OrderRevers = 2, RowValue = 1, RowValueWithStellenwert = 100,
                     Digits = new List<Digit>
                     {
-                        new Digit{ Order = 0, DigitValue = 0, CarryOver = 0 },
-                        new Digit{ Order = 1, DigitValue = 0, CarryOver = 0 },
-                        new Digit{ Order = 2, DigitValue = 1, CarryOver = 0 },
+                        new Digit{ Order = 0, DigitValue = 1, CarryOver = 0 },
                     }
                 }
             };
@@ -143,22 +139,5 @@ namespace MaMaTests.Concept.CalcSteps
                 }
             };
         }
-        private static List<Row> TestCase53_2()
-        {
-            return new List<Row>
-            {
-                new Row
-                {
-                    OrderRevers = 0, RowValue = 106, RowValueWithStellenwert = 106,
-                    Digits = new List<Digit>
-                    {
-                        new Digit{ CarryOver = 0, DigitValue = 6, Order = 0 },
-                        new Digit{ CarryOver = 1, DigitValue = 0, Order = 1 },
-                        new Digit{ CarryOver = 0, DigitValue = 1, Order = 2 },
-                    }
-                }
-            };
-        }
-    }//class
+    }
 }
-
