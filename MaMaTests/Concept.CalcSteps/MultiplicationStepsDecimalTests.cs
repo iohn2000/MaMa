@@ -1,5 +1,7 @@
 ﻿using ConceptStepsAndSvg;
 using MaMa.DataModels;
+using MaMa.DataModels.MultiplicationSteps;
+using MaMa.MultiplicationSteps;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +12,9 @@ namespace MaMaTests.Concept.CalcSteps
     {
         [Test]
         [TestCaseSource(nameof(DecimalTestCases))]
-        public void DecimalMultiplicationTestGoodCases((decimal factor1, decimal factor2, decimal product, List<Row> stepsSln) testCase)
+        public void DecimalMultiplicationTestGoodCases((decimal factor1, decimal factor2, decimal product, List<RowMultiplication> stepsSln) testCase)
         {
-            CalculationSteps cstep = new CalculationSteps();
+            StepsCalculator cstep = new StepsCalculator();
 
             CalculationItem item = new(testCase.factor1, testCase.factor2, testCase.product, EnumRechenArt.Multiplikation, "RuleSet");
             MuiltiplicationStepsSolution sln = cstep.CalculateMultiplicationSteps(item);
@@ -29,9 +31,9 @@ namespace MaMaTests.Concept.CalcSteps
         }
 
 
-        private static IEnumerable<(decimal factor1, decimal factor2, decimal product, List<Row> stepsSln)> DecimalTestCases()
+        private static IEnumerable<(decimal factor1, decimal factor2, decimal product, List<RowMultiplication> stepsSln)> DecimalTestCases()
         {
-            List<(decimal factor1, decimal factor2, decimal product, List<Row> stepsSln)> testCases = new()
+            List<(decimal factor1, decimal factor2, decimal product, List<RowMultiplication> stepsSln)> testCases = new()
             {
                 (factor1: 5.3m, factor2: 67, product: 355.1m, stepsSln: TestCase53_67()),
                 (factor1: 76.5m, factor2: 3.49m, product: 266.985m, stepsSln: TestCase765_349()),
@@ -42,99 +44,99 @@ namespace MaMaTests.Concept.CalcSteps
             return testCases;
         }
 
-        private static List<Row> TestCase100_100()
+        private static List<RowMultiplication> TestCase100_100()
         {
-            return new List<Row>
+            return new List<RowMultiplication>
             {
-                new Row
+                new RowMultiplication
                 {
                     OrderRevers = 0, RowValue = 0, RowValueWithStellenwert = 0,
-                    Digits = new List<Digit>
+                    Digits = new List<DigitMultiplication>
                     {
-                        new Digit{ Order = 0, DigitValue = 0, CarryOver = 0 },
+                        new DigitMultiplication{ Order = 0, DigitValue = 0, CarryOver = 0 },
                     }
                 },
-                new Row
+                new RowMultiplication
                 {
                     OrderRevers = 1, RowValue = 0, RowValueWithStellenwert = 0,
-                    Digits = new List<Digit>
+                    Digits = new List<DigitMultiplication>
                     {
-                        new Digit{ Order = 0, DigitValue = 0, CarryOver = 0 },
+                        new DigitMultiplication{ Order = 0, DigitValue = 0, CarryOver = 0 },
                     }
                 },
-                new Row
+                new RowMultiplication
                 {
                     OrderRevers = 2, RowValue = 1, RowValueWithStellenwert = 100,
-                    Digits = new List<Digit>
+                    Digits = new List<DigitMultiplication>
                     {
-                        new Digit{ Order = 0, DigitValue = 1, CarryOver = 0 },
+                        new DigitMultiplication{ Order = 0, DigitValue = 1, CarryOver = 0 },
                     }
                 }
             };
         }
 
-        private static List<Row> TestCase765_349()
+        private static List<RowMultiplication> TestCase765_349()
         {
-            return new List<Row>
+            return new List<RowMultiplication>
             {
-                new Row
+                new RowMultiplication
                 {
                     OrderRevers = 0, RowValue = 6885, RowValueWithStellenwert = 6885,
-                    Digits = new List<Digit>
+                    Digits = new List<DigitMultiplication>
                     {
-                        new Digit{ Order = 0, DigitValue = 5, CarryOver = 4 },
-                        new Digit{ Order = 1, DigitValue = 8, CarryOver = 5 },
-                        new Digit{ Order = 2, DigitValue = 8, CarryOver = 6 },
-                        new Digit{ Order = 3, DigitValue = 6, CarryOver = 0 },
+                        new DigitMultiplication{ Order = 0, DigitValue = 5, CarryOver = 4 },
+                        new DigitMultiplication{ Order = 1, DigitValue = 8, CarryOver = 5 },
+                        new DigitMultiplication{ Order = 2, DigitValue = 8, CarryOver = 6 },
+                        new DigitMultiplication{ Order = 3, DigitValue = 6, CarryOver = 0 },
                     }
                 },
-                new Row
+                new RowMultiplication
                 {
                     OrderRevers = 1, RowValue = 3060, RowValueWithStellenwert = 30600,
-                    Digits = new List<Digit>
+                    Digits = new List<DigitMultiplication>
                     {
-                        new Digit{ Order = 0, DigitValue = 0, CarryOver = 2 },
-                        new Digit{ Order = 1, DigitValue = 6, CarryOver = 2 },
-                        new Digit{ Order = 2, DigitValue = 0, CarryOver = 3 },
-                        new Digit{ Order = 3, DigitValue = 3, CarryOver = 0 },
+                        new DigitMultiplication{ Order = 0, DigitValue = 0, CarryOver = 2 },
+                        new DigitMultiplication{ Order = 1, DigitValue = 6, CarryOver = 2 },
+                        new DigitMultiplication{ Order = 2, DigitValue = 0, CarryOver = 3 },
+                        new DigitMultiplication{ Order = 3, DigitValue = 3, CarryOver = 0 },
                     }
                 },
-                new Row
+                new RowMultiplication
                 {
                     OrderRevers = 2, RowValue = 2295, RowValueWithStellenwert = 229500,
-                    Digits = new List<Digit>
+                    Digits = new List<DigitMultiplication>
                     {
-                        new Digit{ Order = 0, DigitValue = 5, CarryOver = 1 },
-                        new Digit{ Order = 1, DigitValue = 9, CarryOver = 1 },
-                        new Digit{ Order = 2, DigitValue = 2, CarryOver = 2 },
-                        new Digit{ Order = 3, DigitValue = 2, CarryOver = 0 },
+                        new DigitMultiplication{ Order = 0, DigitValue = 5, CarryOver = 1 },
+                        new DigitMultiplication{ Order = 1, DigitValue = 9, CarryOver = 1 },
+                        new DigitMultiplication{ Order = 2, DigitValue = 2, CarryOver = 2 },
+                        new DigitMultiplication{ Order = 3, DigitValue = 2, CarryOver = 0 },
                     }
                 }
             };
         }
 
-        private static List<Row> TestCase53_67()
+        private static List<RowMultiplication> TestCase53_67()
         {
-            return new List<Row>
+            return new List<RowMultiplication>
             {
-                new Row
+                new RowMultiplication
                 {
                     OrderRevers = 0, RowValue = 371, RowValueWithStellenwert = 371,
-                    Digits = new List<Digit>
+                    Digits = new List<DigitMultiplication>
                     {
-                        new Digit{ CarryOver = 2, DigitValue = 1, Order = 0 },
-                        new Digit{ CarryOver = 3, DigitValue = 7, Order = 1 },
-                        new Digit{ CarryOver = 0, DigitValue = 3, Order = 2 },
+                        new DigitMultiplication{ CarryOver = 2, DigitValue = 1, Order = 0 },
+                        new DigitMultiplication{ CarryOver = 3, DigitValue = 7, Order = 1 },
+                        new DigitMultiplication{ CarryOver = 0, DigitValue = 3, Order = 2 },
                     }
                 },
-                new Row
+                new RowMultiplication
                 {
                     OrderRevers = 1, RowValue = 318, RowValueWithStellenwert = 3180,
-                    Digits = new List<Digit>
+                    Digits = new List<DigitMultiplication>
                     {
-                        new Digit{ CarryOver = 1, DigitValue = 8, Order = 0 },
-                        new Digit{ CarryOver = 3, DigitValue = 1, Order = 1 },
-                        new Digit{ CarryOver = 0, DigitValue = 3, Order = 2 },
+                        new DigitMultiplication{ CarryOver = 1, DigitValue = 8, Order = 0 },
+                        new DigitMultiplication{ CarryOver = 3, DigitValue = 1, Order = 1 },
+                        new DigitMultiplication{ CarryOver = 0, DigitValue = 3, Order = 2 },
                     }
                 }
             };

@@ -1,4 +1,5 @@
 ﻿using MaMa.DataModels;
+using MaMa.MultiplicationSteps;
 
 namespace ConceptStepsAndSvg;
 
@@ -7,10 +8,10 @@ namespace ConceptStepsAndSvg;
 /// </summary>
 public class Concept
 {
-    private readonly CalculationSteps _stepsCalculator;
+    private readonly StepsCalculator _stepsCalculator;
     private readonly SvgRenderer _svgRenderer;
 
-    public Concept(CalculationSteps stepsCalculator, SvgRenderer svgRenderer)
+    public Concept(StepsCalculator stepsCalculator, SvgRenderer svgRenderer)
     {
         _stepsCalculator = stepsCalculator;
         _svgRenderer = svgRenderer;

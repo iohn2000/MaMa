@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using ConceptStepsAndSvg;
+using MaMa.MultiplicationSteps;
 
 namespace ConsoleMath
 {
@@ -35,7 +36,7 @@ namespace ConsoleMath
             ISettingsManager sMgr = serviceProvider.GetRequiredService<ISettingsManager>();
             ConsoleFormatter cf = serviceProvider.GetRequiredService<ConsoleFormatter>();
             Concept concept = serviceProvider.GetRequiredService<Concept>();
-            CalculationSteps steps = serviceProvider.GetRequiredService<CalculationSteps>();
+            StepsCalculator steps = serviceProvider.GetRequiredService<StepsCalculator>();
             SvgRenderer renderer = serviceProvider.GetRequiredService<SvgRenderer>();
 
             Console.WriteLine($"Load rulesSets from file: {r}");
@@ -89,7 +90,7 @@ namespace ConsoleMath
                 .AddSingleton<ISettingsManager, JsonSettingsManager>()
                 .AddSingleton<INumberClassifier,SolutionChecker>()
                 .AddSingleton<Concept>()
-                .AddSingleton<CalculationSteps>()
+                .AddSingleton<StepsCalculator>()
                 .AddSingleton<SvgRenderer>()
                 .AddLogging(builder =>
                 {

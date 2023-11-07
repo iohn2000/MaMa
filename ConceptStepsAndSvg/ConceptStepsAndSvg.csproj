@@ -9,6 +9,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\MaMa.DataModels\MaMa.DataModels.csproj" />
+      <ProjectReference Include="..\MaMa.MultiplicationSteps\MaMa.MultiplicationSteps.csproj" />
     </ItemGroup>
 
 </Project>
