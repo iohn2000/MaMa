@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>ConceptStepsAndSvg</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\MaMa.DataModels\MaMa.DataModels.csproj" />
+      <ProjectReference Include="..\MaMa.MultiplicationSteps\MaMa.MultiplicationSteps.csproj" />
+    </ItemGroup>
+
+</Project>

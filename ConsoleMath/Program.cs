@@ -6,6 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using ConceptStepsAndSvg;
+using MaMa.MultiplicationSteps;
 
 namespace ConsoleMath
 {
@@ -32,6 +35,9 @@ namespace ConsoleMath
             ICalculator cc = serviceProvider.GetService<ICalculator>();
             ISettingsManager sMgr = serviceProvider.GetRequiredService<ISettingsManager>();
             ConsoleFormatter cf = serviceProvider.GetRequiredService<ConsoleFormatter>();
+            Concept concept = serviceProvider.GetRequiredService<Concept>();
+            StepsCalculator steps = serviceProvider.GetRequiredService<StepsCalculator>();
+            SvgRenderer renderer = serviceProvider.GetRequiredService<SvgRenderer>();
 
             Console.WriteLine($"Load rulesSets from file: {r}");
             SettingsFile settingsFile = sMgr.GetSettings(r);
@@ -56,6 +62,15 @@ namespace ConsoleMath
                 cf.ShowSettings(settingsFile.BasicArithmeticalOperationSets); 
             }
             cf.ShowRechnungen(result);
+
+            // testing out svg html rendering
+            // Concept c = new(steps, renderer);
+            Stopwatch w = new Stopwatch();
+            w.Start();
+            concept.Start(result);
+            var time = w.Elapsed;
+            w.Stop();
+            Console.WriteLine($"Count:{result.Count} Time:{time.Milliseconds} ms");
         }
 
         /// <summary>
@@ -74,6 +89,9 @@ namespace ConsoleMath
                 .AddSingleton<ISettingsReader, SettingsFileReader>()
                 .AddSingleton<ISettingsManager, JsonSettingsManager>()
                 .AddSingleton<INumberClassifier,SolutionChecker>()
+                .AddSingleton<Concept>()
+                .AddSingleton<StepsCalculator>()
+                .AddSingleton<SvgRenderer>()
                 .AddLogging(builder =>
                 {
                     builder.AddSerilog(logger);

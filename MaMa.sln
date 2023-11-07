@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaMa.Settings", "MaMa.Settings\MaMa.Settings.csproj", "{4EA36C6B-FBE4-40B7-A6B8-A70FF23D8606}"
 EndProject
@@ -12,6 +12,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleMath", "ConsoleMath\ConsoleMath.csproj", "{F5999A8C-96DF-43F7-81C7-8070F728FD1C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaMa.DataModels", "MaMa.DataModels\MaMa.DataModels.csproj", "{0366AD78-1D0E-40FE-9C5D-712A81A4C4D5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConceptStepsAndSvg", "ConceptStepsAndSvg\ConceptStepsAndSvg.csproj", "{E5F142A2-EEE5-4DB7-A02D-703A5709B041}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaMa.MultiplicationSteps", "MaMa.MultiplicationSteps\MaMa.MultiplicationSteps.csproj", "{7B005431-ABB0-430E-BE1D-01B026F7D68C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +87,30 @@ Global
 		{0366AD78-1D0E-40FE-9C5D-712A81A4C4D5}.Release|x64.Build.0 = Release|Any CPU
 		{0366AD78-1D0E-40FE-9C5D-712A81A4C4D5}.Release|x86.ActiveCfg = Release|Any CPU
 		{0366AD78-1D0E-40FE-9C5D-712A81A4C4D5}.Release|x86.Build.0 = Release|Any CPU
+		{E5F142A2-EEE5-4DB7-A02D-703A5709B041}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5F142A2-EEE5-4DB7-A02D-703A5709B041}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5F142A2-EEE5-4DB7-A02D-703A5709B041}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E5F142A2-EEE5-4DB7-A02D-703A5709B041}.Debug|x64.Build.0 = Debug|Any CPU
+		{E5F142A2-EEE5-4DB7-A02D-703A5709B041}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E5F142A2-EEE5-4DB7-A02D-703A5709B041}.Debug|x86.Build.0 = Debug|Any CPU
+		{E5F142A2-EEE5-4DB7-A02D-703A5709B041}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5F142A2-EEE5-4DB7-A02D-703A5709B041}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5F142A2-EEE5-4DB7-A02D-703A5709B041}.Release|x64.ActiveCfg = Release|Any CPU
+		{E5F142A2-EEE5-4DB7-A02D-703A5709B041}.Release|x64.Build.0 = Release|Any CPU
+		{E5F142A2-EEE5-4DB7-A02D-703A5709B041}.Release|x86.ActiveCfg = Release|Any CPU
+		{E5F142A2-EEE5-4DB7-A02D-703A5709B041}.Release|x86.Build.0 = Release|Any CPU
+		{7B005431-ABB0-430E-BE1D-01B026F7D68C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B005431-ABB0-430E-BE1D-01B026F7D68C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B005431-ABB0-430E-BE1D-01B026F7D68C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7B005431-ABB0-430E-BE1D-01B026F7D68C}.Debug|x64.Build.0 = Debug|Any CPU
+		{7B005431-ABB0-430E-BE1D-01B026F7D68C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7B005431-ABB0-430E-BE1D-01B026F7D68C}.Debug|x86.Build.0 = Debug|Any CPU
+		{7B005431-ABB0-430E-BE1D-01B026F7D68C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B005431-ABB0-430E-BE1D-01B026F7D68C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B005431-ABB0-430E-BE1D-01B026F7D68C}.Release|x64.ActiveCfg = Release|Any CPU
+		{7B005431-ABB0-430E-BE1D-01B026F7D68C}.Release|x64.Build.0 = Release|Any CPU
+		{7B005431-ABB0-430E-BE1D-01B026F7D68C}.Release|x86.ActiveCfg = Release|Any CPU
+		{7B005431-ABB0-430E-BE1D-01B026F7D68C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

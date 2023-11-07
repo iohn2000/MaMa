@@ -20,6 +20,7 @@
     <ProjectReference Include="..\MaMa.CalcGenerator\MaMa.CalcGenerator.csproj" />
     <ProjectReference Include="..\MaMa.DataModels\MaMa.DataModels.csproj" />
     <ProjectReference Include="..\MaMa.Settings\MaMa.Settings.csproj" />
+    <ProjectReference Include="..\ConceptStepsAndSvg\ConceptStepsAndSvg.csproj" />
 	  
   </ItemGroup>
 
