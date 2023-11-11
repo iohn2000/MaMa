@@ -63,8 +63,6 @@ namespace ConsoleMath
             }
             cf.ShowRechnungen(result);
 
-            // testing out svg html rendering
-            // Concept c = new(steps, renderer);
             Stopwatch w = new Stopwatch();
             w.Start();
             concept.Start(result);

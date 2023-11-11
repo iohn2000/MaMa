@@ -1,41 +1,52 @@
 ﻿using MaMa.DataModels;
+using MaMa.DataModels.MultiplicationSteps;
+using MaMa.DataModels.Rendering;
 
 namespace ConceptStepsAndSvg;
 
 public class SvgRenderer
 {
-    public void AddItem(object steps)
-    {
-        
-    }
-}
-public class HtmlContent
-{
-    private static (int width, int height) viewBox = (2100,2970);
+    private static (int Width, int Height) viewBox = (620,877);
     private const int maxCols = 2;
-    
-    private int currentRow = 1;
-    private int currentCol = 1;
-    
-    /// <summary>
-    /// 297 x 210 time 10 to get more pixel
-    /// </summary>
+    private const string textLine = "__textline__";
+
+    private SvgCoord currentPos = new SvgCoord(0,0);
+    private SvgCoord currentPx = new SvgCoord(0, 0);
+
+    private const int rowHeight = 24;
+    private const int colWidth = 20;
+
     private string HtmlBase = $"""
-<html><body>
-    <svg width="100%" height="100%" viewBox="0 0 {viewBox.width} {viewBox.height}">
-    __svg-content__
+<html>
+<body>
+    <svg viewBox="0 0 {viewBox.Width} {viewBox.Height}">
+        <!-- A4 : 0 0 1240 1754 : 150 dpi -->
+        <!-- https://superuser.com/questions/161313/print-a-huge-svg -->
+        <rect x="0" y="0" width="1240" height="1754" style="stroke:red; fill:none" />
+        {textLine}
     </svg>
 </body></html>
 """;
 
-    // public void AddCalcItem(CalculationItem item)
-    // {
-    //     if (currentCol >= maxCols)
-    //     {
-    //         currentCol = 1;
-    //         currentRow++;
-    //     }
-    //     
-    //     item.
-    // }
+    public string RenderSolution(MuiltiplicationStepsSolution solution)
+    {
+        foreach (RowMultiplication? row in solution.Steps)
+        {
+            foreach (DigitMultiplication? digit in row.Digits)
+            {
+                string d = new SvgDigitBox(currentPx,digit).GetSVG();
+                HtmlBase = HtmlBase.Replace(textLine,d + Environment.NewLine + textLine);
+                currentPos.X += 1;
+                currentPx.X += colWidth;
+            }
+            HtmlBase = HtmlBase.Replace(textLine, "<!-- new row -->" + Environment.NewLine + textLine);
+            // next row
+            currentPos.Y += 1;
+            currentPx.Y += rowHeight;
+            // reset cols
+            currentPos.X = currentPos.Y;
+            currentPx.X = currentPos.Y * colWidth;
+        }
+        return HtmlBase;
+    }
 }

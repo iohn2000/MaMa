@@ -1,5 +1,7 @@
 ﻿using MaMa.DataModels;
+using MaMa.DataModels.MultiplicationSteps;
 using MaMa.MultiplicationSteps;
+using System.ComponentModel.Design;
 
 namespace ConceptStepsAndSvg;
 
@@ -33,8 +35,8 @@ public class Concept
     }
     public void PrepareDivisionForRender(CalculationItem calcItem)
     {
-        var steps = _stepsCalculator.CalculateMultiplicationSteps(calcItem);
-        //_svgRenderer.AddItem(steps);
+       MuiltiplicationStepsSolution solution = _stepsCalculator.CalculateMultiplicationSteps(calcItem);
+       string svg = _svgRenderer.RenderSolution(solution);
     }
 }
 
