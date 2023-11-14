@@ -8,8 +8,13 @@ namespace MaMa.DataModels.MultiplicationSteps
 {
     public struct MuiltiplicationStepsSolution
     {
-        public List<RowMultiplication> Steps { get; set; }
-        public int CommaMoveCount { get; set; }
+        /// <summary>
+        /// each row of multiplication, comes in revers order first row is last in list
+        /// </summary>
+        public required List<RowMultiplication> Steps { get; set; }
+        public required CalculationItem CalcItem { get; init; }
+
+        public required int CommaMoveCount { get; init; }
 
         public decimal GetProduct()
         {

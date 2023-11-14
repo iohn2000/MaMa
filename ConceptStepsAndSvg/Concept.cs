@@ -1,5 +1,6 @@
 ﻿using MaMa.DataModels;
 using MaMa.DataModels.MultiplicationSteps;
+using MaMa.DataModels.Rendering;
 using MaMa.MultiplicationSteps;
 using System.ComponentModel.Design;
 
@@ -20,7 +21,6 @@ public class Concept
     }
     public void Start(List<CalculationItem> calcList)
     {
-        
         foreach (CalculationItem calcItem in calcList)
         {
             switch (calcItem.RechenArt)
@@ -36,7 +36,11 @@ public class Concept
     public void PrepareDivisionForRender(CalculationItem calcItem)
     {
        MuiltiplicationStepsSolution solution = _stepsCalculator.CalculateMultiplicationSteps(calcItem);
-       string svg = _svgRenderer.RenderSolution(solution);
+       
+       _svgRenderer.RenderNewPage();
+       string svg = _svgRenderer.RenderCalculation(solution);
+       
+        File.WriteAllText(@"C:\dev\MaMa\ConceptStepsAndSvg\temp.html", svg);
     }
 }
 

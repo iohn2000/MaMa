@@ -68,6 +68,7 @@ namespace MaMa.MultiplicationSteps
             return new MuiltiplicationStepsSolution
             {
                 Steps = rows,
+                CalcItem = item,
                 CommaMoveCount = commaMoveCountFirstNumber + commaMoveCountSecondNumber
             };
         }
