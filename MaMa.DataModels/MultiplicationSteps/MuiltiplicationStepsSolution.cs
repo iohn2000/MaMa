@@ -13,7 +13,6 @@ namespace MaMa.DataModels.MultiplicationSteps
         /// </summary>
         public required List<RowMultiplication> Steps { get; set; }
         public required CalculationItem CalcItem { get; init; }
-
         public required int CommaMoveCount { get; init; }
 
         public decimal GetProduct()

@@ -83,6 +83,29 @@
         "allowNegative": false,
         "elementaryArithmetic": "Multiplikation"
       },
+      "amount": 0
+    },
+    "StepTesterKomma": {
+      "firstNumber": {
+        "maxDigits": null,
+        "minValue": 111,
+        "maxValue": 333,
+        "moveKomma": 2,
+        "allowNegative": false
+      },
+      "secondNumber": {
+        "maxDigits": null,
+        "minValue": 100000,
+        "maxValue": 666666,
+        "moveKomma": 2,
+        "allowNegative": false
+      },
+      "solutionCriteria": {
+        "numberClass": "RationalNonPeriodic",
+        "digitsAfterCommaRange": "1-5",
+        "allowNegative": false,
+        "elementaryArithmetic": "Multiplikation"
+      },
       "amount": 5
     }
   }

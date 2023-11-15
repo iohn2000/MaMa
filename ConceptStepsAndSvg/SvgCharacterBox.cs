@@ -1,10 +1,4 @@
-﻿using MaMa.DataModels.MultiplicationSteps;
-using MaMa.DataModels.Rendering;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MaMa.DataModels.Rendering;
 
 namespace ConceptStepsAndSvg
 {
@@ -12,14 +6,24 @@ namespace ConceptStepsAndSvg
     {
         private readonly char TheChar;
 
-        public SvgCharacterBox(SvgCoord boxOrigin, char theChar) : base(boxOrigin)
+        public SvgCharacterBox(SvgCoord boxOrigin, char theChar, bool needsComma = false) : base(boxOrigin)
         {
             this.TheChar = theChar;
         }
 
         public override string GetSVG()
         {
-            string svgChar = $"""<text x="{BoxOrigin.X + 5}" y="{BoxOrigin.Y + 24}" font-family="monospace" font-size="24px">{TheChar}</text>""";
+            string svgChar = string.Empty;
+            if (TheChar == ',' || TheChar == '.')
+            { 
+                svgChar = $"""  <text x="{BoxOrigin.X + base.CommaOffset.X}" y="{BoxOrigin.Y + base.CommaOffset.Y}" {base.DigitStyle}>{TheChar}</text>""";
+                
+            }
+            else
+            {
+                svgChar = $"""<text x="{BoxOrigin.X + base.DigitOffset.X}" y="{BoxOrigin.Y + base.DigitOffset.Y}" {base.DigitStyle}>{TheChar}</text>""";
+            }
+            
             return svgChar + Environment.NewLine;
         }
     }

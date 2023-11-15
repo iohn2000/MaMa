@@ -11,6 +11,8 @@ namespace MaMa.DataModels.Rendering
     /// </summary>
     public class SvgCalculationDimension
     {
+
+
         public int WidthPixel { get; set; }
         public int HeightPixel { get; set; }
         public int NumberOfRows { get;set; }

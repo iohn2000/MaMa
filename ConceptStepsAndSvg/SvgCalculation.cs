@@ -17,7 +17,7 @@ namespace ConceptStepsAndSvg
         /// <returns></returns>
         public SvgCalculationDimension GetSvgCalculationDimension()
         { 
-            return new SvgCalculationDimension ();
+            return null;
         }
     }
 }

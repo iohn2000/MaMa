@@ -21,26 +21,22 @@ public class Concept
     }
     public void Start(List<CalculationItem> calcList)
     {
+        _svgRenderer.StartNewPage();
+
         foreach (CalculationItem calcItem in calcList)
         {
             switch (calcItem.RechenArt)
             {
                 case EnumRechenArt.Multiplikation:
                 {
-                    PrepareDivisionForRender(calcItem);
+                    MuiltiplicationStepsSolution solution = _stepsCalculator.CalculateMultiplicationSteps(calcItem);
+                    var d = _svgRenderer.AddCalculation(solution);
                     break;
                 }
             }
+            break;
         }
+        File.WriteAllText(@"C:\dev\MaMa\ConceptStepsAndSvg\temp.html", _svgRenderer.GetRenderedHtmlPage());
     }
-    public void PrepareDivisionForRender(CalculationItem calcItem)
-    {
-       MuiltiplicationStepsSolution solution = _stepsCalculator.CalculateMultiplicationSteps(calcItem);
-       
-       _svgRenderer.RenderNewPage();
-       string svg = _svgRenderer.RenderCalculation(solution);
-       
-        File.WriteAllText(@"C:\dev\MaMa\ConceptStepsAndSvg\temp.html", svg);
-    }
-}
+ }
 

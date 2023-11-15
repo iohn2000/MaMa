@@ -2,7 +2,7 @@
   "profiles": {
     "ConsoleMath": {
       "commandName": "Project",
-      "commandLineArgs": "-r RuleSets.json"
+      "commandLineArgs": "-r RuleSets.json --show-rules"
     }
   }
 }

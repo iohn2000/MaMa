@@ -19,8 +19,8 @@ namespace ConceptStepsAndSvg
 
         override public string GetSVG()
         { 
-            string svgCarryOver = $"""<text x="{BoxOrigin.X+0}" y="{BoxOrigin.Y+12}" font-family="monospace" font-size="10px">{TheDigit.CarryOver}</text>""";
-            string svgDigit = $"""<text x="{BoxOrigin.X+5}" y="{BoxOrigin.Y+24}" font-family="monospace" font-size="24px">{TheDigit.DigitValue}</text>""";
+            string svgCarryOver = $"""<text x="{BoxOrigin.X+ base.CarryOverOffset.X}" y="{BoxOrigin.Y+base.CarryOverOffset.Y}" {CarryOverStyle}>{TheDigit.CarryOver}</text>""";
+            string svgDigit = $"""<text x="{BoxOrigin.X+base.DigitOffset.X}" y="{BoxOrigin.Y+base.DigitOffset.Y}" {DigitStyle}>{TheDigit.DigitValue}</text>""";
             return svgCarryOver + Environment.NewLine + svgDigit;
         }
     }
