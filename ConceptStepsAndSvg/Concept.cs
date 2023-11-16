@@ -23,8 +23,10 @@ public class Concept
     {
         _svgRenderer.StartNewPage();
 
+        int idx=0;
         foreach (CalculationItem calcItem in calcList)
         {
+            idx++;
             switch (calcItem.RechenArt)
             {
                 case EnumRechenArt.Multiplikation:
@@ -34,7 +36,7 @@ public class Concept
                     break;
                 }
             }
-            break;
+            if (idx == 3) break;
         }
         File.WriteAllText(@"C:\dev\MaMa\ConceptStepsAndSvg\temp.html", _svgRenderer.GetRenderedHtmlPage());
     }

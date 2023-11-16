@@ -7,17 +7,5 @@ using System.Threading.Tasks;
 
 namespace ConceptStepsAndSvg
 {
-    public class SvgCalculation
-    {
-
-
-        /// <summary>
-        /// return size in px and col,rows
-        /// </summary>
-        /// <returns></returns>
-        public SvgCalculationDimension GetSvgCalculationDimension()
-        { 
-            return null;
-        }
-    }
+   
 }

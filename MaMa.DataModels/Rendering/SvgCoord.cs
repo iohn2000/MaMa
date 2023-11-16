@@ -23,9 +23,11 @@ namespace MaMa.DataModels.Rendering
             this.Y = newCoord.Y;
         }
 
-        public SvgCoord Add (SvgCoord coord)
+        public SvgCoord Add (int x, int y)
         {
-            return new SvgCoord(coord.X+this.X,coord.Y+this.Y);
+            this.X += x;
+            this.Y += y;
+            return this;
         }
     }
 }

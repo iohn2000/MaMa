@@ -16,15 +16,14 @@ namespace ConceptStepsAndSvg
             string svgChar = string.Empty;
             if (TheChar == ',' || TheChar == '.')
             { 
-                svgChar = $"""  <text x="{BoxOrigin.X + base.CommaOffset.X}" y="{BoxOrigin.Y + base.CommaOffset.Y}" {base.DigitStyle}>{TheChar}</text>""";
-                
+                svgChar = $"""  <text x="{BoxOrigin.X - base.CommaOffset.X}" y="{BoxOrigin.Y + base.CommaOffset.Y}" {base.DigitStyle}>{TheChar}</text>""";
             }
             else
             {
                 svgChar = $"""<text x="{BoxOrigin.X + base.DigitOffset.X}" y="{BoxOrigin.Y + base.DigitOffset.Y}" {base.DigitStyle}>{TheChar}</text>""";
             }
             
-            return svgChar + Environment.NewLine;
+            return svgChar;
         }
     }
 }

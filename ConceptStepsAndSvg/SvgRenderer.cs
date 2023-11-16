@@ -13,12 +13,13 @@ public class SvgRenderer
     private static (int Width, int Height) viewBox = (1240, 1754);
     private static (int Width, int Height) svgSize = (1240, 1754);
 
-    private SvgCoord currentPos = new SvgCoord(0, 0);
-    private SvgCoord currentPx = new SvgCoord(0, 0);
+    private SvgCoord currentRelativePos = new SvgCoord(0, 0);
+    private SvgCoord currentAbsolutePx = new SvgCoord(0, 0);
+    private SvgCoord originPx = new SvgCoord(0, 0);
 
     private const int rowHeight = 24;
     private const int colWidth = 20;
-    private const int xPosStartOfAngabe = 1;
+    private const int xPosOffsetForAngabe = 1;
     private readonly int maxCols = svgSize.Width / colWidth;
     private readonly int maxRows = svgSize.Height / rowHeight;
 
@@ -47,8 +48,16 @@ public class SvgRenderer
     /// </summary>
     public void StartNewPage()
     {
-        currentPos = new SvgCoord(0, 0);
-        currentPx = new SvgCoord(0, 0);
+        currentRelativePos = new SvgCoord(0, 0);
+        originPx = new SvgCoord(0, 0);
+        currentAbsolutePx = new SvgCoord(XPixelFromRelativePos(0), YPixelFromRelativePos(0));
+        this.lastCalculationDimension = new SvgCalculationDimension
+        {
+            HeightPixel = 0,
+            WidthPixel = 0,
+            NumberOfColumns = 0,
+            NumberOfRows = 0,
+        };
         RenderedHtml = HtmlTemplate;
     }
 
@@ -59,49 +68,63 @@ public class SvgRenderer
 
     public SvgCalculationDimension AddCalculation(MuiltiplicationStepsSolution solution)
     {
-        SvgCoord firstDigitFaktor1 = new SvgCoord(currentPos);
+        // reset relative pos
+        currentRelativePos = new SvgCoord(0,0);
+        
+        // set new origin taking last runs dimensions
+
+        // move 1 col right and 1 row down
+        //this.originPx.Add(this.lastCalculationDimension.WidthPixel, this.lastCalculationDimension.HeightPixel);
+        
+        // stay in row move to next column
+        //this.originPx.Add(this.lastCalculationDimension.WidthPixel, 0);
+
+        // stay in col move to next row
+        this.originPx.Add(0, this.lastCalculationDimension.HeightPixel);
+
+
+        // set abs px now
+        currentAbsolutePx = new SvgCoord(XPixelFromRelativePos(0), YPixelFromRelativePos(0));
 
         int startXForRows = this.RenderAngabe(solution);
         MoveOneRowDown();
 
         // set cursor to last digit of faktor1
-        currentPos.X = startXForRows - 1;
-        currentPx.X = XPixelFromPos(currentPos.X);
+        currentRelativePos.X = startXForRows - 1;
+        currentAbsolutePx.X = XPixelFromRelativePos(currentRelativePos.X);
 
         solution.Steps.Reverse();
         foreach ((RowMultiplication? row, int index) in solution.Steps.Select((item, index) => (item, index)))
         {
             foreach (DigitMultiplication? digit in row.Digits)
             {
-                string d = new SvgDigitBox(currentPx, digit).GetSVG();
+                string d = new SvgDigitBox(currentAbsolutePx, digit).GetSVG();
                 AddToHtml(d);
                 MoveOneColumnLeft();
             }
-            AddToHtml("<!-- new row -->");
             MoveOneRowDown();
+
             // reset cols to last digit previouse row + 1
-            currentPos.X = startXForRows + index;
-            currentPx.X = XPixelFromPos(currentPos.X);
+            currentRelativePos.X = startXForRows + index;
+            currentAbsolutePx.X = XPixelFromRelativePos(currentRelativePos.X);
         }
-        /*
-        AddToHtml(new SvgLine(
-            new SvgCoord(firstDigitFaktor1.X + 2, currentPx.Y + 3),
-            new SvgCoord(XPixelFromPos(currentPos.X), currentPx.Y + 3)).GetSVG());
-        */
+
         this.RenderSolution(solution.CalcItem.Solution);
 
         SvgCalculationDimension dimensions = new SvgCalculationDimension
         {
-            NumberOfRows = currentPos.Y,
+            NumberOfRows = currentRelativePos.Y,
             NumberOfColumns = GetXposRightMostOfAngabe(solution.CalcItem),
-            WidthPixel = XPixelFromPos(GetXposRightMostOfAngabe(solution.CalcItem)),
-            HeightPixel = YPixelFromPos(currentPos.Y + 1)
+            WidthPixel = XPixelFromRelativePos(GetXposRightMostOfAngabe(solution.CalcItem)) - originPx.X,
+            HeightPixel = YPixelFromRelativePos(currentRelativePos.Y + 1) + 10 - originPx.Y
         };
 
+        /*
         AddToHtml(new SvgRect(
-            new SvgCoord(firstDigitFaktor1.X, firstDigitFaktor1.Y),
+            new SvgCoord(XPixelFromRelativePos(0), YPixelFromRelativePos(0)),
             new SvgCoord(dimensions.WidthPixel, dimensions.HeightPixel)
             ).GetSVG());
+        */
 
         this.lastCalculationDimension = dimensions;
         return dimensions;
@@ -115,45 +138,44 @@ public class SvgRenderer
     private int GetXposRightMostOfAngabe(CalculationItem calc)
     {
         string angabeStr = GetAngabeString(calc);
-        int length = xPosStartOfAngabe + angabeStr.Length - angabeStr.Count(c => c == '.' || c == ',');
+        int length = xPosOffsetForAngabe + angabeStr.Length - angabeStr.Count(c => c == '.' || c == ',');
         return length;
-    }
-
-    private string GetAngabeString(CalculationItem calc)
-    {
-        return calc.FirstNumber.ToString() + "x" + calc.SecondNumber.ToString();
     }
 
     /// <summary>
     /// render angabe, e.g. 123x42
     /// </summary>
     /// <param name="solution"></param>
-    /// <returns>tuple : (pos of last digit faktor1 , pos of last digit faktor2)</returns>
+    /// <returns>pos of last digit faktor1</returns>
     public int RenderAngabe(MuiltiplicationStepsSolution solution)
     {
         string angabeStr = GetAngabeString(solution.CalcItem);
-        int currentXPos = currentPos.X;
-
-        // use digitbox to render each number (char)
-        foreach (char item in angabeStr)
+        int currentXPos = currentRelativePos.X;
+        
+        // move xPosOffsetForAngabe amount of times to right to position cursor correcly with offest
+        foreach (int _ in Enumerable.Range(0, xPosOffsetForAngabe))
         {
-            if (item != ',' && item != '.')
-            {
-                MoveOneColumnRight(); // angabe starts one col right of start
-            }
-            string c = new SvgCharacterBox(currentPx, item).GetSVG();
-            AddToHtml(c);
+            MoveOneColumnRight();
         }
 
-        int pos = this.HasComma(solution.CalcItem.FirstNumber) ?
-            solution.CalcItem.FirstNumber.ToString().Length + xPosStartOfAngabe - 1 :
-            solution.CalcItem.FirstNumber.ToString().Length + xPosStartOfAngabe;
+        // use charbox to render each number (char)
+        foreach (char item in angabeStr)
+        {
+            string c = new SvgCharacterBox(currentAbsolutePx, item).GetSVG();
+            AddToHtml(c);
+            if (IsNotAComma(item)) // comma doesnt count as its own character dont move cursor
+            {
+                MoveOneColumnRight();
+            }
+        }
+
+        int lastDigitOfFactor1 = this.GetDigitCounthWithoutCommas(solution.CalcItem.FirstNumber) + xPosOffsetForAngabe;
 
         AddToHtml(new SvgLine(
-            new SvgCoord(XPixelFromPos(currentXPos + xPosStartOfAngabe), currentPx.Y + 3 + rowHeight),
-            new SvgCoord(XPixelFromPos(GetXposRightMostOfAngabe(solution.CalcItem)), currentPx.Y + 3 + rowHeight)).GetSVG());
+            new SvgCoord(XPixelFromRelativePos(currentXPos + xPosOffsetForAngabe), currentAbsolutePx.Y + 3 + rowHeight),
+            new SvgCoord(XPixelFromRelativePos(GetXposRightMostOfAngabe(solution.CalcItem)), currentAbsolutePx.Y + 3 + rowHeight)).GetSVG());
 
-        return pos; // we start at second row not first
+        return lastDigitOfFactor1; // we start at second row not first
     }
 
     /// <summary>
@@ -162,27 +184,41 @@ public class SvgRenderer
     /// <param name="solution"></param>
     public void RenderSolution(decimal solution)
     {
-        int slnLength = this.HasComma(solution) ?
-           solution.ToString().Length + xPosStartOfAngabe - 1 :
-           solution.ToString().Length + xPosStartOfAngabe;
+        int slnLength = this.GetDigitCounthWithoutCommas(solution) + xPosOffsetForAngabe;
 
         AddToHtml(new SvgLine(
-            new SvgCoord(XPixelFromPos(currentPos.X - slnLength - 1), currentPx.Y + 3),
-            new SvgCoord(XPixelFromPos(currentPos.X), currentPx.Y + 3)).GetSVG());
+            new SvgCoord(XPixelFromRelativePos(currentRelativePos.X - slnLength + 1), currentAbsolutePx.Y + 3),
+            new SvgCoord(XPixelFromRelativePos(currentRelativePos.X), currentAbsolutePx.Y + 3)).GetSVG());
 
-        MoveOneColumnLeft();
+        MoveOneColumnLeft(); // cursor if one too far right because of row logic, fix it
+
         var solutionReverse = solution.ToString().ToList();
         solutionReverse.Reverse();
         foreach (char item in solutionReverse)
         {
-            string c = new SvgCharacterBox(currentPx, item).GetSVG();
+            string c = new SvgCharacterBox(currentAbsolutePx, item).GetSVG();
             AddToHtml(c);
-            if (item != ',' && item != '.')
+            if (IsNotAComma(item))
             {
                 MoveOneColumnLeft(); // angabe starts one col right of start
             }
         }
+    }
 
+    private bool IsNotAComma(char item)
+    {
+        return item != ',' && item != '.';
+    }
+
+    private int GetDigitCounthWithoutCommas(decimal theNumber)
+    {
+        string strNumer = theNumber.ToString();
+        return strNumer.Length - strNumer.Count(c => c == '.' || c == ',');
+    }
+
+    private string GetAngabeString(CalculationItem calc)
+    {
+        return calc.FirstNumber.ToString() + "x" + calc.SecondNumber.ToString();
     }
 
     private void AddToHtml(string angabe)
@@ -192,19 +228,18 @@ public class SvgRenderer
 
     private void MoveOneColumnRight()
     {
-        currentPos.X += 1;
-        currentPx.X = XPixelFromPos(currentPos.X);
+        currentRelativePos.X += 1;
+        currentAbsolutePx.X = XPixelFromRelativePos(currentRelativePos.X);
     }
     private void MoveOneColumnLeft()
     {
-        currentPos.X -= 1;
-        currentPx.X = XPixelFromPos(currentPos.X);
+        currentRelativePos.X -= 1;
+        currentAbsolutePx.X = XPixelFromRelativePos(currentRelativePos.X);
     }
     private void MoveOneRowDown()
     {
-        currentPos.Y += 1;
-        //currentPx.Y += rowHeight;
-        currentPx.Y = YPixelFromPos(currentPos.Y);
+        currentRelativePos.Y += 1;
+        currentAbsolutePx.Y = YPixelFromRelativePos(currentRelativePos.Y);
     }
 
     private bool HasComma(decimal theNumber)
@@ -212,7 +247,7 @@ public class SvgRenderer
         return theNumber.ToString().Contains(',') || theNumber.ToString().Contains('.');
     }
 
-    private int XPixelFromPos(int xpos) => (xpos) * colWidth;
+    private int XPixelFromRelativePos(int xpos) => originPx.X + (xpos * colWidth);
 
-    private int YPixelFromPos(int ypos) => ypos * rowHeight;
+    private int YPixelFromRelativePos(int ypos) => originPx.Y + (ypos * rowHeight);
 }

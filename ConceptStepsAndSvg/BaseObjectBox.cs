@@ -24,7 +24,7 @@ namespace ConceptStepsAndSvg
             this.BoxOrigin = boxOrigin;    
             this.CarryOverOffset = new SvgCoord(0, 12);
             this.DigitOffset = new SvgCoord(5, 24);
-            this.CommaOffset = new SvgCoord(13, this.DigitOffset.Y);
+            this.CommaOffset = new SvgCoord(6, this.DigitOffset.Y);
         }
 
         public abstract string GetSVG();
