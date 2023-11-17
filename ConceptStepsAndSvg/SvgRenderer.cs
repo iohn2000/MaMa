@@ -111,15 +111,19 @@ public class SvgRenderer
 
         this.RenderSolution(solution.CalcItem.Solution);
 
+        //
+         move calc to start so a decision can be made if it fits into row or even page
+        //
         SvgCalculationDimension dimensions = new SvgCalculationDimension
         {
-            NumberOfRows = currentRelativePos.Y,
-            NumberOfColumns = GetXposRightMostOfAngabe(solution.CalcItem),
+            NumberOfRows = currentRelativePos.Y, // change to length of factor2 + 2
+            NumberOfColumns = GetXposRightMostOfAngabe(solution.CalcItem), // is ok
             WidthPixel = XPixelFromRelativePos(GetXposRightMostOfAngabe(solution.CalcItem)) - originPx.X,
             HeightPixel = YPixelFromRelativePos(currentRelativePos.Y + 1) + 10 - originPx.Y
         };
 
         /*
+        // a rectangle to see boundaries
         AddToHtml(new SvgRect(
             new SvgCoord(XPixelFromRelativePos(0), YPixelFromRelativePos(0)),
             new SvgCoord(dimensions.WidthPixel, dimensions.HeightPixel)
