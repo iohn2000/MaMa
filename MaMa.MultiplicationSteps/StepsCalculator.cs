@@ -68,13 +68,14 @@ namespace MaMa.MultiplicationSteps
             return new MuiltiplicationStepsSolution
             {
                 Steps = rows,
+                CalcItem = item,
                 CommaMoveCount = commaMoveCountFirstNumber + commaMoveCountSecondNumber
             };
         }
 
         private (int, string) ConvertToIntegerNumber(decimal decimalNr)
         {
-            // get comma count
+            // get comma count --> should use https://learn.microsoft.com/en-us/dotnet/api/system.decimal.scale?view=net-7.0
             int commaCount = (int)BitConverter.GetBytes(Decimal.GetBits(decimalNr)[3])[2];
             // move away comma 1.23 --> 123
             int intNumber = (int)(decimalNr * (decimal)Math.Pow(10f, (float)commaCount));

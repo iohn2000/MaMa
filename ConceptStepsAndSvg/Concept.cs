@@ -1,5 +1,8 @@
 ﻿using MaMa.DataModels;
+using MaMa.DataModels.MultiplicationSteps;
+using MaMa.DataModels.Rendering;
 using MaMa.MultiplicationSteps;
+using System.ComponentModel.Design;
 
 namespace ConceptStepsAndSvg;
 
@@ -18,23 +21,24 @@ public class Concept
     }
     public void Start(List<CalculationItem> calcList)
     {
-        
+        _svgRenderer.StartNewPage();
+
+        int idx=0;
         foreach (CalculationItem calcItem in calcList)
         {
+            idx++;
             switch (calcItem.RechenArt)
             {
                 case EnumRechenArt.Multiplikation:
                 {
-                    PrepareDivisionForRender(calcItem);
+                    MuiltiplicationStepsSolution solution = _stepsCalculator.CalculateMultiplicationSteps(calcItem);
+                    var d = _svgRenderer.AddCalculation(solution);
                     break;
                 }
             }
+            if (idx == 3) break;
         }
+        File.WriteAllText(@"C:\dev\MaMa\ConceptStepsAndSvg\temp.html", _svgRenderer.GetRenderedHtmlPage());
     }
-    public void PrepareDivisionForRender(CalculationItem calcItem)
-    {
-        var steps = _stepsCalculator.CalculateMultiplicationSteps(calcItem);
-        //_svgRenderer.AddItem(steps);
-    }
-}
+ }
 
