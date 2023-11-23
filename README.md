@@ -1,19 +1,22 @@
 # MaMa # 
-Generate simple calculations and their solution.
-Renders them on console or as printable SVG
-See example below:
+
+**Randomly** generate simple calculations and their solution.
+Renders them on console or as printable SVG, see example below:
 ![alt text](docu/pics/example-multiplication.png)
 
 ## Generate Random math problems for primary schools (Volksschule). ##
 
-Type of calculation (plus, minus, multplication, division) and many paramteres concernen the random numbers and type of result can be configured in a json file.
+Type of calculation (plus, minus, multiplication, division) and many parameters concerning the random numbers and type of result can be configured in a json file.
 Example below produces :
 - 3 multiplications with first number between 1000 and 99999 with no comma (moveComma)
 - 3 division where the result has no comma (no remainder) "Integer"
 - 3 division with any result (including periodic non-periodic rational numbers)
 
-##
+## Documentation
+[Click here for documentation: settings.md](docu/settings.md)
  
+ ## Example settings.json
+
 ``` json
 {
   "BasicArithmeticalOperation": {
@@ -90,7 +93,9 @@ Example below produces :
   "Fractions": null
 }
 ```
-## Output ##
+
+## Output
+
 ```
 C:\Temp\MaMa> .\ConsoleMath.exe -r .\Liam.json
 MaMa - Mathe Maker
@@ -107,6 +112,7 @@ Load rulesSets from file: .\Liam.json
 ```
 
 ## Help Output ##
+
 ```
 C:\Temp\MaMa> .\ConsoleMath.exe -?
 ConsoleMath
