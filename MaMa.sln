@@ -15,7 +15,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaMa.DataModels", "MaMa.Dat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConceptStepsAndSvg", "ConceptStepsAndSvg\ConceptStepsAndSvg.csproj", "{E5F142A2-EEE5-4DB7-A02D-703A5709B041}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaMa.MultiplicationSteps", "MaMa.MultiplicationSteps\MaMa.MultiplicationSteps.csproj", "{7B005431-ABB0-430E-BE1D-01B026F7D68C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaMa.MultiplicationSteps", "MaMa.MultiplicationSteps\MaMa.MultiplicationSteps.csproj", "{7B005431-ABB0-430E-BE1D-01B026F7D68C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{7C825A92-AA3F-46FD-AD41-6C832D1E8636}"
+	ProjectSection(SolutionItems) = preProject
+		docu\pics\example-multiplication.png = docu\pics\example-multiplication.png
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

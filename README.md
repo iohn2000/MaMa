@@ -1,6 +1,8 @@
 # MaMa # 
-
-## https://www.questpdf.com/ genereate PDFs ##
+Generate simple calculations and their solution.
+Renders them on console or as printable SVG
+See example below:
+![alt text](docu/pics/example-multiplication.png)
 
 ## Generate Random math problems for primary schools (Volksschule). ##
 
@@ -10,7 +12,8 @@ Example below produces :
 - 3 division where the result has no comma (no remainder) "Integer"
 - 3 division with any result (including periodic non-periodic rational numbers)
 
-
+##
+ 
 ``` json
 {
   "BasicArithmeticalOperation": {
@@ -119,4 +122,6 @@ Options:
   -?, -h, --help  Show help and usage information
  ```
 
-PdfSharpt Samples : http://www.pdfsharp.net/wiki/MigraDocSamples.ashx
+ ## Links
+- PdfSharpt Samples : http://www.pdfsharp.net/wiki/MigraDocSamples.ashx
+- https://www.questpdf.com/ genereate PDFs
