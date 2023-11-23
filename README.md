@@ -2,6 +2,7 @@
 
 **Randomly** generate simple calculations and their solution.
 Renders them on console or as printable SVG, see example below:
+
 ![alt text](docu/pics/example-multiplication.png)
 
 ## Generate Random math problems for primary schools (Volksschule). ##
@@ -94,7 +95,7 @@ Example below produces :
 }
 ```
 
-## Output
+## Console Output Renderer
 
 ```
 C:\Temp\MaMa> .\ConsoleMath.exe -r .\Liam.json
