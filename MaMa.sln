@@ -25,7 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docu", "docu", "{F047C87E-A3C1-4846-B3F3-BD0F37D497C9}"
 	ProjectSection(SolutionItems) = preProject
-		settings.md = settings.md
+		docu\settings.md = docu\settings.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pics", "pics", "{B8F3A375-0834-442F-B0DC-1132919C2D52}"

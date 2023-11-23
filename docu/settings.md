@@ -3,7 +3,7 @@
 A settings file can have 1 or more different definitions for calculations. 
 The definition defines certain properties like size but the actual number is randomly generated.
 
-A definition has name and contains 4 sections:
+A definition has a name and contains 4 sections:
  1. firstNumber
  1. secondNumber
  1. solutionCriteria
@@ -23,7 +23,7 @@ It is defined as follows :
    - firstNumber : Minuend
    - secondNumber : Subtrahend
 
-### Properties First-, Second Number
+### Properties for First-, Second Number
 
 #### maxDigits, minValue, maxValue
 Here it is defined how big the number is.
@@ -36,12 +36,13 @@ Examples:
 #### moveKomma, allowNegativ
 Once the number is generated some modification can be applied.
 
-- `allowNegative`: a randomizer turns the number negative or not
-- `moveKomma`: **maximum** amount of decimal places a comma is moved, the actual number is a random number between 0 and the value of `moveKomma`,  
-  starting at ones column (Einerstelle or leftmost decimal place)  
-  Examples: 
-    - if value is `2` and the random number is `4128` the result is `41,28` 
-    - value is `5` and number `12` result is `0,00012`
+- `allowNegative`: `false|true` a randomizer turns the number negative or not
+- `moveKomma`: **maximum** amount of decimal places a comma is moved,  
+   the actual number is a random number between 0 and the value of `moveKomma`,  
+   starting at ones column (Einerstelle or leftmost decimal place)  
+   Examples: 
+     - if value is `2` and the random number is `4128` the result is `41,28` 
+     - value is `5` and number `12` result is `0,00012`
 
    
 ## Basic Arithmetical Operations
