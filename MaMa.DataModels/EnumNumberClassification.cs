@@ -5,9 +5,26 @@ namespace MaMa.DataModels
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum EnumNumberClassification
     {
+        /// <summary>
+        /// An integer is a whole number that can be either positive, negative, or zero. 
+        /// In other words, integers are numbers that do not have any fractional or decimal parts. 
+        /// The set of integers includes all the counting numbers (1, 2, 3, ...), their negatives (-1, -2, -3, ...), and zero (0).
+        /// </summary>
         Integer, 
+
+        /// <summary>
+        /// non periodic is the same as <see cref="RationalTerminatingDecimals"/>
+        /// </summary>
         RationalNonPeriodic,
+
+        /// <summary>
+        /// rational periodic is the same as <see cref="RationalNonTerminatingDecimals"/>
+        /// </summary>
         RationalPeriodic,
+        
+        /// <summary>
+        /// No check for any type is done
+        /// </summary>
         Any,
 
         /// <summary>

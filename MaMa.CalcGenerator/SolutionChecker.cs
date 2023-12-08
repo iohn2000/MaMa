@@ -9,18 +9,19 @@ namespace MaMa.CalcGenerator
 {
     public class SolutionChecker : INumberClassifier
     {
-        public EnumNumberClassification GetClassOfNumber(decimal theNumber)
-        {
-            if ((int)theNumber == theNumber)
-            {
-                return EnumNumberClassification.Integer;
-            }
-            else
-            {
-                return EnumNumberClassification.RationalNonPeriodic;
-            }
-            throw new Exception($"cannot calculate class of number: {theNumber}");
-        }
+        //public EnumNumberClassification GetClassOfNumber(decimal theNumber)
+        //{
+        //    if ((int)theNumber == theNumber)
+        //    {
+        //        return EnumNumberClassification.Integer;
+        //    }
+        //    else
+        //    {
+        //        return EnumNumberClassification.RationalNonPeriodic;
+        //    }
+        //    throw new Exception($"cannot calculate class of number: {theNumber}");
+        //}
+        
         /// <summary>
         /// return amount of commas if number is non periodic, if number is periodic returns -1
         /// </summary>
@@ -50,9 +51,11 @@ namespace MaMa.CalcGenerator
             }
             else
             {
+                // http://www.arndt-bruenner.de/mathe/scripts/periodenlaenge.htm
                 List<long> primeFactors = GetPrimeFactors(divisorInteger);
                 List<long> otherNumbers = new List<long> { 1, 3, 4, 6, 7, 8, 9 };
 
+                // The List<T>.Intersect method in C# is used to find the common elements between two lists.
                 bool containsNumberNot_2_or_5 = primeFactors.Intersect(otherNumbers).Any() || primeFactors.Exists(e=>e>9);
 
                 isNonPeriodic = !containsNumberNot_2_or_5;
@@ -98,7 +101,7 @@ namespace MaMa.CalcGenerator
         }
 
         /// <summary>
-        /// if prime factors onyl contain 2 or 5 its a non periodic number
+        /// if prime factors only contain 2 or 5 its a non periodic number
         /// http://www.arndt-bruenner.de/mathe/scripts/periodenlaenge.htm
         /// </summary>
         /// <param name="theNumber"></param>

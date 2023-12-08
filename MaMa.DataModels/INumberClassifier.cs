@@ -5,7 +5,7 @@
     /// </summary>
     public interface INumberClassifier
     {
-        EnumNumberClassification GetClassOfNumber(decimal theNumber);
+        //EnumNumberClassification GetClassOfNumber(decimal theNumber);
 
         (bool isNonPeriodic, int commaCount) CalcPeriodicity(decimal dividend, decimal divisor);
 
