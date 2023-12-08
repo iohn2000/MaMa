@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaMa.MultiplicationSteps", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{7C825A92-AA3F-46FD-AD41-6C832D1E8636}"
 	ProjectSection(SolutionItems) = preProject
-		docu\pics\example-multiplication.png = docu\pics\example-multiplication.png
+		
 		README.md = README.md
 	EndProjectSection
 EndProject

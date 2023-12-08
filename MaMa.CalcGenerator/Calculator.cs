@@ -157,7 +157,7 @@ namespace MaMa.CalcGenerator
                 {
                     if (!string.IsNullOrWhiteSpace(slnCfg.DigitsAfterCommaRange)) // check amount commas
                     {
-                        // get amount of commas make sure its wihtin limits
+                        // get amount of commas make sure its within limits
                         if (isNonPeriodic && this.soltionChecker.IsInRange(commaCount, slnCfg.DigitsAfterCommaRange)) // all ok
                         {
                             nrClassificationMet = true;

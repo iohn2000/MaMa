@@ -41,9 +41,26 @@ Once the number is generated some modification can be applied.
    the actual number is a random number between 0 and the value of `moveKomma`,  
    starting at ones column (Einerstelle or leftmost decimal place)  
    Examples: 
-     - if value is `2` and the random number is `4128` the result is `41,28` 
-     - value is `5` and number `12` result is `0,00012`
+     - if `moveKomma` is `2` and the random number is `4128` the result is `41,28` 
+     - `moveKomma` is `5` and number `12` result is `0,00012`
 
+## SolutionCriteria
+
+### numberClass
+
+- `Integer`
+  Solution (number) has to ben an integer, a number with no commas
+
+- `RationalNonPeriodic`
+- `RationalPeriodic`
+- `Any`  
+  Number can be of any type
+
+### digitsAfterCommaRange
+
+### allowNegative
+
+### elementaryArithmetic
    
 ## Basic Arithmetical Operations
 
