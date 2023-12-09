@@ -40,7 +40,7 @@
         "AllowNegative": false
       },
       "solutionCriteria": {
-        "NumberClass": "RationalNonPeriodic",
+        "NumberClass": "RationalTerminatingDecimals",
         "AmountOfDigitsAfterComma": 3,
         "AllowNegative": false,
         "ShowAsRechenArt": "Multiplikation"

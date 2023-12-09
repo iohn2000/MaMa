@@ -77,10 +77,10 @@ public class SvgRenderer
         //this.originPx.Add(this.lastCalculationDimension.WidthPixel, this.lastCalculationDimension.HeightPixel);
         
         // stay in row move to next column
-        //this.originPx.Add(this.lastCalculationDimension.WidthPixel, 0);
+        this.originPx.Add(this.lastCalculationDimension.WidthPixel, 0);
 
         // stay in col move to next row
-        this.originPx.Add(0, this.lastCalculationDimension.HeightPixel);
+        //this.originPx.Add(0, this.lastCalculationDimension.HeightPixel);
 
 
         // set abs px now

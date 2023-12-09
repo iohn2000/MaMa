@@ -17,20 +17,20 @@ namespace MaMa.CalcGenerator
         {
             decimal genNr;
             int rndNr;
-            var kommaDivisor = Convert.ToInt32(Math.Pow(10, randomiser.Next(0, nrCfg.MaxMoveKomma + 1)));
+            var commaDivisor = Convert.ToInt32(Math.Pow(10, randomiser.Next(0, nrCfg.MaxMoveKomma + 1)));
 
             if (nrCfg.MaxValue != null & nrCfg.MinValue != null)
             {
                 // use min/max
                 rndNr = randomiser.Next(nrCfg.MinValue.Value, nrCfg.MaxValue.Value + 1);
-                genNr = (decimal)rndNr / (decimal)kommaDivisor;
+                genNr = (decimal)rndNr / (decimal)commaDivisor;
             }
             else if (nrCfg.MaxDigits != null)
             {
                 // use max digits
                 var stellenFaktor = (int)(Math.Pow(10, nrCfg.MaxDigits.Value - 1));
                 rndNr = randomiser.Next(stellenFaktor, stellenFaktor * 10 - 1);
-                genNr = rndNr / kommaDivisor;
+                genNr = rndNr / commaDivisor;
             }
             else
                 throw new ArgumentException("please set min/max value or maxdigits");

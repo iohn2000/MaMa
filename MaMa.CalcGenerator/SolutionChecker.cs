@@ -9,25 +9,26 @@ namespace MaMa.CalcGenerator
 {
     public class SolutionChecker : INumberClassifier
     {
-        public EnumNumberClassification GetClassOfNumber(decimal theNumber)
-        {
-            if ((int)theNumber == theNumber)
-            {
-                return EnumNumberClassification.Integer;
-            }
-            else
-            {
-                return EnumNumberClassification.RationalNonPeriodic;
-            }
-            throw new Exception($"cannot calculate class of number: {theNumber}");
-        }
+        //public EnumNumberClassification GetClassOfNumber(decimal theNumber)
+        //{
+        //    if ((int)theNumber == theNumber)
+        //    {
+        //        return EnumNumberClassification.Integer;
+        //    }
+        //    else
+        //    {
+        //        return EnumNumberClassification.RationalNonPeriodic;
+        //    }
+        //    throw new Exception($"cannot calculate class of number: {theNumber}");
+        //}
+        
         /// <summary>
         /// return amount of commas if number is non periodic, if number is periodic returns -1
         /// </summary>
         /// <param name="dividend"></param>
         /// <param name="divisor"></param>
         /// <returns></returns>
-        public (bool isNonPeriodic, int commaCount) CalcPeriodicity(decimal dividend, decimal divisor)
+        public (bool rationalTerminatingDecimals, int commaCount) CalcPeriodicity(decimal dividend, decimal divisor)
         {
             // prep fraction so calcs can be done on it
             // 1) remove commas  1.23 -> 123 -> 10^2
@@ -41,22 +42,24 @@ namespace MaMa.CalcGenerator
             (_, divisorInteger) = this.BruchKürzen(dividendInteger, divisorInteger);
 
             // 3) non periodic?
-            bool isNonPeriodic;
+            bool rationalTerminatingDecimals;
             int commaCount = -1;
             if (divisorInteger == 1) // keine kommastellen
             {
-                isNonPeriodic = true;
+                rationalTerminatingDecimals = true;
                 commaCount = 0;
             }
             else
             {
+                // http://www.arndt-bruenner.de/mathe/scripts/periodenlaenge.htm
                 List<long> primeFactors = GetPrimeFactors(divisorInteger);
                 List<long> otherNumbers = new List<long> { 1, 3, 4, 6, 7, 8, 9 };
 
+                // The List<T>.Intersect method in C# is used to find the common elements between two lists.
                 bool containsNumberNot_2_or_5 = primeFactors.Intersect(otherNumbers).Any() || primeFactors.Exists(e=>e>9);
 
-                isNonPeriodic = !containsNumberNot_2_or_5;
-                if (isNonPeriodic)
+                rationalTerminatingDecimals = !containsNumberNot_2_or_5;
+                if (rationalTerminatingDecimals)
                 {
                     // 4) amount of commas - only when there is commas
                     commaCount = Math.Max(primeFactors.Count(p => p == 2),primeFactors.Count(p => p == 5));
@@ -67,7 +70,7 @@ namespace MaMa.CalcGenerator
                 }
             }
 
-            return (isNonPeriodic, commaCount);
+            return (rationalTerminatingDecimals, commaCount);
         }
 
         public (long dividend, long divisor) BruchKürzen(long dividendInteger, long divisorInteger)
@@ -98,7 +101,7 @@ namespace MaMa.CalcGenerator
         }
 
         /// <summary>
-        /// if prime factors onyl contain 2 or 5 its a non periodic number
+        /// if prime factors only contain 2 or 5 its a non periodic number
         /// http://www.arndt-bruenner.de/mathe/scripts/periodenlaenge.htm
         /// </summary>
         /// <param name="theNumber"></param>
@@ -157,7 +160,7 @@ namespace MaMa.CalcGenerator
 
         public bool IsInRange(int theNumber, string theRange)
         {
-            if (string.IsNullOrWhiteSpace(theRange) && theRange.IndexOf("-") == -1)
+            if (theRange.IndexOf("-") == -1)
             {
                 throw new Exception($"Specified range in solution properties is not valid. range:'{theRange}'");
             }
@@ -165,6 +168,10 @@ namespace MaMa.CalcGenerator
             if (range.Length != 2)
             {
                 throw new Exception($"Specified range in solution properties is not valid. range:'{theRange}'");
+            }
+            if (int.Parse(range[0]) <= 0 || int.Parse(range[1]) <=0)
+            {
+                throw new Exception($"Specified range in solution properties is not valid. No negative numbers allowed. range:'{theRange}'");
             }
             return theNumber >= int.Parse(range[0]) && theNumber <= int.Parse(range[1]);
         }
