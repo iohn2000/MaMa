@@ -151,7 +151,7 @@ namespace MaMa.CalcGenerator
                     nrClassificationMet = true;
             }
             // rational periodic
-            else if (slnCfg.NumberClass == EnumNumberClassification.RationalNonPeriodic)
+            else if (slnCfg.NumberClass == EnumNumberClassification.RationalTerminatingDecimals)
             {
                 if (isNonPeriodic)
                 {

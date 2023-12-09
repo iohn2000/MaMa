@@ -28,7 +28,7 @@ namespace MaMa.CalcGenerator
         /// <param name="dividend"></param>
         /// <param name="divisor"></param>
         /// <returns></returns>
-        public (bool isNonPeriodic, int commaCount) CalcPeriodicity(decimal dividend, decimal divisor)
+        public (bool rationalTerminatingDecimals, int commaCount) CalcPeriodicity(decimal dividend, decimal divisor)
         {
             // prep fraction so calcs can be done on it
             // 1) remove commas  1.23 -> 123 -> 10^2
@@ -42,11 +42,11 @@ namespace MaMa.CalcGenerator
             (_, divisorInteger) = this.BruchKürzen(dividendInteger, divisorInteger);
 
             // 3) non periodic?
-            bool isNonPeriodic;
+            bool rationalTerminatingDecimals;
             int commaCount = -1;
             if (divisorInteger == 1) // keine kommastellen
             {
-                isNonPeriodic = true;
+                rationalTerminatingDecimals = true;
                 commaCount = 0;
             }
             else
@@ -58,8 +58,8 @@ namespace MaMa.CalcGenerator
                 // The List<T>.Intersect method in C# is used to find the common elements between two lists.
                 bool containsNumberNot_2_or_5 = primeFactors.Intersect(otherNumbers).Any() || primeFactors.Exists(e=>e>9);
 
-                isNonPeriodic = !containsNumberNot_2_or_5;
-                if (isNonPeriodic)
+                rationalTerminatingDecimals = !containsNumberNot_2_or_5;
+                if (rationalTerminatingDecimals)
                 {
                     // 4) amount of commas - only when there is commas
                     commaCount = Math.Max(primeFactors.Count(p => p == 2),primeFactors.Count(p => p == 5));
@@ -70,7 +70,7 @@ namespace MaMa.CalcGenerator
                 }
             }
 
-            return (isNonPeriodic, commaCount);
+            return (rationalTerminatingDecimals, commaCount);
         }
 
         public (long dividend, long divisor) BruchKürzen(long dividendInteger, long divisorInteger)

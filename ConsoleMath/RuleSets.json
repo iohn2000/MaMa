@@ -32,7 +32,7 @@
         "allowNegative": false
       },
       "solutionCriteria": {
-        "numberClass": "RationalNonPeriodic",
+        "numberClass": "RationalTerminatingDecimals",
         "digitsAfterCommaRange": "2-5",
         "allowNegative": false,
         "elementaryArithmetic": "Division"
@@ -101,7 +101,7 @@
         "allowNegative": false
       },
       "solutionCriteria": {
-        "numberClass": "RationalNonPeriodic",
+        "numberClass": "RationalTerminatingDecimals",
         "digitsAfterCommaRange": "1-5",
         "allowNegative": false,
         "elementaryArithmetic": "Multiplikation"

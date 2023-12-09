@@ -51,12 +51,15 @@ Once the number is generated some modification can be applied.
 - `Integer`
   Solution (number) has to ben an integer, a number with no commas
 
-- `RationalNonPeriodic`
-- `RationalPeriodic`
+- `RationalTerminatingDecimals`  
+  A rational number with a finite number of decimals after the comma. See [this setting](#commaafterrange) here.
+
+- `RationalRepeatingDecimals` not used at the moment
 - `Any`  
   Number can be of any type
+- `RationalNonTerminatingDecimals` not used at the moment
 
-### digitsAfterCommaRange
+### <a name="commaafterrange" style="color:#000000">digitsAfterCommaRange</a>
 
 ### allowNegative
 

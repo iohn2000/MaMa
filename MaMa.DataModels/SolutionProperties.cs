@@ -13,7 +13,7 @@ namespace MaMa.DataModels
 
 
         /// <summary>
-        /// in case number class == <see cref="EnumNumberClassification.RationalNonPeriodic"></see> you can limit the number of digits after the comma
+        /// in case number class == <see cref="EnumNumberClassification.RationalTerminatingDecimals"></see> you can limit the number of digits after the comma
         /// empty means no range
         /// </summary>
         [JsonPropertyName("digitsAfterCommaRange")]
