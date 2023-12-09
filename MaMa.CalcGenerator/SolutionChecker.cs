@@ -160,7 +160,7 @@ namespace MaMa.CalcGenerator
 
         public bool IsInRange(int theNumber, string theRange)
         {
-            if (string.IsNullOrWhiteSpace(theRange) && theRange.IndexOf("-") == -1)
+            if (theRange.IndexOf("-") == -1)
             {
                 throw new Exception($"Specified range in solution properties is not valid. range:'{theRange}'");
             }
@@ -168,6 +168,10 @@ namespace MaMa.CalcGenerator
             if (range.Length != 2)
             {
                 throw new Exception($"Specified range in solution properties is not valid. range:'{theRange}'");
+            }
+            if (int.Parse(range[0]) <= 0 || int.Parse(range[1]) <=0)
+            {
+                throw new Exception($"Specified range in solution properties is not valid. No negative numbers allowed. range:'{theRange}'");
             }
             return theNumber >= int.Parse(range[0]) && theNumber <= int.Parse(range[1]);
         }

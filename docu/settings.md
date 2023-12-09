@@ -52,7 +52,7 @@ Once the number is generated some modification can be applied.
   Solution (number) has to ben an integer, a number with no commas
 
 - `RationalTerminatingDecimals`  
-  A rational number with a finite number of decimals after the comma. See [this setting](#commaafterrange) here.
+  A rational number with a finite number of decimals after the comma. See [setting: digitsAfterCommaRange](#commaafterrange) here.
 
 - `RationalRepeatingDecimals` not used at the moment
 - `Any`  
@@ -61,10 +61,30 @@ Once the number is generated some modification can be applied.
 
 ### <a name="commaafterrange" style="color:#000000">digitsAfterCommaRange</a>
 
+Defines a range for the format `from-to` how many commas as ok as solution.
+If left empty any the solution can have any amount of commas.
+Examples:
+- `digitsAfterCommaRange="2-6""` : any amount of commas between 2 and 6 is ok.
+- `digitsAfterCommaRange="2"` : error no range specified
+- `digitsAfterCommaRange=""` : ok, any amount is valid
+
 ### allowNegative
 
+Defines is solution is allowed to be negative. Valid values are `true | false`
+
 ### elementaryArithmetic
+
+Defines what arithmetic is used for the 2 defined numbers
+
+- Multiplikation : `firstNumber * secondNumber`
+- Division : `firstNumber / secondNumber`
+- Addition : `firstNumber + secondNumber`
+- Subtraction : `firstNumber - secondNumber`
    
+## Amount
+
+How many calculation to generate.
+
 ## Basic Arithmetical Operations
 
 ``` json
