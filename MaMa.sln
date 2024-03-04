@@ -15,7 +15,23 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaMa.DataModels", "MaMa.Dat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConceptStepsAndSvg", "ConceptStepsAndSvg\ConceptStepsAndSvg.csproj", "{E5F142A2-EEE5-4DB7-A02D-703A5709B041}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaMa.MultiplicationSteps", "MaMa.MultiplicationSteps\MaMa.MultiplicationSteps.csproj", "{7B005431-ABB0-430E-BE1D-01B026F7D68C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaMa.MultiplicationSteps", "MaMa.MultiplicationSteps\MaMa.MultiplicationSteps.csproj", "{7B005431-ABB0-430E-BE1D-01B026F7D68C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{7C825A92-AA3F-46FD-AD41-6C832D1E8636}"
+	ProjectSection(SolutionItems) = preProject
+		
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docu", "docu", "{F047C87E-A3C1-4846-B3F3-BD0F37D497C9}"
+	ProjectSection(SolutionItems) = preProject
+		docu\settings.md = docu\settings.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pics", "pics", "{B8F3A375-0834-442F-B0DC-1132919C2D52}"
+	ProjectSection(SolutionItems) = preProject
+		docu\pics\example-multiplication.png = docu\pics\example-multiplication.png
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -114,6 +130,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F047C87E-A3C1-4846-B3F3-BD0F37D497C9} = {7C825A92-AA3F-46FD-AD41-6C832D1E8636}
+		{B8F3A375-0834-442F-B0DC-1132919C2D52} = {F047C87E-A3C1-4846-B3F3-BD0F37D497C9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EB4C287F-B84F-44D9-A6B5-99158007684E}

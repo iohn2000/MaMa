@@ -77,10 +77,10 @@ public class SvgRenderer
         //this.originPx.Add(this.lastCalculationDimension.WidthPixel, this.lastCalculationDimension.HeightPixel);
         
         // stay in row move to next column
-        //this.originPx.Add(this.lastCalculationDimension.WidthPixel, 0);
+        this.originPx.Add(this.lastCalculationDimension.WidthPixel, 0);
 
         // stay in col move to next row
-        this.originPx.Add(0, this.lastCalculationDimension.HeightPixel);
+        //this.originPx.Add(0, this.lastCalculationDimension.HeightPixel);
 
 
         // set abs px now
@@ -111,19 +111,15 @@ public class SvgRenderer
 
         this.RenderSolution(solution.CalcItem.Solution);
 
-        //
-         move calc to start so a decision can be made if it fits into row or even page
-        //
         SvgCalculationDimension dimensions = new SvgCalculationDimension
         {
-            NumberOfRows = currentRelativePos.Y, // change to length of factor2 + 2
-            NumberOfColumns = GetXposRightMostOfAngabe(solution.CalcItem), // is ok
+            NumberOfRows = currentRelativePos.Y,
+            NumberOfColumns = GetXposRightMostOfAngabe(solution.CalcItem),
             WidthPixel = XPixelFromRelativePos(GetXposRightMostOfAngabe(solution.CalcItem)) - originPx.X,
             HeightPixel = YPixelFromRelativePos(currentRelativePos.Y + 1) + 10 - originPx.Y
         };
 
         /*
-        // a rectangle to see boundaries
         AddToHtml(new SvgRect(
             new SvgCoord(XPixelFromRelativePos(0), YPixelFromRelativePos(0)),
             new SvgCoord(dimensions.WidthPixel, dimensions.HeightPixel)

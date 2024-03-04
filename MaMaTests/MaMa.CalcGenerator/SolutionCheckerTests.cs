@@ -37,7 +37,7 @@ namespace MaMaTests.MaMa.CalcGenerator
         {
             SolutionChecker sc = new SolutionChecker();
             var result = sc.CalcPeriodicity((decimal)dividend, (decimal)divisor);
-            Assert.AreEqual(isNonPeriodic,result.isNonPeriodic);
+            Assert.AreEqual(isNonPeriodic,result.rationalTerminatingDecimals);
             Assert.AreEqual(commaCount,result.commaCount);
 
         }

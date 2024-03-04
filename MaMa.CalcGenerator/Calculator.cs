@@ -151,13 +151,13 @@ namespace MaMa.CalcGenerator
                     nrClassificationMet = true;
             }
             // rational periodic
-            else if (slnCfg.NumberClass == EnumNumberClassification.RationalNonPeriodic)
+            else if (slnCfg.NumberClass == EnumNumberClassification.RationalTerminatingDecimals)
             {
                 if (isNonPeriodic)
                 {
                     if (!string.IsNullOrWhiteSpace(slnCfg.DigitsAfterCommaRange)) // check amount commas
                     {
-                        // get amount of commas make sure its wihtin limits
+                        // get amount of commas make sure its within limits
                         if (isNonPeriodic && this.soltionChecker.IsInRange(commaCount, slnCfg.DigitsAfterCommaRange)) // all ok
                         {
                             nrClassificationMet = true;

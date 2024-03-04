@@ -62,9 +62,9 @@ namespace MaMaTests.CalcGenerator
 
         [Test]
         [TestCase(EnumRechenArt.Multiplikation, 6.0d, 2.0d, 12d, EnumNumberClassification.Integer)]
-        [TestCase(EnumRechenArt.Division, 12.0d, 2.0d, 6d, EnumNumberClassification.RationalNonPeriodic)]
-        [TestCase(EnumRechenArt.Division, 11.0d, 2.0d, 5.5d, EnumNumberClassification.RationalNonPeriodic)]
-        [TestCase(EnumRechenArt.Addition, 7.1d, 1.3d, 8.4d, EnumNumberClassification.RationalNonPeriodic)]
+        [TestCase(EnumRechenArt.Division, 12.0d, 2.0d, 6d, EnumNumberClassification.RationalTerminatingDecimals)]
+        [TestCase(EnumRechenArt.Division, 11.0d, 2.0d, 5.5d, EnumNumberClassification.RationalTerminatingDecimals)]
+        [TestCase(EnumRechenArt.Addition, 7.1d, 1.3d, 8.4d, EnumNumberClassification.RationalTerminatingDecimals)]
         public void CaclulationsDoneCorrectly(EnumRechenArt rechenArt, double nr1, double nr2, double sln, EnumNumberClassification nrClass)
         {
             int rawNr = 0;
