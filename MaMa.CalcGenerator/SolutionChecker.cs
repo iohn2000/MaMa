@@ -169,7 +169,7 @@ namespace MaMa.CalcGenerator
             {
                 throw new Exception($"Specified range in solution properties is not valid. range:'{theRange}'");
             }
-            if (int.Parse(range[0]) <= 0 || int.Parse(range[1]) <=0)
+            if (int.Parse(range[0]) < 0 || int.Parse(range[1]) < 0)
             {
                 throw new Exception($"Specified range in solution properties is not valid. No negative numbers allowed. range:'{theRange}'");
             }

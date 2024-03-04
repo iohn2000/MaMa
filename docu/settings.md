@@ -36,7 +36,7 @@ Examples:
 #### moveKomma, allowNegativ
 Once the number is generated some modification can be applied.
 
-- `allowNegative`: `false|true` a randomizer turns the number negative or not
+- `allowNegative`: `false|true` if true the number can be negative or positiv (randomly)
 - `moveKomma`: **maximum** amount of decimal places a comma is moved,  
    the actual number is a random number between 0 and the value of `moveKomma`,  
    starting at ones column (Einerstelle or leftmost decimal place)  
@@ -61,7 +61,7 @@ Once the number is generated some modification can be applied.
 
 ### <a name="commaafterrange" style="color:#000000">digitsAfterCommaRange</a>
 
-Defines a range for the format `from-to` how many commas as ok as solution.
+Defines a range for the format `from-to` how many commas are ok as solution.
 If left empty any the solution can have any amount of commas.
 Examples:
 - `digitsAfterCommaRange="2-6""` : any amount of commas between 2 and 6 is ok.
