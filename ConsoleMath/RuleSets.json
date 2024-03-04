@@ -95,7 +95,7 @@
       },
       "secondNumber": {
         "maxDigits": null,
-        "minValue": 100000,
+        "minValue": 1000,
         "maxValue": 666666,
         "moveKomma": 2,
         "allowNegative": false
@@ -106,7 +106,7 @@
         "allowNegative": false,
         "elementaryArithmetic": "Multiplikation"
       },
-      "amount": 5
+      "amount": 21
     }
   }
 }

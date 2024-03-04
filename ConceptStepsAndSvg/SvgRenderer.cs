@@ -1,7 +1,7 @@
 ﻿using MaMa.DataModels;
 using MaMa.DataModels.MultiplicationSteps;
 using MaMa.DataModels.Rendering;
-using System.Transactions;
+using Microsoft.Extensions.Logging;
 
 namespace ConceptStepsAndSvg;
 
@@ -22,7 +22,7 @@ public class SvgRenderer
     private const int xPosOffsetForAngabe = 1;
     private readonly int maxCols = svgSize.Width / colWidth;
     private readonly int maxRows = svgSize.Height / rowHeight;
-
+    private readonly ILogger<SvgRenderer> logger;
     private SvgCalculationDimension lastCalculationDimension = new SvgCalculationDimension { HeightPixel = 0, WidthPixel = 0, NumberOfColumns = 0, NumberOfRows = 0 };
 
     private string RenderedHtml = "";
@@ -38,9 +38,10 @@ public class SvgRenderer
 </body></html>
 """;
 
-    public SvgRenderer()
+    public SvgRenderer(ILogger<SvgRenderer> logger)
     {
         StartNewPage();
+        this.logger = logger;
     }
 
     /// <summary>
@@ -69,15 +70,45 @@ public class SvgRenderer
     public SvgCalculationDimension AddCalculation(MuiltiplicationStepsSolution solution)
     {
         // reset relative pos
-        currentRelativePos = new SvgCoord(0,0);
+        currentRelativePos = new SvgCoord(0, 0);
+
+        SvgCalculationDimension dimensions = new SvgCalculationDimension
+        {
+            NumberOfRows = currentRelativePos.Y,
+            NumberOfColumns = GetXposRightMostOfAngabe(solution.CalcItem),
+            WidthPixel = XPixelFromRelativePos(GetXposRightMostOfAngabe(solution.CalcItem)) - originPx.X,
+            HeightPixel = YPixelFromRelativePos(GetDigitCounthWithoutCommas(solution.CalcItem.SecondNumber) + 2) + 10 - originPx.Y
+        };
+        /*
+        AddToHtml(new SvgRect(
+            new SvgCoord(XPixelFromRelativePos(0), YPixelFromRelativePos(0)),
+            new SvgCoord(dimensions.WidthPixel, dimensions.HeightPixel)
+            ).GetSVG());
+        */
         
+        // line full move to next row down
+        /*
+        if (svgSize.Width < dimensions.WidthPixel + this.originPx.X)
+        {
+            // move 1 col right and 1 row down
+            this.originPx.Add(this.lastCalculationDimension.WidthPixel, this.lastCalculationDimension.HeightPixel);
+        }
+        */
+
+        // still room for more in current row
+        if (svgSize.Width >= dimensions.WidthPixel + this.originPx.X) 
+        {
+            // stay in row move to next column
+            this.originPx.Add(this.lastCalculationDimension.WidthPixel, 0);
+        }
+        else
+        {
+            this.originPx.X = 0;
+            this.originPx.Y += this.lastCalculationDimension.HeightPixel + 10;
+        }
+
         // set new origin taking last runs dimensions
 
-        // move 1 col right and 1 row down
-        //this.originPx.Add(this.lastCalculationDimension.WidthPixel, this.lastCalculationDimension.HeightPixel);
-        
-        // stay in row move to next column
-        this.originPx.Add(this.lastCalculationDimension.WidthPixel, 0);
 
         // stay in col move to next row
         //this.originPx.Add(0, this.lastCalculationDimension.HeightPixel);
@@ -89,6 +120,31 @@ public class SvgRenderer
         int startXForRows = this.RenderAngabe(solution);
         MoveOneRowDown();
 
+        this.RenderSteps(solution, startXForRows);
+
+        this.RenderSolution(solution.CalcItem.Solution);
+        
+        /*
+        SvgCalculationDimension dimensions2 = new SvgCalculationDimension
+        {
+            NumberOfRows = currentRelativePos.Y,
+            NumberOfColumns = GetXposRightMostOfAngabe(solution.CalcItem),
+            WidthPixel = XPixelFromRelativePos(GetXposRightMostOfAngabe(solution.CalcItem)) - originPx.X,
+            HeightPixel = YPixelFromRelativePos(currentRelativePos.Y + 1) + 10 - originPx.Y
+        };
+        
+        AddToHtml(new SvgRect(
+           new SvgCoord(XPixelFromRelativePos(0), YPixelFromRelativePos(0)),
+           new SvgCoord(dimensions2.WidthPixel, dimensions2.HeightPixel)
+           ).GetSVG());
+        */
+
+        this.lastCalculationDimension = dimensions;
+        return dimensions;
+    }
+
+    private void RenderSteps(MuiltiplicationStepsSolution solution, int startXForRows)
+    {
         // set cursor to last digit of faktor1
         currentRelativePos.X = startXForRows - 1;
         currentAbsolutePx.X = XPixelFromRelativePos(currentRelativePos.X);
@@ -108,26 +164,6 @@ public class SvgRenderer
             currentRelativePos.X = startXForRows + index;
             currentAbsolutePx.X = XPixelFromRelativePos(currentRelativePos.X);
         }
-
-        this.RenderSolution(solution.CalcItem.Solution);
-
-        SvgCalculationDimension dimensions = new SvgCalculationDimension
-        {
-            NumberOfRows = currentRelativePos.Y,
-            NumberOfColumns = GetXposRightMostOfAngabe(solution.CalcItem),
-            WidthPixel = XPixelFromRelativePos(GetXposRightMostOfAngabe(solution.CalcItem)) - originPx.X,
-            HeightPixel = YPixelFromRelativePos(currentRelativePos.Y + 1) + 10 - originPx.Y
-        };
-
-        /*
-        AddToHtml(new SvgRect(
-            new SvgCoord(XPixelFromRelativePos(0), YPixelFromRelativePos(0)),
-            new SvgCoord(dimensions.WidthPixel, dimensions.HeightPixel)
-            ).GetSVG());
-        */
-
-        this.lastCalculationDimension = dimensions;
-        return dimensions;
     }
 
     /// <summary>
@@ -138,8 +174,13 @@ public class SvgRenderer
     private int GetXposRightMostOfAngabe(CalculationItem calc)
     {
         string angabeStr = GetAngabeString(calc);
-        int length = xPosOffsetForAngabe + angabeStr.Length - angabeStr.Count(c => c == '.' || c == ',');
+        int length = xPosOffsetForAngabe + GitDigitCountNoCommas(angabeStr);
         return length;
+    }
+
+    private int GitDigitCountNoCommas(string angabeStr)
+    {
+        return angabeStr.Length - angabeStr.Count(c => !IsNotAComma(c));
     }
 
     /// <summary>

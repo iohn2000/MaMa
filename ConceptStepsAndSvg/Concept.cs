@@ -32,11 +32,11 @@ public class Concept
                 case EnumRechenArt.Multiplikation:
                 {
                     MuiltiplicationStepsSolution solution = _stepsCalculator.CalculateMultiplicationSteps(calcItem);
-                    var d = _svgRenderer.AddCalculation(solution);
-                    break;
+                        _ = _svgRenderer.AddCalculation(solution);
+                        break;
                 }
             }
-            if (idx == 3) break;
+            //if (idx == 3) break;
         }
         File.WriteAllText(@"C:\dev\MaMa\ConceptStepsAndSvg\temp.html", _svgRenderer.GetRenderedHtmlPage());
     }
